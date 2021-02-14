@@ -1,0 +1,19 @@
+{
+    "name": "app",
+    "private": true,
+    "version": "0.0.0",
+    "engines": {
+        "node": ">=14",
+        "yarn": ">=1.18"
+    },
+    "scripts": {
+        "android": "yarn env:development && react-native run-android",
+        "android:device": "yarn env:device && react-native run-android",
+        "env:development": "node ./../../scripts/set-environment.js development",
+        "ios": "yarn env:development && react-native run-ios",
+        "ios:device": "yarn env:device && react-native run-ios",
+        "start": "yarn env:development && react-native start --reset-cache",
+        "build:android": "yarn env:staging && yarn bundle:android && cd android && ./gradlew clean assembleRelease -x bundleReleaseJsAndAssets",
+        "build:ios": "yarn env:staging && react-native bundle --entry-file packages/app/index.tsx --bundle-output ios/main.jsbundle --dev=false --platform='ios' --assets-dest ios/"
+    }
+}
