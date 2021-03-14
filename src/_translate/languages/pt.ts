@@ -3,15 +3,19 @@
 const messages = {
     pt: {
         translations: {
+            labels: {
+                forgotPassword: 'Esqueceu a senha',
+                login: 'Entrar',
+                loginWithFacebook: 'Continue com Facebook',
+                password: 'Senha',
+                user: 'Usuário',
+            },
             validation: {
                 invalidCPF: 'CPF inválido!',
-            },
-            labels: {
-                forgotPassword: 'Esqueci minha senha',
-                loginWithFacebook: 'Continue com Facebook',
+                invalidUser: 'Usuário inválido',
             },
         },
     },
-};
+}
 
-export { messages };
+export { messages }

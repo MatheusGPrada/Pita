@@ -125,7 +125,6 @@ module.exports = {
                 max: 1,
             },
         ],
-        'no-nested-ternary': 'error',
         'no-new': 'error',
         'no-new-func': 'error',
         'no-new-object': 'error',

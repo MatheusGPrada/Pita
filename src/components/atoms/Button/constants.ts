@@ -1,7 +1,9 @@
+import { theme } from '../../../styles/theme'
+
 export const BUTTON_STYLE = {
-    borderRadius: 8,
-    borderWidth: 1,
-    height: 48,
-    letterSpacing: 0.8,
-    lineHeight: 24,
-};
+    borderRadius: theme.size.m8,
+    borderWidth: theme.size.m1,
+    height: theme.size.m48,
+    letterSpacing: theme.letterSpacing.ls08,
+    lineHeight: theme.size.m24,
+}

@@ -1,4 +1,12 @@
-import { Animated, Easing } from 'react-native';
+import { Animated, Easing, EasingFunction } from 'react-native'
+
+interface AnimateProps {
+    animation: Animated.Value | Animated.ValueXY
+    toValue: number
+    duration: number
+    easing?: EasingFunction
+    useNativeDriver?: boolean
+}
 
 export const getRotateAnimationStyle = (animation: Animated.Value, styles = {}) => {
     Animated.loop(
@@ -8,15 +16,19 @@ export const getRotateAnimationStyle = (animation: Animated.Value, styles = {}) 
             toValue: 1,
             useNativeDriver: false,
         }),
-    ).start();
+    ).start()
 
     const spin = animation.interpolate({
         inputRange: [0, 1],
         outputRange: ['0deg', '360deg'],
-    });
+    })
 
     return {
         transform: [{ rotate: spin }],
         ...styles,
-    };
-};
+    }
+}
+
+export const animate = ({ animation, duration, easing = Easing.ease, toValue, useNativeDriver = true }: AnimateProps) => {
+    Animated.timing(animation, { duration, easing, toValue, useNativeDriver }).start()
+}

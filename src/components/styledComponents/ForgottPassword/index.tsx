@@ -1,12 +1,12 @@
-import styled from '../../../../node_modules/styled-components';
-import { theme } from '../../../styles/theme';
+import styled from '../../../../node_modules/styled-components'
+import { theme } from '../../../styles/theme'
 
 export const ForgotPassword = styled.Text`
-    color: blue;
+    color: ${theme.colors.primary50};
     text-align: center;
-    text-decoration: underline;
     font-family: ${theme.fonts.montserratRegular};
-    font-size: ${theme.fontSize.small};
-    padding-bottom: ${theme.marginsPx.m28px};
+    font-size: ${theme.fontSize.medium};
+    padding-top: ${theme.marginsPx.m8px};
     text-decoration-color: ${theme.colors.primary60};
-`;
+    align-self: flex-end;
+`

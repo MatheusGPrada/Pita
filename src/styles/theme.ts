@@ -1,4 +1,4 @@
-import { SPACER, m8, m12, m16, m20, m24, m28, m32, m36, m40, m60 } from './constants';
+import { SPACER, m8, m1, m12, m16, m20, m24, m28, m32, m36, m40, m60, m48 } from './constants'
 
 export const theme = {
     colors: {
@@ -86,6 +86,7 @@ export const theme = {
         m8px: `${m8}px`,
     },
     size: {
+        m1: m1,
         m12: m12,
         m16: m16,
         m20: m20,
@@ -95,7 +96,8 @@ export const theme = {
         m36: m36,
         m4: SPACER,
         m40: m40,
+        m48: m48,
         m60: m60,
         m8: m8,
     },
-};
+}
