@@ -23,8 +23,8 @@ export const StyledText = styled.Text`
 
 export const TextContainer = styled.View`
     flex-direction: row;
-    justify-content: space-around;
-    margin-bottom: ${theme.marginsPx.m20px};
+    justify-content: space-between;
+    margin: 0 ${theme.marginsPx.m60px} ${theme.marginsPx.m20px};
 `
 
 export const LineSeparator = styled.View`
@@ -36,7 +36,7 @@ export const LineSeparator = styled.View`
 
 export const LineSeparatorContainer = styled.View`
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-bottom: ${theme.marginsPx.m20px};
 `
 

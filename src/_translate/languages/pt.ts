@@ -9,6 +9,7 @@ const messages = {
             },
             labels: {
                 forgotPassword: 'Esqueceu a senha',
+                invalidUserOrPassword: 'Usuário ou senha inválidos',
                 login: 'Entrar',
                 or: 'Ou',
                 password: 'Senha',
@@ -17,7 +18,7 @@ const messages = {
             },
             validation: {
                 invalidCPF: 'CPF inválido!',
-                invalidUser: 'Usuário inválido',
+                invalidUser: 'O usuário parece não existir no sistema',
             },
         },
     },

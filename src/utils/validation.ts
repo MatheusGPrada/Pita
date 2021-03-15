@@ -34,29 +34,3 @@ export const useCpfValidations = (initialCpf = '') => {
         setError,
     }
 }
-
-export const useUserValidation = () => {
-    const [user, setUser] = useState<string>()
-    const [error, setError] = useState<string>()
-
-    // TO DO - ADD USER VALID
-    const validUser = () => user === 'Matheus'
-
-    const handleUser = (value: string) => {
-        setUser(value)
-        if (isEmpty(value)) {
-            setError('')
-        }
-    }
-
-    const validUserError = () => {
-        setError(!isEmpty(user) && validUser() ? '' : i18n.t('validation.invalidUser'))
-    }
-
-    return {
-        error,
-        handleUser,
-        user,
-        validUserError,
-    }
-}

@@ -19,8 +19,8 @@ export const LoginOptions: FC = () => {
             <Content>
                 <Image resizeMode="contain" source={require('../../../../assets/images/pita.png')} />
                 <TextContainer>
-                    <StyledText onPress={() => navigate('Login')}>{i18n.t('labels.login')}</StyledText>
                     <StyledText onPress={() => navigate('')}>{i18n.t('labels.register')}</StyledText>
+                    <StyledText onPress={() => navigate('Login')}>{i18n.t('labels.login')}</StyledText>
                 </TextContainer>
                 <LineSeparatorContainer>
                     <LineSeparator />
