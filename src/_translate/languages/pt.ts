@@ -3,11 +3,16 @@
 const messages = {
     pt: {
         translations: {
+            buttonLabels: {
+                login: 'Entrar',
+                loginWithFacebook: 'Continue com Facebook',
+            },
             labels: {
                 forgotPassword: 'Esqueceu a senha',
                 login: 'Entrar',
-                loginWithFacebook: 'Continue com Facebook',
+                or: 'Ou',
                 password: 'Senha',
+                register: 'Cadastrar',
                 user: 'Usuário',
             },
             validation: {

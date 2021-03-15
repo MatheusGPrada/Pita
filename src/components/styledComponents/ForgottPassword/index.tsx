@@ -2,7 +2,7 @@ import styled from '../../../../node_modules/styled-components'
 import { theme } from '../../../styles/theme'
 
 export const ForgotPassword = styled.Text`
-    color: ${theme.colors.primary50};
+    color: ${theme.colors.white};
     text-align: center;
     font-family: ${theme.fonts.montserratRegular};
     font-size: ${theme.fontSize.medium};

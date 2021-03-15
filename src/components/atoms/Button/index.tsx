@@ -7,6 +7,7 @@ export const Button: FC<ButtonProps> = ({
     children,
     disabled = false,
     label,
+    labelSize = 'medium',
     loading,
     loadingIsBlue,
     hideText,
@@ -20,7 +21,7 @@ export const Button: FC<ButtonProps> = ({
             <Content>
                 {showIconBeforeText && children}
                 {!hideText && (
-                    <Text disabled={disabled} variant={variant}>
+                    <Text disabled={disabled} labelSize={labelSize} variant={variant}>
                         {label}
                     </Text>
                 )}

@@ -11,8 +11,8 @@ export const Image = styled.Image`
 `
 export const ImageContainer = styled.View`
     align-self: center;
-    flex: 1;
     max-width: 280;
     max-height: 280;
-    margin-bottom: ${theme.marginsPx.m40px};
+    margin-bottom: ${theme.marginsPx.m20px};
+    margin-top: ${theme.marginsPx.m40px};
 `

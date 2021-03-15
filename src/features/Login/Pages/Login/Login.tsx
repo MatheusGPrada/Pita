@@ -10,7 +10,6 @@ import { useUserValidation } from '../../../../utils/validation'
 import { i18n } from '../../../../_translate/i18n'
 import { TextInput } from 'react-native-paper'
 import { ContainerWithMarginTop, Image, ImageContainer } from './styles'
-import { SignUpButtonContainer } from '../../../../components/atoms/Button/styles'
 // import { useNavigation } from '@react-navigation/native'
 
 Icon.loadFont()
@@ -42,7 +41,7 @@ export const Login: FC = () => {
     return (
         <>
             <SafeAreaView style={{ flex: 0 }} />
-            <SafeAreaView style={{ backgroundColor: theme.colors.white, flex: 1 }}>
+            <SafeAreaView style={{ backgroundColor: theme.colors.black100, flex: 1 }}>
                 <StatusBar barStyle="light-content" />
                 <Content>
                     <ImageContainer>
@@ -76,15 +75,8 @@ export const Login: FC = () => {
                             />
                             <ForgotPassword onPress={handleForgotPassword}>{i18n.t('labels.forgotPassword')}</ForgotPassword>
                         </ContainerWithMarginTop>
-                        <SignUpButtonContainer>
-                            <Button disabled={false} label={i18n.t('labels.login')} showIconBeforeText={false}>
-                                <Icon color="white" name="login" size={theme.size.m36} />
-                            </Button>
-                        </SignUpButtonContainer>
-                        {/* <Button disabled={false} label={i18n.t('labels.loginWithFacebook')}>
-                        <Icon color="white" name="facebook-square" size={theme.size.m36} />
-                    </Button> */}
                     </InputContainer>
+                    <Button disabled={false} label={i18n.t('buttonLabels.login')} labelSize="large" showIconBeforeText={false} />
                 </Content>
             </SafeAreaView>
         </>

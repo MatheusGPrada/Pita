@@ -1,15 +1,16 @@
-import React from 'react';
-import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
-import { LoginStackParamList } from './typings/login';
-import { Login } from '../features/Login/Pages/Login/Login';
-import { Platform } from 'react-native';
+import React from 'react'
+import { createStackNavigator, TransitionPresets } from '@react-navigation/stack'
+import { LoginStackParamList } from './typings/login'
+import { Login } from '../features/Login/Pages/Login/Login'
+import { Platform } from 'react-native'
+import { LoginOptions } from '../features/Login/Pages/LoginOptions/LoginOptions'
 
-const { Navigator, Screen } = createStackNavigator<LoginStackParamList>();
+const { Navigator, Screen } = createStackNavigator<LoginStackParamList>()
 
 export const LoginStack = () => (
     <Navigator
         screenOptions={{
-            //headerBackImage: () => <HeaderBackIcon addScreenNameTestId isArrow />,
+            // headerBackImage: () => <HeaderBackIcon addScreenNameTestId isArrow />,
             headerBackTitleVisible: false,
             headerStyle: {
                 backgroundColor: 'black',
@@ -21,6 +22,7 @@ export const LoginStack = () => (
             ...TransitionPresets.SlideFromRightIOS,
         }}
     >
+        <Screen component={LoginOptions} name="LoginOptions" options={{ headerShown: false }} />
         <Screen component={Login} name="Login" options={{ headerShown: false }} />
     </Navigator>
-);
+)

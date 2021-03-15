@@ -25,11 +25,8 @@ export const Content = styled.View`
 export const Text = styled.Text<ButtonProps>`
     color: ${({ disabled, variant }) => (disabled ? 'gray' : variant === 'primary' ? 'white' : 'blue')};
     font-family: ${theme.fonts.montserratSemiBold};
-    font-size: ${theme.fontSize.medium};
+    font-size: ${({ labelSize }) => (labelSize === 'medium' ? theme.fontSize.medium : theme.fontSize.large)};
     letter-spacing: ${BUTTON_STYLE.letterSpacing};
     line-height: ${BUTTON_STYLE.lineHeight};
     padding-horizontal: ${theme.marginsPx.m8px};
-`
-export const SignUpButtonContainer = styled.View`
-    padding-top: ${theme.marginsPx.m60px};
 `

@@ -1,3 +1,4 @@
 export type LoginStackParamList = {
-    Login: undefined;
-};
+    Login: undefined
+    LoginOptions: undefined
+}
