@@ -18,7 +18,6 @@ const messages = {
             },
             validation: {
                 invalidCPF: 'CPF inválido!',
-                invalidUser: 'O usuário parece não existir no sistema',
             },
         },
     },

@@ -13,14 +13,5 @@ export const ImageContainer = styled.View`
     max-width: 280;
     max-height: 280;
     margin-bottom: ${theme.marginsPx.m20px};
-    margin-top: ${theme.marginsPx.m40px};
-`
-
-export const StyledText = styled.Text`
-    color: ${theme.colors.danger50};
-    text-align: center;
-    font-family: ${theme.fonts.montserratRegular};
-    font-size: ${theme.fontSize.medium};
-    align-self: center;
-    margin-bottom: ${theme.marginsPx.m32px};
+    margin-top: ${theme.marginsPx.m100px};
 `

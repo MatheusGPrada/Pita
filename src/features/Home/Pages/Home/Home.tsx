@@ -1,6 +1,8 @@
 import React, { FC, useState } from 'react'
+import { Content } from '../../../../components/utils/Screen'
 import { ButtonContainer, InputContainer } from '../../../../components/styledComponents/InputContainer'
 import { ForgotPassword } from '../../../../components/styledComponents/ForgottPassword'
+import { SafeAreaView, StatusBar } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
 import { Button } from '../../../../components/atoms/Button'
 import { theme } from '../../../../styles/theme'
@@ -8,7 +10,7 @@ import { i18n } from '../../../../_translate/i18n'
 import { Snackbar, TextInput } from 'react-native-paper'
 import { Image, ImageContainer } from './styles'
 import { useNavigation } from '@react-navigation/native'
-import { Template } from '../../../../components/template/Template'
+import { Template } from '../../../../components/templates/template'
 
 Icon.loadFont()
 
@@ -45,7 +47,7 @@ export const Login: FC = () => {
     }
 
     return (
-        <Template backgroundColor="white" statusBarColor="white" statusBarStyle="dark-content">
+        <Template safeAreaBackgroundColor="black" statusBarBackgroundColor="black" statusBarStyle="light-content">
             <ImageContainer>
                 <Image resizeMode="contain" source={require('../../../../assets/images/logo.png')} />
             </ImageContainer>
