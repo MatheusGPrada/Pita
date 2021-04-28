@@ -20,10 +20,10 @@ export const Container = styled.TouchableHighlight<ButtonProps>`
 
 export const Content = styled.View`
     flex-direction: row;
-    justify-content: ${({ variant }) => (variant !== 'terciary' ? 'center' : 'flex-start')};
+    justify-content: ${({ variant }) => (variant !== 'tertiary' ? 'center' : 'flex-start')};
     align-items: center;
-    ${({ variant }) => (variant !== 'terciary' ? '' : 'flex: 1')};
-    ${({ variant }) => (variant !== 'terciary' ? '' : 'paddingLeft: 16px')};
+    ${({ variant }) => (variant !== 'tertiary' ? '' : 'flex: 1')};
+    ${({ variant }) => (variant !== 'tertiary' ? '' : 'paddingLeft: 16px')};
 `
 
 export const Text = styled.Text<ButtonProps>`

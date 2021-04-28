@@ -28,22 +28,22 @@ export const Home: FC = () => {
             <ProfileContent>
                 <ContentTitle>{i18n.t('title.changeProfileData')}</ContentTitle>
                 <ButtonContainer>
-                    <Button label={i18n.t('buttonLabels.changeName')} useButtonContainer={true} variant={'terciary'}>
+                    <Button label={i18n.t('buttonLabels.changeName')} useButtonContainer={true} variant={'tertiary'}>
                         <Icon color="black" name="account" size={36} />
                     </Button>
                 </ButtonContainer>
                 <ButtonContainer>
-                    <Button label={i18n.t('buttonLabels.changeEmail')} useButtonContainer={true} variant={'terciary'}>
+                    <Button label={i18n.t('buttonLabels.changeEmail')} useButtonContainer={true} variant={'tertiary'}>
                         <Icon color="black" name="email" size={36} />
                     </Button>
                 </ButtonContainer>
                 <ButtonContainer>
-                    <Button label={i18n.t('buttonLabels.changeCellphone')} useButtonContainer={true} variant={'terciary'}>
+                    <Button label={i18n.t('buttonLabels.changeCellphone')} useButtonContainer={true} variant={'tertiary'}>
                         <Icon color="black" name="cellphone-basic" size={36} />
                     </Button>
                 </ButtonContainer>
                 <ButtonContainer>
-                    <Button label={i18n.t('buttonLabels.changePassword')} useButtonContainer={true} variant={'terciary'}>
+                    <Button label={i18n.t('buttonLabels.changePassword')} useButtonContainer={true} variant={'tertiary'}>
                         <Icon color="black" name="lock" size={36} />
                     </Button>
                 </ButtonContainer>
