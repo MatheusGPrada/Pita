@@ -6,6 +6,7 @@ import { ButtonProps } from './typings'
 export const Button: FC<ButtonProps> = ({
     children,
     disabled = false,
+    useButtonContainer = false,
     label,
     labelSize = 'medium',
     loading,
@@ -15,10 +16,10 @@ export const Button: FC<ButtonProps> = ({
     showIconBeforeText = true,
     ...props
 }) => (
-    <Container disabled={disabled} variant={variant} {...props}>
+    <Container disabled={disabled} useButtonContainer={useButtonContainer} variant={variant} {...props}>
         <>
             {loading && <Loading isBlue={loadingIsBlue} />}
-            <Content>
+            <Content variant={variant}>
                 {showIconBeforeText && children}
                 {!hideText && (
                     <Text disabled={disabled} labelSize={labelSize} variant={variant}>

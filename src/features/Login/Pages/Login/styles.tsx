@@ -10,8 +10,8 @@ export const Image = styled.Image`
 `
 export const ImageContainer = styled.View`
     align-self: center;
-    max-width: 280;
-    max-height: 280;
+    max-width: 280px;
+    max-height: 280px;
     margin-bottom: ${theme.marginsPx.m20px};
     margin-top: ${theme.marginsPx.m100px};
 `

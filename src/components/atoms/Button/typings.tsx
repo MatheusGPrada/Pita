@@ -6,8 +6,9 @@ export interface ButtonProps {
     label?: string
     labelSize?: string
     loading?: boolean
-    variant?: 'primary' | 'secondary'
+    variant?: 'primary' | 'secondary' | 'terciary'
     hideText?: boolean
     loadingIsBlue?: boolean
     showIconBeforeText?: boolean
+    useButtonContainer?: boolean
 }

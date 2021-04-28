@@ -1,15 +1,16 @@
-import React from 'react';
-import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
-import { MainStackParamList } from './typings/main';
+import React from 'react'
+import { createStackNavigator, TransitionPresets } from '@react-navigation/stack'
+import { MainStackParamList } from './typings/main'
 
-import { LoginStack } from './LoginStack';
-import { NavigationContainer } from '@react-navigation/native';
-import { Theme } from '../styles/theme';
+import { LoginStack } from './LoginStack'
+import { NavigationContainer } from '@react-navigation/native'
+import { theme } from '../styles/theme'
+import { HomeStack } from './HomeStack'
 
-const { Navigator, Screen } = createStackNavigator<MainStackParamList>();
+const { Navigator, Screen } = createStackNavigator<MainStackParamList>()
 
 export const MainStack = () => (
-    <NavigationContainer theme={Theme}>
+    <NavigationContainer theme={theme}>
         <Navigator
             initialRouteName="LoginStack"
             screenOptions={{
@@ -18,6 +19,7 @@ export const MainStack = () => (
             }}
         >
             <Screen component={LoginStack} name="LoginStack" />
+            <Screen component={HomeStack} name="HomeStack" />
         </Navigator>
     </NavigationContainer>
-);
+)

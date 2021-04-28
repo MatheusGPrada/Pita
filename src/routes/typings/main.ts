@@ -1,3 +1,4 @@
 export type MainStackParamList = {
-    LoginStack: undefined;
-};
+    LoginStack: undefined
+    HomeStack: undefined
+}

@@ -5,25 +5,30 @@ import { theme } from '../../../../src/styles/theme'
 
 export const Container = styled.TouchableHighlight<ButtonProps>`
     align-items: center;
-    background-color: ${({ disabled, variant }) => (disabled ? 'gray' : variant === 'primary' ? 'blue' : 'white')};
-    border-color: ${({ disabled, variant }) => (disabled ? 'gray' : variant === 'primary' ? 'blue' : 'white')};
+    background-color: ${({ disabled, variant }) =>
+        disabled ? '#e2dede' : variant === 'primary' ? 'blue' : variant === 'secondary' ? 'white' : 'white'};
+    border-color: ${({ disabled, variant }) =>
+        disabled ? '#e2dede' : variant === 'primary' ? 'blue' : variant === 'secondary' ? 'white' : 'black'};
     border-radius: ${BUTTON_STYLE.borderRadius};
     border-width: ${BUTTON_STYLE.borderWidth};
     flex-direction: row;
     height: ${BUTTON_STYLE.height};
     justify-content: center;
-    margin-left: ${theme.margins.m40};
-    margin-right: ${theme.margins.m40};
+    margin-left: ${({ useButtonContainer }) => (useButtonContainer ? theme.margins.m40px : 0)};
+    margin-right: ${({ useButtonContainer }) => (useButtonContainer ? theme.margins.m40px : 0)};
 `
 
 export const Content = styled.View`
     flex-direction: row;
-    justify-content: center;
+    justify-content: ${({ variant }) => (variant !== 'terciary' ? 'center' : 'flex-start')};
     align-items: center;
+    ${({ variant }) => (variant !== 'terciary' ? '' : 'flex: 1')};
+    ${({ variant }) => (variant !== 'terciary' ? '' : 'paddingLeft: 16px')};
 `
 
 export const Text = styled.Text<ButtonProps>`
-    color: ${({ disabled, variant }) => (disabled ? 'gray' : variant === 'primary' ? 'white' : 'blue')};
+    color: ${({ disabled, variant }) =>
+        disabled ? '#887e7e' : variant === 'primary' ? 'white' : variant === 'secondary' ? 'blue' : 'black'};
     font-family: ${theme.fonts.montserratSemiBold};
     font-size: ${({ labelSize }) => (labelSize === 'medium' ? theme.fontSize.medium : theme.fontSize.large)};
     letter-spacing: ${BUTTON_STYLE.letterSpacing};

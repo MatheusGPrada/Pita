@@ -1,11 +1,10 @@
 import React, { FC } from 'react'
 import Icon from 'react-native-vector-icons/AntDesign'
-import { theme } from '../../../../styles/theme'
 import { Image, StyledText, TextContainer, LineSeparator, LineSeparatorContainer, StyledLabel } from './styles'
 import { Button } from '../../../../components/atoms/Button'
 import { i18n } from '../../../../_translate/i18n'
 import { useNavigation } from '@react-navigation/native'
-import { Template } from '../../../../components/template/Template'
+import { DarkTemplate } from '../../../../components/templates/DarkTemplate/DarkTemplate'
 
 Icon.loadFont()
 
@@ -13,7 +12,7 @@ export const LoginOptions: FC = () => {
     const { navigate } = useNavigation()
 
     return (
-        <Template backgroundColor="black" statusBarColor="black" statusBarStyle="light-content">
+        <DarkTemplate>
             <Image resizeMode="contain" source={require('../../../../assets/images/pita.png')} />
             <TextContainer>
                 <StyledText onPress={() => navigate('')}>{i18n.t('labels.register')}</StyledText>
@@ -24,9 +23,9 @@ export const LoginOptions: FC = () => {
                 <StyledLabel>{i18n.t('labels.or')}</StyledLabel>
                 <LineSeparator />
             </LineSeparatorContainer>
-            <Button disabled={false} label={i18n.t('buttonLabels.loginWithFacebook')}>
-                <Icon color="white" name="facebook-square" size={theme.size.m36} />
+            <Button disabled={false} label={i18n.t('buttonLabels.loginWithFacebook')} useButtonContainer={true}>
+                <Icon color="white" name="facebook-square" size={36} />
             </Button>
-        </Template>
+        </DarkTemplate>
     )
 }

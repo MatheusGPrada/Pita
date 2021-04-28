@@ -1,115 +1,83 @@
-import React, { FC, useState } from 'react'
-import { Content } from '../../../../components/utils/Screen'
-import { ButtonContainer, InputContainer } from '../../../../components/styledComponents/InputContainer'
-import { ForgotPassword } from '../../../../components/styledComponents/ForgottPassword'
+import React, { FC } from 'react'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { BottomNavigation } from 'react-native-paper'
+import { ProfileHeader, ProfileContent, UserName, FullSizeBgColor, Footer, ButtonContainer, ContentTitle } from './styles'
 import { SafeAreaView, StatusBar } from 'react-native'
-import Icon from 'react-native-vector-icons/Feather'
 import { Button } from '../../../../components/atoms/Button'
-import { theme } from '../../../../styles/theme'
 import { i18n } from '../../../../_translate/i18n'
-import { Snackbar, TextInput } from 'react-native-paper'
-import { Image, ImageContainer } from './styles'
 import { useNavigation } from '@react-navigation/native'
-import { Template } from '../../../../components/templates/template'
+import { theme } from '../../../../styles/theme'
 
 Icon.loadFont()
 
-export const Login: FC = () => {
-    // TO DO - IMPLEMENT THE INPUTS AND CPF VALIDATION
-
-    const [user, setUser] = useState()
-    const [error, setError] = useState('')
-    const [password, setPassword] = useState()
-    const [showPassword, setShowPassword] = useState(true)
-    const [visible, setVisible] = React.useState(false)
-
-    const onToggleSnackBar = () => setVisible(!visible)
-
-    const onDismissSnackBar = () => setVisible(false)
-
+export const Home: FC = () => {
     const { navigate } = useNavigation()
 
-    const handleForgotPassword = () => {
-        // TO DO - ADD RECOVERY PASSWORD
-    }
+    const [index, setIndex] = React.useState(0)
+    const [routes] = React.useState([
+        { icon: props => <Icon color="white" name="bookmark-check" size={36} {...props} />, key: 'schedule' },
+        { icon: props => <Icon color="white" name="account-box" size={36} {...props} />, key: 'account' },
+    ])
 
-    const doLogin = () => {
-        user === 'Matheus' && password === '12345' ? navigate('Home') : setLoginError()
-    }
+    const AccountRoute = () => (
+        <FullSizeBgColor>
+            <ProfileHeader>
+                <Icon color="black" name="account-circle" size={100} />
+                <UserName>Matheus Prada</UserName>
+            </ProfileHeader>
+            <ProfileContent>
+                <ContentTitle>{i18n.t('title.changeProfileData')}</ContentTitle>
+                <ButtonContainer>
+                    <Button label={i18n.t('buttonLabels.changeName')} useButtonContainer={true} variant={'terciary'}>
+                        <Icon color="black" name="account" size={36} />
+                    </Button>
+                </ButtonContainer>
+                <ButtonContainer>
+                    <Button label={i18n.t('buttonLabels.changeEmail')} useButtonContainer={true} variant={'terciary'}>
+                        <Icon color="black" name="email" size={36} />
+                    </Button>
+                </ButtonContainer>
+                <ButtonContainer>
+                    <Button label={i18n.t('buttonLabels.changeCellphone')} useButtonContainer={true} variant={'terciary'}>
+                        <Icon color="black" name="cellphone-basic" size={36} />
+                    </Button>
+                </ButtonContainer>
+                <ButtonContainer>
+                    <Button label={i18n.t('buttonLabels.changePassword')} useButtonContainer={true} variant={'terciary'}>
+                        <Icon color="black" name="lock" size={36} />
+                    </Button>
+                </ButtonContainer>
+            </ProfileContent>
+            <Footer>
+                <Button label={i18n.t('buttonLabels.logout')} labelSize="large" onPress={() => doLogOut()} useButtonContainer={true} />
+            </Footer>
+        </FullSizeBgColor>
+    )
 
-    const setLoginError = () => {
-        setError(i18n.t('labels.invalidUserOrPassword'))
-        onToggleSnackBar()
-    }
+    const ScheduleRoute = () => <FullSizeBgColor />
 
-    const cleanError = () => {
-        setError('')
+    const renderScene = BottomNavigation.SceneMap({
+        account: AccountRoute,
+        schedule: ScheduleRoute,
+    })
+
+    const doLogOut = () => {
+        navigate('LoginOptions')
     }
 
     return (
-        <Template safeAreaBackgroundColor="black" statusBarBackgroundColor="black" statusBarStyle="light-content">
-            <ImageContainer>
-                <Image resizeMode="contain" source={require('../../../../assets/images/logo.png')} />
-            </ImageContainer>
-            <InputContainer>
-                <TextInput
-                    label={i18n.t('labels.user')}
-                    onChangeText={setUser}
-                    onFocus={() => cleanError()}
-                    style={{ backgroundColor: 'rgb(255, 255, 255)', borderRadius: 10, height: 55 }}
-                    theme={{ colors: { primary: 'black', underlineColor: 'transparent' } }}
-                    value={user}
+        <>
+            <SafeAreaView style={{ backgroundColor: 'white', flex: 0 }} />
+            <SafeAreaView style={{ backgroundColor: 'black', flex: 1 }}>
+                <StatusBar backgroundColor="white" barStyle="dark-content" />
+                <BottomNavigation
+                    barStyle={{ backgroundColor: '#000000' }}
+                    labeled={false}
+                    navigationState={{ index, routes }}
+                    onIndexChange={setIndex}
+                    renderScene={renderScene}
                 />
-            </InputContainer>
-            <InputContainer>
-                <TextInput
-                    label={i18n.t('labels.password')}
-                    onChangeText={setPassword}
-                    onFocus={() => cleanError()}
-                    right={
-                        password ? (
-                            <TextInput.Icon
-                                name={() =>
-                                    showPassword ? (
-                                        <Icon color="black" name="eye" size={theme.size.m36} />
-                                    ) : (
-                                        <Icon color="black" name="eye-off" size={theme.size.m36} />
-                                    )
-                                }
-                                onPress={() => setShowPassword(!showPassword)}
-                            />
-                        ) : (
-                            ''
-                        )
-                    }
-                    secureTextEntry={showPassword}
-                    style={{ backgroundColor: 'rgb(255, 255, 255)', borderRadius: 10, height: 55 }}
-                    theme={{ colors: { primary: 'black', underlineColor: 'transparent' } }}
-                    value={password}
-                />
-                <ForgotPassword onPress={handleForgotPassword}>{i18n.t('labels.forgotPassword')}</ForgotPassword>
-            </InputContainer>
-
-            <ButtonContainer>
-                <Button
-                    disabled={false}
-                    label={i18n.t('buttonLabels.login')}
-                    labelSize="large"
-                    onPress={() => doLogin()}
-                    showIconBeforeText={false}
-                />
-            </ButtonContainer>
-
-            <Snackbar
-                action={{
-                    label: 'OK',
-                    onPress: () => {},
-                }}
-                onDismiss={onDismissSnackBar}
-                visible={visible}
-            >
-                {error}
-            </Snackbar>
-        </Template>
+            </SafeAreaView>
+        </>
     )
 }

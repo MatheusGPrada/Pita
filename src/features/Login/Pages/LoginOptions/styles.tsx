@@ -30,7 +30,7 @@ export const TextContainer = styled.View`
 export const LineSeparator = styled.View`
     align-self: center;
     background-color: ${theme.colors.grayscale50};
-    height: 1;
+    height: ${theme.size.m1px};
     width: 40%;
 `
 

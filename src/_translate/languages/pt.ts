@@ -4,8 +4,14 @@ const messages = {
     pt: {
         translations: {
             buttonLabels: {
+                changeCellphone: 'Telefone',
+                changeEmail: 'Email',
+                changeName: 'Nome',
+                changePassword: 'Senha',
+                email: 'Email',
                 login: 'Entrar',
                 loginWithFacebook: 'Continue com Facebook',
+                logout: 'Sair da conta',
             },
             labels: {
                 forgotPassword: 'Esqueceu a senha',
@@ -15,6 +21,9 @@ const messages = {
                 password: 'Senha',
                 register: 'Cadastrar',
                 user: 'Usuário',
+            },
+            title: {
+                changeProfileData: 'Alterar dados cadastrais',
             },
             validation: {
                 invalidCPF: 'CPF inválido!',

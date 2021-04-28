@@ -3,21 +3,18 @@ import { ButtonContainer, InputContainer } from '../../../../components/styledCo
 import { ForgotPassword } from '../../../../components/styledComponents/ForgottPassword'
 import Icon from 'react-native-vector-icons/Feather'
 import { Button } from '../../../../components/atoms/Button'
-import { theme } from '../../../../styles/theme'
 import { i18n } from '../../../../_translate/i18n'
 import { Snackbar, TextInput } from 'react-native-paper'
 import { Image, ImageContainer } from './styles'
 import { useNavigation } from '@react-navigation/native'
-import { Template } from '../../../../components/template/Template'
+import { LightTemplate } from '../../../../components/templates/LightTemplate/LightTemplate'
 
 Icon.loadFont()
 
 export const Login: FC = () => {
-    // TO DO - IMPLEMENT THE INPUTS AND CPF VALIDATION
-
-    const [user, setUser] = useState()
+    const [user, setUser] = useState('Matheus')
     const [error, setError] = useState('')
-    const [password, setPassword] = useState()
+    const [password, setPassword] = useState('12345')
     const [showPassword, setShowPassword] = useState(true)
     const [visible, setVisible] = React.useState(false)
 
@@ -32,7 +29,7 @@ export const Login: FC = () => {
     }
 
     const doLogin = () => {
-        user === 'Matheus' && password === '12345' ? navigate('Home') : setLoginError()
+        user === 'Matheus' && password === '12345' ? navigate('HomeStack', { screen: 'Home' }) : setLoginError()
     }
 
     const setLoginError = () => {
@@ -45,7 +42,7 @@ export const Login: FC = () => {
     }
 
     return (
-        <Template backgroundColor="white" statusBarColor="white" statusBarStyle="dark-content">
+        <LightTemplate>
             <ImageContainer>
                 <Image resizeMode="contain" source={require('../../../../assets/images/logo.png')} />
             </ImageContainer>
@@ -55,7 +52,7 @@ export const Login: FC = () => {
                     onChangeText={setUser}
                     onFocus={() => cleanError()}
                     style={{ backgroundColor: 'rgb(255, 255, 255)', borderRadius: 10, height: 55 }}
-                    theme={{ colors: { primary: 'black', underlineColor: 'transparent' } }}
+                    theme={{ colors: { primary: 'black' } }}
                     value={user}
                 />
             </InputContainer>
@@ -69,9 +66,9 @@ export const Login: FC = () => {
                             <TextInput.Icon
                                 name={() =>
                                     showPassword ? (
-                                        <Icon color="black" name="eye" size={theme.size.m36} />
+                                        <Icon color="black" name="eye" size={36} />
                                     ) : (
-                                        <Icon color="black" name="eye-off" size={theme.size.m36} />
+                                        <Icon color="black" name="eye-off" size={36} />
                                     )
                                 }
                                 onPress={() => setShowPassword(!showPassword)}
@@ -82,7 +79,7 @@ export const Login: FC = () => {
                     }
                     secureTextEntry={showPassword}
                     style={{ backgroundColor: 'rgb(255, 255, 255)', borderRadius: 10, height: 55 }}
-                    theme={{ colors: { primary: 'black', underlineColor: 'transparent' } }}
+                    theme={{ colors: { primary: 'black' } }}
                     value={password}
                 />
                 <ForgotPassword onPress={handleForgotPassword}>{i18n.t('labels.forgotPassword')}</ForgotPassword>
@@ -90,24 +87,24 @@ export const Login: FC = () => {
 
             <ButtonContainer>
                 <Button
-                    disabled={false}
                     label={i18n.t('buttonLabels.login')}
                     labelSize="large"
                     onPress={() => doLogin()}
                     showIconBeforeText={false}
+                    useButtonContainer={true}
                 />
             </ButtonContainer>
 
             <Snackbar
                 action={{
                     label: 'OK',
-                    onPress: () => {},
+                    onPress: () => null,
                 }}
                 onDismiss={onDismissSnackBar}
                 visible={visible}
             >
                 {error}
             </Snackbar>
-        </Template>
+        </LightTemplate>
     )
 }
