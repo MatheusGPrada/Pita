@@ -8,6 +8,7 @@ import { Snackbar, TextInput } from 'react-native-paper'
 import { Image, ImageContainer } from './styles'
 import { useNavigation } from '@react-navigation/native'
 import { LightTemplate } from '../../../../components/templates/LightTemplate/LightTemplate'
+import { HOME_STACK } from '../../../../routes/Contants'
 
 Icon.loadFont()
 
@@ -22,7 +23,7 @@ export const Login: FC = () => {
 
     const onDismissSnackBar = () => setVisible(false)
 
-    const { navigate } = useNavigation()
+    const { navigate, reset } = useNavigation()
 
     const handleForgotPassword = () => {
         // TO DO - ADD RECOVERY PASSWORD
@@ -30,6 +31,10 @@ export const Login: FC = () => {
 
     const doLogin = () => {
         user === 'Matheus' && password === '12345' ? navigate('HomeStack', { screen: 'Home' }) : setLoginError()
+        reset({
+            index: 0,
+            routes: [{ name: HOME_STACK }],
+        })
     }
 
     const setLoginError = () => {

@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import { theme } from '../../../../styles/theme'
+import { theme } from '../../../styles/theme'
 
 export const FullSizeBgColor = styled.View`
     flex: 1;
@@ -9,13 +9,13 @@ export const FullSizeBgColor = styled.View`
 export const ProfileHeader = styled.View`
     align-self: flex-start;
     flex-direction: row;
-    margin: ${theme.marginsPx.m32px} 0 0 ${theme.marginsPx.m16px};
+    margin: ${theme.marginsPx.m32px} 0 ${theme.marginsPx.m16px} 0;
 `
 
 export const UserName = styled.Text`
     color: black;
     font-family: ${theme.fonts.montserratSemiBold};
-    font-size: ${theme.fontSize.medium};
+    font-size: ${theme.fontSize.xLarge};
     letter-spacing: ${theme.letterSpacing.ls08};
     align-self: center;
     left: ${theme.marginsPx.m20px};
