@@ -1,7 +1,7 @@
 import React from 'react'
 import { ProfileHeader, ProfileContent, UserName, FullSizeBgColor, Footer, ButtonContainer, ContentTitle } from '../styles'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import { Button } from '../../../../components/atoms/Button'
+import { Button } from '../../../../components/atoms/Button/Button'
 import { i18n } from '../../../../_translate/i18n'
 import { useNavigation } from '@react-navigation/native'
 import { LOGIN_STACK } from '../../../../routes/Contants'

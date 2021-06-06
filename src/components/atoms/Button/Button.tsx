@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Container, Text, Content } from './styles'
-import { Loading } from '../../atoms/Loading'
+import { Loading } from '../Loading/Loading'
 import { ButtonProps } from './typings'
 
 export const Button: FC<ButtonProps> = ({

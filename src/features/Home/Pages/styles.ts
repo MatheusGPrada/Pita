@@ -6,10 +6,16 @@ export const FullSizeBgColor = styled.View`
     background-color: white;
 `
 
+export const ScheduleContent = styled.View`
+    margin: ${theme.marginsPx.m40px} ${theme.marginsPx.m16px} ${theme.marginsPx.m16px} ${theme.marginsPx.m16px};
+    flex: 1;
+`
+
 export const ProfileHeader = styled.View`
     align-self: flex-start;
     flex-direction: row;
-    margin: ${theme.marginsPx.m32px} 0 ${theme.marginsPx.m16px} 0;
+    margin-top: ${theme.marginsPx.m32px};
+    margin-left: ${theme.marginsPx.m16px};
 `
 
 export const UserName = styled.Text`
@@ -43,4 +49,8 @@ export const ContentTitle = styled.Text`
     letter-spacing: ${theme.letterSpacing.ls08};
     align-self: flex-start;
     left: ${theme.marginsPx.m20px};
+`
+
+export const ContentContainer = styled.View`
+    flex: 1;
 `

@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react'
-import { ButtonContainer, InputContainer } from '../../../../components/styledComponents/InputContainer'
-import { ForgotPassword } from '../../../../components/styledComponents/ForgottPassword'
+import { ButtonContainer, InputContainer } from '../../../../components/styledComponents/InputContainer/InputContainer'
+import { ForgotPassword } from '../../../../components/styledComponents/ForgottPassword/ForgottPassword'
 import Icon from 'react-native-vector-icons/Feather'
-import { Button } from '../../../../components/atoms/Button'
+import { Button } from '../../../../components/atoms/Button/Button'
 import { i18n } from '../../../../_translate/i18n'
 import { Snackbar, TextInput } from 'react-native-paper'
 import { Image, ImageContainer } from './styles'
@@ -91,13 +91,7 @@ export const Login: FC = () => {
             </InputContainer>
 
             <ButtonContainer>
-                <Button
-                    label={i18n.t('buttonLabels.login')}
-                    labelSize="large"
-                    onPress={() => doLogin()}
-                    showIconBeforeText={false}
-                    useButtonContainer={true}
-                />
+                <Button label={i18n.t('buttonLabels.login')} labelSize="large" onPress={() => doLogin()} useButtonContainer={true} />
             </ButtonContainer>
 
             <Snackbar

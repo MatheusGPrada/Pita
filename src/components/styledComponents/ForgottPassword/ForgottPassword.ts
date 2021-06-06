@@ -1,4 +1,4 @@
-import styled from '../../../../node_modules/styled-components'
+import styled from 'styled-components'
 import { theme } from '../../../styles/theme'
 
 export const ForgotPassword = styled.Text`

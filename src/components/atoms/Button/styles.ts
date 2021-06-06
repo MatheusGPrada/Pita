@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 import { BUTTON_STYLE } from './constants'
 import { ButtonProps } from './typings'
-import { theme } from '../../../../src/styles/theme'
+import { theme } from '../../../styles/theme'
 
 export const Container = styled.TouchableHighlight<ButtonProps>`
     align-items: center;

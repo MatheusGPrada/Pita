@@ -2,8 +2,8 @@ import React, { FC } from 'react'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { BottomNavigation } from 'react-native-paper'
 import { SafeAreaView, StatusBar } from 'react-native'
-import { Account } from '../Accont'
-import { Schedule } from '../Schedule'
+import { Account } from '../Account/Account'
+import { Schedule } from '../Schedule/Schedule'
 
 Icon.loadFont()
 
@@ -22,14 +22,15 @@ export const Home: FC = () => {
     return (
         <>
             <SafeAreaView style={{ backgroundColor: 'white', flex: 0 }} />
-            <SafeAreaView style={{ backgroundColor: 'black', flex: 1 }}>
+            <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }}>
                 <StatusBar backgroundColor="white" barStyle="dark-content" />
                 <BottomNavigation
-                    barStyle={{ backgroundColor: '#000000' }}
+                    barStyle={{ backgroundColor: 'white' }}
                     labeled={false}
                     navigationState={{ index, routes }}
                     onIndexChange={setIndex}
                     renderScene={renderScene}
+                    shifting={true}
                 />
             </SafeAreaView>
         </>
