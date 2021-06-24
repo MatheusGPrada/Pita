@@ -1,6 +1,7 @@
 # OSX
 #
 .DS_Store
+*.icloud
 
 # Xcode
 #
@@ -20,6 +21,13 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+ios/build/
+ios/assets/
+ios/Nav/main.jsbundle
+ios/fastlane/README.md
+ios/fastlane/report.xml
+android/fastlane/README.md
+android/fastlane/report.xml
 
 # Android/IntelliJ
 #
@@ -31,9 +39,13 @@ local.properties
 
 # node.js
 #
-node_modules/
+./node_modules/**
+**/node_modules/**
 npm-debug.log
 yarn-error.log
+.yarn/*
+.yarnrc
+./.yarnrc
 
 # BUCK
 buck-out/
@@ -57,3 +69,15 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+
+# Gradle
+/build/
+/RNTester/android/app/build/
+/RNTester/android/app/gradle/
+/RNTester/android/app/gradlew
+/RNTester/android/app/gradlew.bat
+/ReactAndroid/build/
+
+# Visual studio
+.vscode
+.vs
