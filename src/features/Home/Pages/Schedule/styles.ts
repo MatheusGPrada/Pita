@@ -8,7 +8,7 @@ export const AttendanceHeader = styled.View`
 `
 
 export const Attendance = styled.Text`
-    color: ${theme.colors.black100};
+    color: #000000;
     font-family: ${theme.fonts.montserratRegular};
     font-size: ${theme.fontSize.large};
     padding-bottom: ${theme.marginsPx.m8px};
@@ -17,22 +17,22 @@ export const Attendance = styled.Text`
 `
 
 export const Day = styled.Text`
-    color: ${theme.colors.black100};
+    color: #000000;
     font-family: ${theme.fonts.montserratSemiBold};
     font-size: ${theme.fontSize.xxLarge};
     padding-left: ${theme.marginsPx.m16px};
 `
 
 export const Time = styled.Text`
-    color: ${theme.colors.black100};
+    color: #000000;
     font-family: ${theme.fonts.montserratSemiBold};
     font-size: ${theme.fontSize.xxLarge};
     padding-right: ${theme.marginsPx.m16px};
 `
 
 export const AttendanceContainer = styled.View`
-    background-color: #00bfff;
-    border-radius: 20px;
+    background-color: #ffd6a5;
+    border-radius: 10px;
     margin-top: ${theme.marginsPx.m16px};
     padding-bottom: ${theme.marginsPx.m16px};
     padding-top: ${theme.marginsPx.m16px};

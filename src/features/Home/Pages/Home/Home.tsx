@@ -25,7 +25,7 @@ export const Home: FC = () => {
             <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }}>
                 <StatusBar backgroundColor="white" barStyle="dark-content" />
                 <BottomNavigation
-                    barStyle={{ backgroundColor: 'white' }}
+                    barStyle={{ backgroundColor: 'white', height: 50 }}
                     labeled={false}
                     navigationState={{ index, routes }}
                     onIndexChange={setIndex}

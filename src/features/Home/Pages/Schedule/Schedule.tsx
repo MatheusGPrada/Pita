@@ -88,7 +88,7 @@ export const Schedule: FC = () => {
                             </AttendanceContainer>
                         ))}
                         <ButtonContainer>
-                            <Button label={i18n.t('buttonLabels.seeAllSchedule')} onPress={() => addSchedule()}>
+                            <Button label={i18n.t('buttonLabels.addSchedule')} onPress={() => addSchedule()}>
                                 <Icon color="white" name="plus" size={25} />
                             </Button>
                         </ButtonContainer>

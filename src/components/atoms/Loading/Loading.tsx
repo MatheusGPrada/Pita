@@ -8,7 +8,7 @@ Icon.loadFont()
 
 export const Loading = ({ size = 32, isBlue = false }: LoadingProps) => {
     const [rotateAnimation] = useState(new Animated.Value(0))
-    const color = isBlue ? 'blue' : 'white'
+    const color = isBlue ? '#613dc1' : 'white'
     return (
         <Animated.View style={getRotateAnimationStyle(rotateAnimation)}>
             <Icon color={color} name="loading1" size={size} />

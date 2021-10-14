@@ -4,6 +4,7 @@ const messages = {
     pt: {
         translations: {
             buttonLabels: {
+                addSchedule: 'Adicionar agendamento',
                 changeCellphone: 'Telefone',
                 changeEmail: 'Email',
                 changeName: 'Nome',
