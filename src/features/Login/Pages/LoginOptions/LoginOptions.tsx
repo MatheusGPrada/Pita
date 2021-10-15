@@ -15,7 +15,7 @@ export const LoginOptions: FC = () => {
         <DarkTemplate>
             <Image resizeMode="contain" source={require('../../../../assets/images/pita.png')} />
             <TextContainer>
-                <StyledText onPress={() => navigate('')}>{i18n.t('labels.register')}</StyledText>
+                <StyledText onPress={() => navigate('RegisterStack', { screen: 'UserInfo' })}>{i18n.t('labels.register')}</StyledText>
                 <StyledText onPress={() => navigate('Login')}>{i18n.t('labels.login')}</StyledText>
             </TextContainer>
             <LineSeparatorContainer>

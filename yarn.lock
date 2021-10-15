@@ -971,43 +971,12 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@brazilian-utils/format-cpf@^0.1.8":
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/@brazilian-utils/format-cpf/-/format-cpf-0.1.8.tgz#2eaad4999a3d7667ea69481d5cbd8e4168cd28c2"
-  integrity sha512-y+Jhtksc2yVKmVlW70DMuTOuTHQvKXiblcae6Gcn6LoT4yp/+P+I961dYhlXJZtjMGPV/PqisHYb14HXASegzA==
-  dependencies:
-    "@brazilian-utils/helper-is-last-char" "^0.1.7"
-    "@brazilian-utils/helper-only-numbers" "^0.1.5"
+"@brazilian-utils/brazilian-utils@^1.0.0-rc.12":
+  version "1.0.0-rc.12"
+  resolved "https://registry.yarnpkg.com/@brazilian-utils/brazilian-utils/-/brazilian-utils-1.0.0-rc.12.tgz#1ab9dd02bc7cf9cd999a651eb315a0326b6f490b"
+  integrity sha512-gR5TbSKTgFgDe0/ZghgwqCEryLbHjwdEpvr3ao/Z0f8zRu6LD3lif0HJ3eQiC3pJSwtUPyA+97vm1IEqZkYSTA==
 
-"@brazilian-utils/helper-generate-checksum@^1.0.0-alpha.3":
-  version "1.0.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/@brazilian-utils/helper-generate-checksum/-/helper-generate-checksum-1.0.0-alpha.3.tgz#49f80d3efbb780ce6dcba7eb6b7e3a835fa5816f"
-  integrity sha512-chB8V6eMZlZJCHIwJ47Pdmw8r/b1f25OuK/yP/1F1oeeippoCIcI2QMK96Yq5FrcQEMNW+UiyCNaUz1DX+XYJg==
-  dependencies:
-    "@brazilian-utils/helper-only-numbers" "^1.0.0-alpha.1"
 
-"@brazilian-utils/helper-is-last-char@^0.1.7":
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/@brazilian-utils/helper-is-last-char/-/helper-is-last-char-0.1.7.tgz#fc9c89dd46f319f25882d06a2cb73b7d5a01a82f"
-  integrity sha512-40bVIHBII6BqPhkHZYa6AP3sLxiX8/SAvfBWgeIeEF0gaLBe+/L2MoOlWVlJarnKKxikHqDeUafbfaG/Bjl/NQ==
-
-"@brazilian-utils/helper-only-numbers@^0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@brazilian-utils/helper-only-numbers/-/helper-only-numbers-0.1.5.tgz#ad1a18cf219ecd44d8c2c0ae3f058bcd42e795ab"
-  integrity sha512-nsfHGdDr97n8ech2UwMHgUjw9xGxbc5gyGgmSrvqisOzuBAjRx5LfcL7ZNjEiPe4hldwp6AgaMI6WXKCQ3fOfg==
-
-"@brazilian-utils/helper-only-numbers@^1.0.0-alpha.1":
-  version "1.0.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/@brazilian-utils/helper-only-numbers/-/helper-only-numbers-1.0.0-alpha.1.tgz#2c2484d011ad7e117cb46798f797f2af85d9820f"
-  integrity sha512-XzNo6iD12t5F4SiR/Z1dbic95cX3xTL2SZLk8TxZR+G/IZtNXyWfo8q1TqJVvN+PRwH30qLZcaqx/5tiWUZKmA==
-
-"@brazilian-utils/is-valid-cpf@^1.0.0-alpha.3":
-  version "1.0.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/@brazilian-utils/is-valid-cpf/-/is-valid-cpf-1.0.0-alpha.3.tgz#bc2d36081288ef9afc3a334f0169964c7ac81fb8"
-  integrity sha512-FSxC4jZzRI4xYDUY5bzajENfjEuCsrE6RKtOMxkp1WGXi+PoqWnyPfvF4+3wBJQqhX4rF/cztwA05vdO4mBmJw==
-  dependencies:
-    "@brazilian-utils/helper-generate-checksum" "^1.0.0-alpha.3"
-    "@brazilian-utils/helper-only-numbers" "^1.0.0-alpha.1"
 
 "@callstack/react-theme-provider@^3.0.5":
   version "3.0.5"
@@ -2889,6 +2858,11 @@ data-urls@^2.0.0:
     abab "^2.0.3"
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
+
+date-and-time@0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/date-and-time/-/date-and-time-0.9.0.tgz#1524579e56dc07675c640b41735a7665c0659240"
+  integrity sha512-4JybB6PbR+EebpFx/KyR5Ybl+TcdXMLIJkyYsCx3P4M4CWGMuDyFF19yh6TyasMAIF5lrsgIxiSHBXh2FFc7Fg==
 
 dayjs@^1.8.15:
   version "1.10.4"
@@ -6769,6 +6743,14 @@ react-native-iphone-x-helper@^1.3.0, react-native-iphone-x-helper@^1.3.1:
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.3.1.tgz#20c603e9a0e765fd6f97396638bdeb0e5a60b010"
   integrity sha512-HOf0jzRnq2/aFUcdCJ9w9JGzN3gdEg0zFE4FyYlp4jtidqU03D5X7ZegGKfT1EWteR0gPBGp9ye5T5FvSWi9Yg==
 
+react-native-masked-text@^1.13.0:
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/react-native-masked-text/-/react-native-masked-text-1.13.0.tgz#533fde8c45ccbaa1d6b0df30bf19b84b4ace3de3"
+  integrity sha512-iMku5Ky6DP4fTRosjsYNJOhH8yoBQCzRALBdv1wVDKmCBQhhVE8RHr5EW4SNUjkYTZL473sDdEKl4NI948q9FQ==
+  dependencies:
+    date-and-time "0.9.0"
+    tinymask "1.0.2"
+
 react-native-paper@^4.7.2:
   version "4.7.2"
   resolved "https://registry.yarnpkg.com/react-native-paper/-/react-native-paper-4.7.2.tgz#a40d1da87af5b030d45b525313cd703d490876ff"
@@ -7805,6 +7787,11 @@ time-stamp@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/time-stamp/-/time-stamp-1.1.0.tgz#764a5a11af50561921b133f3b44e618687e0f5c3"
   integrity sha1-dkpaEa9QVhkhsTPztE5hhofg9cM=
+
+tinymask@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/tinymask/-/tinymask-1.0.2.tgz#df3775a94087b0d3d056c256e8923c01b7ec0941"
+  integrity sha1-3zd1qUCHsNPQVsJW6JI8AbfsCUE=
 
 tmp@^0.0.33:
   version "0.0.33"

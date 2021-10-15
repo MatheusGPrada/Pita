@@ -15,3 +15,7 @@ export const ImageContainer = styled.View`
     margin-bottom: ${theme.marginsPx.m20px};
     margin-top: ${theme.marginsPx.m100px};
 `
+
+export const ContentContainer = styled.View`
+    margin-top: ${theme.marginsPx.m60px};
+`

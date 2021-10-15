@@ -10,13 +10,13 @@
         "moduleResolution": "node",
         "skipLibCheck": true,
         "noEmit": true,
-        "paths": {
-            "@theme": ["./src/styles/theme.ts"],
-            "@routes/*": ["./src/routes/*"],
-            "@features/*": ["./src/features/*"],
-            "@components/*": ["./src/components/*"],
-            "@i18n": ["./src/_translate/i18n"],
-        },
+        // "paths": {
+        //     "@theme": ["./src/styles/theme.ts"],
+        //     "@routes/*": ["./src/routes/*"],
+        //     "@features/*": ["./src/features/*"],
+        //     "@components/*": ["./src/components/*"],
+        //     "@i18n": ["./src/_translate/i18n"],
+        // },
         "plugins": [
             {
                 "name": "typescript-styled-plugin",

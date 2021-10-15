@@ -16,22 +16,30 @@ const messages = {
                 logout: 'Sair da conta',
                 seeAllSchedule: 'Ver todos',
             },
-            labels: {
-                forgotPassword: 'Esqueceu a senha',
+            error: {
+                invalidCPF: 'O CPF informado é inválido',
                 invalidUserOrPassword: 'Usuário ou senha inválidos',
+            },
+            labels: {
+                cpf: 'CPF',
+                forgotPassword: 'Esqueceu a senha',
                 login: 'Entrar',
+                name: 'Nome',
                 or: 'Ou',
                 password: 'Senha',
                 register: 'Cadastrar',
                 user: 'Usuário',
+                birthDate: 'Data de nascimento',
             },
             subtitle: {
                 createSchedule: 'Agende agora mesmo o seu atendimento',
+                signUp: 'Informe seus dados pessoais abaixo para criar seu cadastro',
             },
             title: {
                 changeProfileData: 'Alterar dados cadastrais',
                 schedule: 'Nenhum agendamento',
                 scheduleds: 'Agendados',
+                welcome: 'Bem vindo',
             },
             validation: {
                 invalidCPF: 'CPF inválido!',

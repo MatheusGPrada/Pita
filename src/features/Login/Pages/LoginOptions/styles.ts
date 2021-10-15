@@ -41,7 +41,7 @@ export const LineSeparatorContainer = styled.View`
 `
 
 export const StyledLabel = styled.Text`
-    color: ${theme.colors.grayscale60};
+    color: ${theme.colors.white};
     text-align: center;
     font-family: ${theme.fonts.montserratRegular};
     font-size: ${theme.fontSize.large};
