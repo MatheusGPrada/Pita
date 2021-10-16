@@ -1,6 +1,6 @@
 import React, { FC, useRef, useState, useCallback } from 'react'
 import Icon from 'react-native-vector-icons/AntDesign'
-import { InputContainer, ContentContainer, HeaderContent, Title, Subtitle } from './styles'
+import { InputContainer, ContentContainer, HeaderContent, Title, Subtitle, InputText } from './styles'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { DarkTemplate } from '../../../../components/templates/DarkTemplate/DarkTemplate'
 import { Snackbar, TextInput } from 'react-native-paper'
@@ -12,7 +12,7 @@ import { isValidCPF } from '@brazilian-utils/brazilian-utils'
 
 Icon.loadFont()
 
-export const UserInfo: FC = () => {
+export const UserInfo: FC = (setShowNext: Function) => {
     const [visible, setVisible] = React.useState(false)
 
     const [name, setName] = useState('')
@@ -30,8 +30,15 @@ export const UserInfo: FC = () => {
 
     const { navigate } = useNavigation()
 
+    const validAllInfo = () => {
+        if (!isEmpty(name) && isValidCPF(cpf) && !isEmpty(birthDate)) {
+            //setShowNext(true)
+        }
+    }
+
     useFocusEffect(
         useCallback(() => {
+            console.debug('setShowNext', setShowNext)
             nameInputRef.current.focus()
         }, []),
     )
@@ -44,26 +51,27 @@ export const UserInfo: FC = () => {
             </HeaderContent>
             <ContentContainer>
                 <InputContainer>
+                    <InputText>{i18n.t('labels.name')}</InputText>
                     <TextInput
-                        label={i18n.t('labels.name')}
                         onChangeText={setName}
                         onFocus={() => null}
+                        onBlur={() => validAllInfo()}
                         style={{ backgroundColor: theme.colors.lightGrey, height: 55, marginBottom: 30 }}
                         theme={{ colors: { primary: 'black' } }}
                         value={name}
-                        placeholder={i18n.t('labels.name')}
                         ref={nameInputRef}
                     />
 
+                    <InputText>{i18n.t('labels.cpf')}</InputText>
                     <TextInput
-                        label={i18n.t('labels.cpf')}
                         onChangeText={setCpf}
                         onBlur={() => {
-                            if (!isEmpty(cpf)) {
-                                if (!isValidCPF(cpf)) {
-                                    setError(i18n.t('error.invalidCPF'))
-                                    onToggleSnackBar()
-                                }
+                            if (!isEmpty(cpf) && !isValidCPF(cpf)) {
+                                setError(i18n.t('error.invalidCPF'))
+                                onToggleSnackBar()
+                            }
+                            if (!isEmpty(cpf) && isValidCPF(cpf)) {
+                                validAllInfo()
                             }
                         }}
                         onFocus={() => {
@@ -76,10 +84,13 @@ export const UserInfo: FC = () => {
                         render={props => <TextInputMask {...props} type="cpf" keyboardType="numeric" />}
                     />
 
+                    <InputText>{i18n.t('labels.birthDate')}</InputText>
                     <TextInput
-                        label={i18n.t('labels.birthDate')}
                         onChangeText={setBirthDate}
                         onFocus={() => null}
+                        onBlur={() => {
+                            validAllInfo()
+                        }}
                         style={{ backgroundColor: theme.colors.lightGrey, height: 55, marginBottom: 20 }}
                         theme={{ colors: { primary: 'black' } }}
                         value={birthDate}

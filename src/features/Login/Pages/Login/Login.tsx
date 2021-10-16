@@ -58,7 +58,7 @@ export const Login: FC = () => {
             <ContentContainer>
                 <InputContainer>
                     <TextInput
-                        label={i18n.t('labels.user')}
+                        placeholder={i18n.t('labels.user')}
                         onChangeText={setUser}
                         onFocus={() => cleanError()}
                         style={{ backgroundColor: 'rgb(255, 255, 255)', height: 55 }}
@@ -70,7 +70,7 @@ export const Login: FC = () => {
                 </InputContainer>
                 <InputContainer>
                     <TextInput
-                        label={i18n.t('labels.password')}
+                        placeholder={i18n.t('labels.password')}
                         onChangeText={setPassword}
                         onFocus={() => cleanError()}
                         right={

@@ -976,8 +976,6 @@
   resolved "https://registry.yarnpkg.com/@brazilian-utils/brazilian-utils/-/brazilian-utils-1.0.0-rc.12.tgz#1ab9dd02bc7cf9cd999a651eb315a0326b6f490b"
   integrity sha512-gR5TbSKTgFgDe0/ZghgwqCEryLbHjwdEpvr3ao/Z0f8zRu6LD3lif0HJ3eQiC3pJSwtUPyA+97vm1IEqZkYSTA==
 
-
-
 "@callstack/react-theme-provider@^3.0.5":
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/@callstack/react-theme-provider/-/react-theme-provider-3.0.5.tgz#a173e455e9603c9c45357a3b6ace1273086527ca"
@@ -6781,6 +6779,11 @@ react-native-screens@^2.17.1:
   version "2.17.1"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.17.1.tgz#c3c0ac750af48741c5b1635511e6af2a27b74309"
   integrity sha512-B4gD5e4csvlVwlhf+RNqjQZ9mHTwe/iL3rXondgZxnKz4oW0QAmtLnLRKOrYVxoaJaF9Fy7jhjo//24/472APQ==
+
+react-native-stepper-ui@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/react-native-stepper-ui/-/react-native-stepper-ui-0.0.9.tgz#b62c6bb8f3f81750458bbcdc44d8e668152eaed8"
+  integrity sha512-SnG1r73Ka0v3588MafTRbIJ1I6IF+d/GswQSPW4LsFOjgecwkNsTMjPgcAU14gV4ymts/38JmqXBsmztwR113Q==
 
 react-native-svg@^12.1.0:
   version "12.1.0"

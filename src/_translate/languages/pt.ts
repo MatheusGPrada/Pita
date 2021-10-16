@@ -33,7 +33,7 @@ const messages = {
             },
             subtitle: {
                 createSchedule: 'Agende agora mesmo o seu atendimento',
-                signUp: 'Informe seus dados pessoais abaixo para criar seu cadastro',
+                signUp: 'Informe seus dados pessoais abaixo ',
             },
             title: {
                 changeProfileData: 'Alterar dados cadastrais',
