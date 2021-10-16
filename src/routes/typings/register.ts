@@ -1,4 +1,4 @@
 export type RegisterStackParamList = {
-    UserInfo: undefined
+    UserInfo: { setShowNext: Function }
     SignUp: undefined
 }

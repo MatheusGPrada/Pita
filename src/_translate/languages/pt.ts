@@ -17,6 +17,8 @@ const messages = {
                 seeAllSchedule: 'Ver todos',
             },
             error: {
+                invalidDate: 'A data informada é inválida',
+                emptyName: 'O nome deve ser preenchido',
                 invalidCPF: 'O CPF informado é inválido',
                 invalidUserOrPassword: 'Usuário ou senha inválidos',
             },

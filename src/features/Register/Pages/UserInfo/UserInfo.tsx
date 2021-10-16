@@ -9,11 +9,12 @@ import { TextInput as TextInputType } from 'react-native'
 import { theme } from '../../../../../src/styles/theme'
 import { TextInputMask } from 'react-native-masked-text'
 import { isValidCPF } from '@brazilian-utils/brazilian-utils'
+import { isValid } from 'date-fns'
 
 Icon.loadFont()
 
-export const UserInfo: FC = (setShowNext: Function) => {
-    const [visible, setVisible] = React.useState(false)
+export const UserInfo: FC = ({ setShowNext }: UserInfoParams) => {
+    const [visible, setVisible] = useState(false)
 
     const [name, setName] = useState('')
     const [cpf, setCpf] = useState('')
@@ -31,14 +32,27 @@ export const UserInfo: FC = (setShowNext: Function) => {
     const { navigate } = useNavigation()
 
     const validAllInfo = () => {
-        if (!isEmpty(name) && isValidCPF(cpf) && !isEmpty(birthDate)) {
-            //setShowNext(true)
+        const elements = birthDate.split('/')
+        if (!isEmpty(name) && !isEmpty(cpf) && elements.length === 3) {
+            if (isValidCPF(cpf) && isValid(new Date(elements[2].concat('/', elements[1], '/', elements[0])))) {
+                setShowNext(true)
+                return
+            }
         }
+        setShowNext(false)
+        return
+    }
+
+    const validDate = () => {
+        const elements = birthDate.split('/')
+        if (elements.length === 3) {
+            return isValid(new Date(elements[2].concat('/', elements[1], '/', elements[0]))) && parseInt(elements[0], 10) <= 31
+        }
+        return false
     }
 
     useFocusEffect(
         useCallback(() => {
-            console.debug('setShowNext', setShowNext)
             nameInputRef.current.focus()
         }, []),
     )
@@ -54,8 +68,14 @@ export const UserInfo: FC = (setShowNext: Function) => {
                     <InputText>{i18n.t('labels.name')}</InputText>
                     <TextInput
                         onChangeText={setName}
-                        onFocus={() => null}
-                        onBlur={() => validAllInfo()}
+                        onFocus={() => validAllInfo()}
+                        onBlur={() => {
+                            validAllInfo()
+                            if (isEmpty(name)) {
+                                setError(i18n.t('error.emptyName'))
+                                onToggleSnackBar()
+                            }
+                        }}
                         style={{ backgroundColor: theme.colors.lightGrey, height: 55, marginBottom: 30 }}
                         theme={{ colors: { primary: 'black' } }}
                         value={name}
@@ -65,18 +85,13 @@ export const UserInfo: FC = (setShowNext: Function) => {
                     <InputText>{i18n.t('labels.cpf')}</InputText>
                     <TextInput
                         onChangeText={setCpf}
+                        onFocus={() => validAllInfo()}
                         onBlur={() => {
+                            validAllInfo()
                             if (!isEmpty(cpf) && !isValidCPF(cpf)) {
                                 setError(i18n.t('error.invalidCPF'))
                                 onToggleSnackBar()
                             }
-                            if (!isEmpty(cpf) && isValidCPF(cpf)) {
-                                validAllInfo()
-                            }
-                        }}
-                        onFocus={() => {
-                            onDismissSnackBar()
-                            setError('')
                         }}
                         style={{ backgroundColor: theme.colors.lightGrey, height: 55, marginBottom: 30 }}
                         theme={{ colors: { primary: 'black' } }}
@@ -87,9 +102,13 @@ export const UserInfo: FC = (setShowNext: Function) => {
                     <InputText>{i18n.t('labels.birthDate')}</InputText>
                     <TextInput
                         onChangeText={setBirthDate}
-                        onFocus={() => null}
+                        onFocus={() => validAllInfo()}
                         onBlur={() => {
                             validAllInfo()
+                            if (!validDate()) {
+                                setError(i18n.t('error.invalidDate'))
+                                onToggleSnackBar()
+                            }
                         }}
                         style={{ backgroundColor: theme.colors.lightGrey, height: 55, marginBottom: 20 }}
                         theme={{ colors: { primary: 'black' } }}
@@ -111,7 +130,7 @@ export const UserInfo: FC = (setShowNext: Function) => {
             <Snackbar
                 action={{
                     label: 'OK',
-                    onPress: () => null,
+                    onPress: () => onDismissSnackBar(),
                 }}
                 onDismiss={onDismissSnackBar}
                 visible={visible}
