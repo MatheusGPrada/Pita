@@ -1,15 +1,15 @@
 import React, { FC, useState, useRef } from 'react'
-import { ButtonContainer, InputContainer } from '../../../../components/styledComponents/InputContainer/InputContainer'
-import { ForgotPassword } from '../../../../components/styledComponents/ForgottPassword/ForgottPassword'
 import Icon from 'react-native-vector-icons/Feather'
-import { Button } from '../../../../components/atoms/Button/Button'
-import { i18n } from '../../../../_translate/i18n'
 import { Snackbar, TextInput } from 'react-native-paper'
 import { Image, ImageContainer, ContentContainer } from './styles'
 import { useNavigation } from '@react-navigation/native'
-import { LightTemplate } from '../../../../components/templates/LightTemplate/LightTemplate'
-import { HOME_STACK } from '../../../../routes/Contants'
 import { TextInput as TextInputType } from 'react-native'
+import { LightTemplate } from '@components/templates/LightTemplate/LightTemplate'
+import { ButtonContainer, InputContainer } from '@components/styledComponents/InputContainer/InputContainer'
+import { ForgotPassword } from '@components/styledComponents/ForgottPassword/ForgottPassword'
+import { Button } from '@components/atoms/Button/Button'
+import { i18n } from '@i18n'
+import { HOME_STACK } from '@routes/Contants'
 
 Icon.loadFont()
 
@@ -58,21 +58,23 @@ export const Login: FC = () => {
             <ContentContainer>
                 <InputContainer>
                     <TextInput
-                        placeholder={i18n.t('labels.user')}
                         onChangeText={setUser}
                         onFocus={() => cleanError()}
+                        onSubmitEditing={() => passwordInputRef.current.focus()}
+                        placeholder={i18n.t('labels.user')}
+                        ref={userInputRef}
                         style={{ backgroundColor: 'rgb(255, 255, 255)', height: 55 }}
                         theme={{ colors: { primary: 'black' } }}
                         value={user}
-                        ref={userInputRef}
-                        onSubmitEditing={() => passwordInputRef.current.focus()}
                     />
                 </InputContainer>
                 <InputContainer>
                     <TextInput
-                        placeholder={i18n.t('labels.password')}
                         onChangeText={setPassword}
                         onFocus={() => cleanError()}
+                        onSubmitEditing={() => doLogin()}
+                        placeholder={i18n.t('labels.password')}
+                        ref={passwordInputRef}
                         right={
                             password ? (
                                 <TextInput.Icon
@@ -93,8 +95,6 @@ export const Login: FC = () => {
                         style={{ backgroundColor: 'rgb(255, 255, 255)', height: 55 }}
                         theme={{ colors: { primary: 'black' } }}
                         value={password}
-                        ref={passwordInputRef}
-                        onSubmitEditing={() => doLogin()}
                     />
                     <ForgotPassword onPress={handleForgotPassword}>{i18n.t('labels.forgotPassword')}</ForgotPassword>
                 </InputContainer>
@@ -105,7 +105,7 @@ export const Login: FC = () => {
 
             <Snackbar
                 action={{
-                    label: 'OK',
+                    label: i18n.t('labels.OK'),
                     onPress: () => null,
                 }}
                 onDismiss={onDismissSnackBar}

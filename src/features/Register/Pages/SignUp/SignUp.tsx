@@ -1,22 +1,40 @@
-import React, { useState, FC } from 'react'
+import { DarkTemplate } from '@components/templates/DarkTemplate/DarkTemplate'
+import React, { useState, FC, useEffect } from 'react'
 import Stepper from 'react-native-stepper-ui'
-import { DarkTemplate } from '../../../../../src/components/templates/DarkTemplate/DarkTemplate'
+import { PhoneNumber } from '../PhoneNumber/PhoneNumber'
 import { UserInfo } from '../UserInfo/UserInfo'
+import { Cache } from 'react-native-cache'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export const SignUp: FC = () => {
+    const [cache, setCache] = useState(0)
     const [active, setActive] = useState(0)
-    const [showNext, setShowNext] = useState(false)
 
-    const content = [<UserInfo setShowNext={setShowNext} />]
+    const content = [<UserInfo cache={cache} key={'UserInfo'} />, <PhoneNumber cache={cache} key={'UserInfo'} />]
+
+    useEffect(() => {
+        const createCache = async () => {
+            setCache(
+                new Cache({
+                    backend: AsyncStorage,
+                    namespace: 'Pita',
+                    policy: {
+                        maxEntries: 50000,
+                    },
+                }),
+            )
+        }
+        createCache()
+    }, [])
+
     return (
         <DarkTemplate>
             <Stepper
                 active={active}
                 content={content}
-                onBack={() => setActive(p => p - 1)}
+                onBack={() => setActive(index => index - 1)}
                 onFinish={() => alert('Finish')}
-                onNext={() => setActive(p => p + 1)}
-                showButton={showNext}
+                onNext={() => setActive(index => index + 1)}
             />
         </DarkTemplate>
     )

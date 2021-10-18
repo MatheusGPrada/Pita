@@ -1,10 +1,10 @@
+import { Button } from '@components/atoms/Button/Button'
+import { DarkTemplate } from '@components/templates/DarkTemplate/DarkTemplate'
+import { i18n } from '@i18n'
+import { useNavigation } from '@react-navigation/native'
 import React, { FC } from 'react'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { Image, StyledText, TextContainer, LineSeparator, LineSeparatorContainer, StyledLabel } from './styles'
-import { Button } from '../../../../components/atoms/Button/Button'
-import { i18n } from '../../../../_translate/i18n'
-import { useNavigation } from '@react-navigation/native'
-import { DarkTemplate } from '../../../../components/templates/DarkTemplate/DarkTemplate'
 
 Icon.loadFont()
 

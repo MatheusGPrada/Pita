@@ -1,6 +1,5 @@
-import React, { useState, useCallback, FC } from 'react'
+import React, { useState, FC, useEffect } from 'react'
 import { ScheduleContent, FullSizeBgColor, Footer, ContentContainer } from '../styles'
-import { useFocusEffect } from '@react-navigation/native'
 import {
     Attendance,
     AttendanceContainer,
@@ -13,10 +12,10 @@ import {
     ContentHeader,
     ButtonContainer,
 } from './styles'
-import { i18n } from '../../../../_translate/i18n'
 import { Attendances } from './typings'
 import Icon from 'react-native-vector-icons/AntDesign'
-import { Button } from '../../../../components/atoms/Button/Button'
+import { i18n } from '@i18n'
+import { Button } from '@components/atoms/Button/Button'
 
 Icon.loadFont()
 
@@ -26,7 +25,7 @@ export const Schedule: FC = () => {
 
     const checkSchedule = () => {
         // TO DO - CHECK THE SCHEDULE
-        let Scheduleds = [
+        const Scheduleds = [
             {
                 day: '01/01',
                 scheduledAttendance: ['Corte masculino', 'Tintura masculino', 'Hidratação'],
@@ -54,12 +53,10 @@ export const Schedule: FC = () => {
         // TO DO - SEE ALL SCHEDULE
     }
 
-    useFocusEffect(
-        useCallback(() => {
-            setAttendances(checkSchedule())
-            setLoading(false)
-        }, []),
-    )
+    useEffect(() => {
+        setAttendances(checkSchedule())
+        setLoading(false)
+    }, [setAttendances, setLoading])
 
     return (
         <FullSizeBgColor>

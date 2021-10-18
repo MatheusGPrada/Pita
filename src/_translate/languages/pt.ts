@@ -17,12 +17,15 @@ const messages = {
                 seeAllSchedule: 'Ver todos',
             },
             error: {
-                invalidDate: 'A data informada é inválida',
                 emptyName: 'O nome deve ser preenchido',
                 invalidCPF: 'O CPF informado é inválido',
+                invalidDate: 'A data informada é inválida',
                 invalidUserOrPassword: 'Usuário ou senha inválidos',
             },
             labels: {
+                OK: 'OK',
+                birthDate: 'Data de nascimento',
+                cellphone: 'Celular',
                 cpf: 'CPF',
                 forgotPassword: 'Esqueceu a senha',
                 login: 'Entrar',
@@ -31,11 +34,11 @@ const messages = {
                 password: 'Senha',
                 register: 'Cadastrar',
                 user: 'Usuário',
-                birthDate: 'Data de nascimento',
             },
             subtitle: {
                 createSchedule: 'Agende agora mesmo o seu atendimento',
-                signUp: 'Informe seus dados pessoais abaixo ',
+                phoneNumber: 'Insira o número do seu celular para validar seu cadastro',
+                signUp: 'Informe seus dados pessoais abaixo',
             },
             title: {
                 changeProfileData: 'Alterar dados cadastrais',

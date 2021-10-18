@@ -56,15 +56,6 @@ module.exports = {
             },
         ],
         'init-declarations': 'off',
-        // FIXME: Disabled cause side effects
-        // 'import-helpers/order-imports': [
-        //     'warn',
-        //     {
-        //         newlinesBetween: 'always',
-        //         groups: ['module', '/^@shared/', ['parent', 'sibling', 'index']],
-        //         alphabetize: { order: 'asc', ignoreCase: true },
-        //     },
-        // ],
         'jest/no-jasmine-globals': 'off',
         'key-spacing': [
             'error',
