@@ -9,7 +9,7 @@ import { SnackBar } from '@components/atoms/SnackBar/SnackBar'
 import { DarkTemplate } from '@components/templates/DarkTemplate/DarkTemplate'
 import { i18n } from '@i18n'
 import { theme } from '@theme'
-import { validAllInfo } from './utils'
+import { saveUserInfoInCache } from './utils'
 
 export const UserInfo: FC = ({ cache }) => {
     const [visible, setVisible] = useState(false)
@@ -17,6 +17,9 @@ export const UserInfo: FC = ({ cache }) => {
     const [name, setName] = useState('Matheus')
     const [cpf, setCpf] = useState('482.085.298-18')
     const [birthDate, setBirthDate] = useState('31/03/2000')
+    // const [name, setName] = useState('')
+    // const [cpf, setCpf] = useState('')
+    // const [birthDate, setBirthDate] = useState('')
 
     const [error, setError] = useState('')
 
@@ -39,13 +42,23 @@ export const UserInfo: FC = ({ cache }) => {
                     <InputText>{i18n.t('labels.name')}</InputText>
                     <TextInput
                         onBlur={async () => {
+                            await saveUserInfoInCache(name, cpf, birthDate, cache)
                             if (isEmpty(name)) {
-                                setError(i18n.t('error.emptyName'))
-                                onToggleSnackBar()
+                                await setError(i18n.t('error.emptyName'))
+                                await onToggleSnackBar()
                             }
                         }}
                         onChangeText={setName}
-                        onFocus={async () => await validAllInfo(name, cpf, birthDate, cache)}
+                        // onFocus={async () => {
+                        //     const {
+                        //         Name: { value: nameValue },
+                        //         CPF: { value: cpfValue },
+                        //         BirthDate: { value: birthDateValue },
+                        //     } = await cache.getAll()
+                        //     await setName(nameValue)
+                        //     await setCpf(cpfValue)
+                        //     await setBirthDate(birthDateValue)
+                        // }}
                         ref={nameInputRef}
                         style={{ backgroundColor: theme.colors.lightGrey, height: 55, marginBottom: 30 }}
                         theme={{ colors: { primary: 'black' } }}
@@ -55,14 +68,13 @@ export const UserInfo: FC = ({ cache }) => {
                     <InputText>{i18n.t('labels.cpf')}</InputText>
                     <TextInput
                         onBlur={async () => {
-                            await validAllInfo(name, cpf, birthDate, cache)
+                            await saveUserInfoInCache(name, cpf, birthDate, cache)
                             if (!isEmpty(cpf) && !isValidCPF(cpf)) {
-                                setError(i18n.t('error.invalidCPF'))
-                                onToggleSnackBar()
+                                await setError(i18n.t('error.invalidCPF'))
+                                await onToggleSnackBar()
                             }
                         }}
                         onChangeText={setCpf}
-                        onFocus={async () => await validAllInfo(name, cpf, birthDate, cache)}
                         render={props => <TextInputMask {...props} keyboardType="numeric" type="cpf" />}
                         style={{ backgroundColor: theme.colors.lightGrey, height: 55, marginBottom: 30 }}
                         theme={{ colors: { primary: 'black' } }}
@@ -72,14 +84,13 @@ export const UserInfo: FC = ({ cache }) => {
                     <InputText>{i18n.t('labels.birthDate')}</InputText>
                     <TextInput
                         onBlur={async () => {
-                            await validAllInfo(name, cpf, birthDate, cache)
+                            await saveUserInfoInCache(name, cpf, birthDate, cache)
                             if (!validDate(birthDate)) {
-                                setError(i18n.t('error.invalidDate'))
-                                onToggleSnackBar()
+                                await setError(i18n.t('error.invalidDate'))
+                                await onToggleSnackBar()
                             }
                         }}
                         onChangeText={setBirthDate}
-                        onFocus={async () => await validAllInfo(name, cpf, birthDate, cache)}
                         render={props => (
                             <TextInputMask
                                 {...props}

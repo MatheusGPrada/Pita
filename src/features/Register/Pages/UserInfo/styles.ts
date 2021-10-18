@@ -1,9 +1,9 @@
-import { theme } from '../../../../../src/styles/theme'
+import { theme } from '@theme'
 import styled from 'styled-components/native'
 
 export const HeaderContent = styled.View`
-    margin: ${theme.marginsPx.m20px} 0 ${theme.marginsPx.m60px};
-    padding: ${theme.marginsPx.m8px};
+    margin-bottom: ${theme.marginsPx.m40px};
+    padding-horizontal: ${theme.marginsPx.m8px};
 `
 
 export const Title = styled.Text`
@@ -12,7 +12,7 @@ export const Title = styled.Text`
     font-size: ${theme.fontSize.xxxLarge};
     font-style: normal;
     font-weight: 300;
-    margin-bottom: ${theme.marginsPx.m12px};
+    margin-bottom: ${theme.marginsPx.m4px};
 `
 
 export const Subtitle = styled.Text`
@@ -29,11 +29,11 @@ export const InputText = styled.Text`
     font-size: ${theme.fontSize.large};
     font-style: normal;
     font-weight: 300;
-    margin-bottom: ${theme.marginsPx.m8px};
+    margin-bottom: ${theme.marginsPx.m4px};
 `
 
 export const InputContainer = styled.View`
-    margin: ${theme.marginsPx.m20px} ${theme.marginsPx.m40px} ${theme.marginsPx.m100px};
+    margin: 0 ${theme.marginsPx.m40px} ${theme.marginsPx.m60px};
 `
 
 export const ContentContainer = styled.View`

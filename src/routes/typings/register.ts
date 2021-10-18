@@ -1,5 +1,5 @@
 export type RegisterStackParamList = {
-    UserInfo: { setShowNext: Function; cache: object }
-    PhoneNumber: { setShowNext: Function; cache: object }
+    UserInfo: { cache: object }
+    PhoneNumber: { cache: object }
     SignUp: undefined
 }

@@ -2,7 +2,7 @@ import { theme } from '../../../../../src/styles/theme'
 import styled from 'styled-components/native'
 
 export const HeaderContent = styled.View`
-    margin: ${theme.marginsPx.m60px} 0 ${theme.marginsPx.m100px};
+    margin-bottom: ${theme.marginsPx.m60px};
     padding: ${theme.marginsPx.m8px};
 `
 

@@ -19,6 +19,7 @@ const messages = {
             error: {
                 emptyName: 'O nome deve ser preenchido',
                 invalidCPF: 'O CPF informado é inválido',
+                invalidData: 'Os Dados informados são inválidos',
                 invalidDate: 'A data informada é inválida',
                 invalidUserOrPassword: 'Usuário ou senha inválidos',
             },
@@ -34,6 +35,10 @@ const messages = {
                 password: 'Senha',
                 register: 'Cadastrar',
                 user: 'Usuário',
+            },
+            steps: {
+                personalData: 'Dados Pessoais',
+                phoneNumber: 'Celular',
             },
             subtitle: {
                 createSchedule: 'Agende agora mesmo o seu atendimento',
