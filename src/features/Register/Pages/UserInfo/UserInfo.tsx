@@ -6,12 +6,11 @@ import { TextInputMask } from 'react-native-masked-text'
 import { isValidCPF } from '@brazilian-utils/brazilian-utils'
 import { isEmpty, validDate } from '@utils/validations'
 import { SnackBar } from '@components/atoms/SnackBar/SnackBar'
-import { DarkTemplate } from '@components/templates/DarkTemplate/DarkTemplate'
 import { i18n } from '@i18n'
 import { theme } from '@theme'
-import { saveUserInfoInCache } from './utils'
+import { saveUserInfoInCache, validAllInfo } from './utils'
 
-export const UserInfo: FC = ({ cache }) => {
+export const UserInfo: FC = ({ cache, setDisabled }) => {
     const [visible, setVisible] = useState(false)
 
     const [name, setName] = useState('Matheus')
@@ -32,7 +31,7 @@ export const UserInfo: FC = ({ cache }) => {
     }, [])
 
     return (
-        <DarkTemplate>
+        <>
             <HeaderContent>
                 <Title>{i18n.t('title.welcome')}</Title>
                 <Subtitle>{i18n.t('subtitle.signUp')}</Subtitle>
@@ -43,24 +42,15 @@ export const UserInfo: FC = ({ cache }) => {
                     <TextInput
                         onBlur={async () => {
                             await saveUserInfoInCache(name, cpf, birthDate, cache)
+                            await validAllInfo(name, cpf, birthDate, setDisabled)
                             if (isEmpty(name)) {
                                 await setError(i18n.t('error.emptyName'))
                                 await onToggleSnackBar()
                             }
                         }}
                         onChangeText={setName}
-                        // onFocus={async () => {
-                        //     const {
-                        //         Name: { value: nameValue },
-                        //         CPF: { value: cpfValue },
-                        //         BirthDate: { value: birthDateValue },
-                        //     } = await cache.getAll()
-                        //     await setName(nameValue)
-                        //     await setCpf(cpfValue)
-                        //     await setBirthDate(birthDateValue)
-                        // }}
                         ref={nameInputRef}
-                        style={{ backgroundColor: theme.colors.lightGrey, height: 55, marginBottom: 30 }}
+                        style={{ backgroundColor: 'rgb(255, 255, 255)', height: 45, marginBottom: 20 }}
                         theme={{ colors: { primary: 'black' } }}
                         value={name}
                     />
@@ -69,6 +59,7 @@ export const UserInfo: FC = ({ cache }) => {
                     <TextInput
                         onBlur={async () => {
                             await saveUserInfoInCache(name, cpf, birthDate, cache)
+                            await validAllInfo(name, cpf, birthDate, setDisabled)
                             if (!isEmpty(cpf) && !isValidCPF(cpf)) {
                                 await setError(i18n.t('error.invalidCPF'))
                                 await onToggleSnackBar()
@@ -76,7 +67,7 @@ export const UserInfo: FC = ({ cache }) => {
                         }}
                         onChangeText={setCpf}
                         render={props => <TextInputMask {...props} keyboardType="numeric" type="cpf" />}
-                        style={{ backgroundColor: theme.colors.lightGrey, height: 55, marginBottom: 30 }}
+                        style={{ backgroundColor: 'rgb(255, 255, 255)', height: 45, marginBottom: 20 }}
                         theme={{ colors: { primary: 'black' } }}
                         value={cpf}
                     />
@@ -85,6 +76,7 @@ export const UserInfo: FC = ({ cache }) => {
                     <TextInput
                         onBlur={async () => {
                             await saveUserInfoInCache(name, cpf, birthDate, cache)
+                            await validAllInfo(name, cpf, birthDate, setDisabled)
                             if (!validDate(birthDate)) {
                                 await setError(i18n.t('error.invalidDate'))
                                 await onToggleSnackBar()
@@ -101,7 +93,7 @@ export const UserInfo: FC = ({ cache }) => {
                                 type={'datetime'}
                             />
                         )}
-                        style={{ backgroundColor: theme.colors.lightGrey, height: 55, marginBottom: 20 }}
+                        style={{ backgroundColor: 'rgb(255, 255, 255)', height: 45, marginBottom: 20 }}
                         theme={{ colors: { primary: 'black' } }}
                         value={birthDate}
                     />
@@ -109,6 +101,6 @@ export const UserInfo: FC = ({ cache }) => {
             </ContentContainer>
 
             {visible && <SnackBar backgroundColor={theme.colors.danger50} message={error} setVisible={setVisible} />}
-        </DarkTemplate>
+        </>
     )
 }

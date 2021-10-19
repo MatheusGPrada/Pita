@@ -4,12 +4,12 @@ import { Snackbar, TextInput } from 'react-native-paper'
 import { Image, ImageContainer, ContentContainer } from './styles'
 import { useNavigation } from '@react-navigation/native'
 import { TextInput as TextInputType } from 'react-native'
-import { LightTemplate } from '@components/templates/LightTemplate/LightTemplate'
 import { ButtonContainer, InputContainer } from '@components/styledComponents/InputContainer/InputContainer'
 import { ForgotPassword } from '@components/styledComponents/ForgottPassword/ForgottPassword'
 import { Button } from '@components/atoms/Button/Button'
 import { i18n } from '@i18n'
 import { HOME_STACK } from '@routes/Contants'
+import { DarkTemplate } from '@components/templates/DarkTemplate/DarkTemplate'
 
 Icon.loadFont()
 
@@ -51,7 +51,7 @@ export const Login: FC = () => {
     }
 
     return (
-        <LightTemplate>
+        <DarkTemplate>
             <ImageContainer>
                 <Image resizeMode="contain" source={require('../../../../assets/images/logo.png')} />
             </ImageContainer>
@@ -63,7 +63,7 @@ export const Login: FC = () => {
                         onSubmitEditing={() => passwordInputRef.current.focus()}
                         placeholder={i18n.t('labels.user')}
                         ref={userInputRef}
-                        style={{ backgroundColor: 'rgb(255, 255, 255)', height: 55 }}
+                        style={{ backgroundColor: 'rgb(255, 255, 255)', height: 45 }}
                         theme={{ colors: { primary: 'black' } }}
                         value={user}
                     />
@@ -92,7 +92,7 @@ export const Login: FC = () => {
                             )
                         }
                         secureTextEntry={showPassword}
-                        style={{ backgroundColor: 'rgb(255, 255, 255)', height: 55 }}
+                        style={{ backgroundColor: 'rgb(255, 255, 255)', height: 45 }}
                         theme={{ colors: { primary: 'black' } }}
                         value={password}
                     />
@@ -113,6 +113,6 @@ export const Login: FC = () => {
             >
                 {error}
             </Snackbar>
-        </LightTemplate>
+        </DarkTemplate>
     )
 }

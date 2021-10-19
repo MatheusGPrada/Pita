@@ -33,7 +33,7 @@ export const InputText = styled.Text`
 `
 
 export const InputContainer = styled.View`
-    margin: 0 ${theme.marginsPx.m40px} ${theme.marginsPx.m60px};
+    margin: ${theme.marginsPx.m20px} ${theme.marginsPx.m40px} ${theme.marginsPx.m100px};
 `
 
 export const ContentContainer = styled.View`

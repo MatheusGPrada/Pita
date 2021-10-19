@@ -1,7 +1,12 @@
-import styled from 'styled-components/native'
-import { theme } from '../../styles/theme'
+import styled, { css } from 'styled-components/native'
+import { ContentProps } from '@components/templates/typings'
+import { theme } from '@theme'
 
 export const Content = styled.View`
     flex: 1;
-    margin: ${theme.marginsPx.m32px} ${theme.marginsPx.m16px};
+    ${({ hasMargin }: ContentProps) =>
+        hasMargin &&
+        css`
+            margin: ${theme.marginsPx.m32px} ${theme.marginsPx.m16px};
+        `};
 `

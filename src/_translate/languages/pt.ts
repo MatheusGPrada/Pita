@@ -5,6 +5,7 @@ const messages = {
         translations: {
             buttonLabels: {
                 addSchedule: 'Adicionar agendamento',
+                back: 'Voltar',
                 changeCellphone: 'Telefone',
                 changeEmail: 'Email',
                 changeName: 'Nome',
@@ -14,6 +15,7 @@ const messages = {
                 login: 'Entrar',
                 loginWithFacebook: 'Continue com Facebook',
                 logout: 'Sair da conta',
+                next: 'Próximo',
                 seeAllSchedule: 'Ver todos',
             },
             error: {
@@ -21,6 +23,7 @@ const messages = {
                 invalidCPF: 'O CPF informado é inválido',
                 invalidData: 'Os Dados informados são inválidos',
                 invalidDate: 'A data informada é inválida',
+                invalidPhoneNumber: 'Número de telefone inválido',
                 invalidUserOrPassword: 'Usuário ou senha inválidos',
             },
             labels: {
@@ -37,15 +40,17 @@ const messages = {
                 user: 'Usuário',
             },
             steps: {
-                personalData: 'Dados Pessoais',
+                personalData: 'Dados',
                 phoneNumber: 'Celular',
             },
             subtitle: {
                 createSchedule: 'Agende agora mesmo o seu atendimento',
-                phoneNumber: 'Insira o número do seu celular para validar seu cadastro',
+                insertPhoneNumber: 'Informe o seu número de celular para contato',
                 signUp: 'Informe seus dados pessoais abaixo',
+                validPhoneNumber: 'Será enviado um código para o seu celular',
             },
             title: {
+                cellphone: 'Celular',
                 changeProfileData: 'Alterar dados cadastrais',
                 schedule: 'Nenhum agendamento',
                 scheduleds: 'Agendados',

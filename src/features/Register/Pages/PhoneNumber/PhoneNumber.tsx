@@ -1,9 +1,8 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useState } from 'react'
 import Icon from 'react-native-vector-icons/AntDesign'
-import { ContentContainer, HeaderContent, Subtitle, InputText } from './styles'
+import { ContentContainer, HeaderContent, Subtitle, InputText, SnackBarContainer, Title } from './styles'
 import { TextInput } from 'react-native-paper'
 import { SnackBar } from '@components/atoms/SnackBar/SnackBar'
-import { DarkTemplate } from '@components/templates/DarkTemplate/DarkTemplate'
 import { i18n } from '@i18n'
 import { theme } from '@theme'
 import { TextInputMask } from 'react-native-masked-text'
@@ -18,20 +17,23 @@ export const PhoneNumber: FC = ({ cache }) => {
     const onToggleSnackBar = () => setVisible(true)
 
     const validPhoneNumber = () => {
-        if (phoneNumber.length === 15) {
-            //setShowNext(true)
+        cache.set('PhoneNumber', phoneNumber)
+        if (phoneNumber.length !== 15) {
+            setError(i18n.t('error.invalidPhoneNumber'))
+            onToggleSnackBar()
         }
     }
 
-    useEffect(() => {
-        // const getCache = async () => console.debug('Matheus', await cache.getAll())
-        // getCache()
-    }, [cache])
+    // useEffect(() => {
+    //     const getCache = async () => console.debug('Matheus', await cache.getAll())
+    //     getCache()
+    // }, [cache])
 
     return (
-        <DarkTemplate>
+        <>
             <HeaderContent>
-                <Subtitle>{i18n.t('subtitle.phoneNumber')}</Subtitle>
+                <Title>{i18n.t('title.cellphone')}</Title>
+                <Subtitle>{i18n.t('subtitle.insertPhoneNumber')}</Subtitle>
             </HeaderContent>
             <ContentContainer>
                 <InputText>{i18n.t('labels.cellphone')}</InputText>
@@ -40,7 +42,6 @@ export const PhoneNumber: FC = ({ cache }) => {
                         validPhoneNumber()
                     }}
                     onChangeText={setPhoneNumber}
-                    onFocus={() => {}}
                     render={props => (
                         <TextInputMask
                             {...props}
@@ -53,12 +54,14 @@ export const PhoneNumber: FC = ({ cache }) => {
                             type={'cel-phone'}
                         />
                     )}
-                    style={{ backgroundColor: theme.colors.lightGrey, height: 55 }}
+                    style={{ backgroundColor: 'rgb(255, 255, 255)', height: 45 }}
                     theme={{ colors: { primary: 'black' } }}
                     value={phoneNumber}
                 />
             </ContentContainer>
-            {visible && <SnackBar backgroundColor={theme.colors.danger50} message={error} setVisible={setVisible} />}
-        </DarkTemplate>
+            <SnackBarContainer>
+                {visible && <SnackBar backgroundColor={theme.colors.danger50} message={error} setVisible={setVisible} />}
+            </SnackBarContainer>
+        </>
     )
 }

@@ -6,63 +6,75 @@ import { Cache } from 'react-native-cache'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps'
 import { i18n } from '@i18n'
-import { validAllInfo } from '../UserInfo/utils'
-import { SnackBar } from '@components/atoms/SnackBar/SnackBar'
+import { saveUserInfoInCache } from '../UserInfo/utils'
 import { theme } from '@theme'
 
 export const SignUp: FC = () => {
-    const [cache, setCache] = useState()
+    const [cache, setCache] = useState(null)
     const [disabled, setDisabled] = useState(false)
-    const [visible, setVisible] = useState(false)
-    const [message, setMessage] = useState('')
-
-    const onToggleSnackBar = () => setVisible(true)
-
-    const createCache = async () => {
-        setCache(
-            new Cache({
-                backend: AsyncStorage,
-                namespace: 'Pita',
-                policy: {
-                    maxEntries: 50000,
-                },
-            }),
-        )
-    }
 
     useEffect(() => {
+        const createCache = async () => {
+            setCache(
+                new Cache({
+                    backend: AsyncStorage,
+                    namespace: 'Pita',
+                    policy: {
+                        maxEntries: 50000,
+                    },
+                }),
+            )
+        }
         createCache()
     }, [])
 
+    const buttonStyle = {
+        backgroundColor: theme.colors.primary50,
+        borderRadius: 10,
+        padding: 8,
+        textAlign: 'center',
+    }
+
+    const buttonTextStyle = { color: theme.colors.white, fontSize: 18 }
+
     return (
-        <DarkTemplate>
-            <ProgressSteps>
+        <DarkTemplate hasMargin={false}>
+            <ProgressSteps
+                activeLabelColor={theme.colors.white}
+                activeStepIconBorderColor={theme.colors.white}
+                borderWidth={3}
+                completedLabelColor={theme.colors.primary50}
+                completedProgressBarColor={theme.colors.primary50}
+                completedStepIconColor={theme.colors.primary50}
+                labelColor={theme.colors.white}
+                labelFontFamily={theme.fonts.montserratRegular}
+                progressBarColor={theme.colors.white}
+            >
                 <ProgressStep
-                    errors={disabled}
                     label={i18n.t('steps.personalData')}
-                    onNext={async () => {
-                        const {
-                            Name: { value: name },
-                            CPF: { value: cpf },
-                            BirthDate: { value: birthDate },
-                        } = await cache.getAll()
-                        console.debug('Teste', { birthDate, cpf, name })
-                        if (!(await validAllInfo(name, cpf, birthDate))) {
-                            await setDisabled(true)
-                            await setMessage(i18n.t('error.invalidData'))
-                            await onToggleSnackBar()
-                        } else {
-                            await setDisabled(false)
-                        }
-                    }}
+                    nextBtnDisabled={disabled}
+                    nextBtnStyle={buttonStyle}
+                    nextBtnText={i18n.t('buttonLabels.next')}
+                    nextBtnTextStyle={buttonTextStyle}
                 >
-                    <UserInfo cache={cache} />
+                    <UserInfo cache={cache} setDisabled={setDisabled} />
                 </ProgressStep>
-                <ProgressStep label={i18n.t('steps.phoneNumber')}>
+                <ProgressStep
+                    label={i18n.t('steps.phoneNumber')}
+                    nextBtnStyle={buttonStyle}
+                    nextBtnText={i18n.t('buttonLabels.next')}
+                    nextBtnTextStyle={buttonTextStyle}
+                    onPrevious={async () => {
+                        await saveUserInfoInCache('', '', '', cache)
+                    }}
+                    previousBtnStyle={buttonStyle}
+                    previousBtnText={i18n.t('buttonLabels.back')}
+                    previousBtnTextStyle={buttonTextStyle}
+                    scrollViewProps={undefined}
+                >
                     <PhoneNumber cache={cache} />
                 </ProgressStep>
             </ProgressSteps>
-            {visible && <SnackBar backgroundColor={theme.colors.danger50} message={message} setVisible={setVisible} />}
         </DarkTemplate>
     )
 }
