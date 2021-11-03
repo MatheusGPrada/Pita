@@ -8,17 +8,17 @@ import { isEmpty, validDate } from '@utils/validations'
 import { SnackBar } from '@components/atoms/SnackBar/SnackBar'
 import { i18n } from '@i18n'
 import { theme } from '@theme'
-import { saveUserInfoInCache, validAllInfo } from './utils'
+import { saveUserInfoInCache, isValidUserInfo } from '@features/Register/Utils/utils'
 
 export const UserInfo: FC = ({ cache, setDisabled }) => {
     const [visible, setVisible] = useState(false)
 
-    const [name, setName] = useState('Matheus')
-    const [cpf, setCpf] = useState('482.085.298-18')
-    const [birthDate, setBirthDate] = useState('31/03/2000')
-    // const [name, setName] = useState('')
-    // const [cpf, setCpf] = useState('')
-    // const [birthDate, setBirthDate] = useState('')
+    // const [name, setName] = useState('Matheus')
+    // const [cpf, setCpf] = useState('482.085.298-18')
+    // const [birthDate, setBirthDate] = useState('31/03/2000')
+    const [name, setName] = useState('')
+    const [cpf, setCpf] = useState('')
+    const [birthDate, setBirthDate] = useState('')
 
     const [error, setError] = useState('')
 
@@ -28,6 +28,7 @@ export const UserInfo: FC = ({ cache, setDisabled }) => {
 
     useEffect(() => {
         nameInputRef.current.focus()
+        isValidUserInfo(name, cpf, birthDate, setDisabled)
     }, [])
 
     return (
@@ -42,7 +43,7 @@ export const UserInfo: FC = ({ cache, setDisabled }) => {
                     <TextInput
                         onBlur={async () => {
                             await saveUserInfoInCache(name, cpf, birthDate, cache)
-                            await validAllInfo(name, cpf, birthDate, setDisabled)
+                            await isValidUserInfo(name, cpf, birthDate, setDisabled)
                             if (isEmpty(name)) {
                                 await setError(i18n.t('error.emptyName'))
                                 await onToggleSnackBar()
@@ -59,7 +60,7 @@ export const UserInfo: FC = ({ cache, setDisabled }) => {
                     <TextInput
                         onBlur={async () => {
                             await saveUserInfoInCache(name, cpf, birthDate, cache)
-                            await validAllInfo(name, cpf, birthDate, setDisabled)
+                            await isValidUserInfo(name, cpf, birthDate, setDisabled)
                             if (!isEmpty(cpf) && !isValidCPF(cpf)) {
                                 await setError(i18n.t('error.invalidCPF'))
                                 await onToggleSnackBar()
@@ -76,7 +77,7 @@ export const UserInfo: FC = ({ cache, setDisabled }) => {
                     <TextInput
                         onBlur={async () => {
                             await saveUserInfoInCache(name, cpf, birthDate, cache)
-                            await validAllInfo(name, cpf, birthDate, setDisabled)
+                            await isValidUserInfo(name, cpf, birthDate, setDisabled)
                             if (!validDate(birthDate)) {
                                 await setError(i18n.t('error.invalidDate'))
                                 await onToggleSnackBar()

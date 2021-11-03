@@ -6,8 +6,9 @@ import { Cache } from 'react-native-cache'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps'
 import { i18n } from '@i18n'
-import { saveUserInfoInCache } from '../UserInfo/utils'
 import { theme } from '@theme'
+import { Email } from '../Email/Email'
+import { saveUserInfoInCache } from '@features/Register/Utils/utils'
 
 export const SignUp: FC = () => {
     const [cache, setCache] = useState(null)
@@ -61,6 +62,7 @@ export const SignUp: FC = () => {
                 </ProgressStep>
                 <ProgressStep
                     label={i18n.t('steps.phoneNumber')}
+                    nextBtnDisabled={disabled}
                     nextBtnStyle={buttonStyle}
                     nextBtnText={i18n.t('buttonLabels.next')}
                     nextBtnTextStyle={buttonTextStyle}
@@ -70,9 +72,22 @@ export const SignUp: FC = () => {
                     previousBtnStyle={buttonStyle}
                     previousBtnText={i18n.t('buttonLabels.back')}
                     previousBtnTextStyle={buttonTextStyle}
-                    scrollViewProps={undefined}
                 >
-                    <PhoneNumber cache={cache} />
+                    <PhoneNumber cache={cache} setDisabled={setDisabled} />
+                </ProgressStep>
+                <ProgressStep
+                    finishBtnText={i18n.t('buttonLabels.finish')}
+                    label={i18n.t('steps.email')}
+                    nextBtnStyle={buttonStyle}
+                    nextBtnTextStyle={buttonTextStyle}
+                    onPrevious={async () => {
+                        await saveUserInfoInCache('', '', '', cache)
+                    }}
+                    previousBtnStyle={buttonStyle}
+                    previousBtnText={i18n.t('buttonLabels.back')}
+                    previousBtnTextStyle={buttonTextStyle}
+                >
+                    <Email cache={cache} setDisabled={setDisabled} />
                 </ProgressStep>
             </ProgressSteps>
         </DarkTemplate>

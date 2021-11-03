@@ -1,33 +1,31 @@
-import React, { FC, useState } from 'react'
-import Icon from 'react-native-vector-icons/AntDesign'
+import React, { FC, useState, useEffect } from 'react'
 import { ContentContainer, HeaderContent, Subtitle, InputText, SnackBarContainer, Title } from './styles'
 import { TextInput } from 'react-native-paper'
 import { SnackBar } from '@components/atoms/SnackBar/SnackBar'
 import { i18n } from '@i18n'
 import { theme } from '@theme'
 import { TextInputMask } from 'react-native-masked-text'
+import { isValidPhoneNumber, savePhoneNumberInCache } from '@features/Register/Utils/utils'
 
-Icon.loadFont()
-
-export const PhoneNumber: FC = ({ cache }) => {
+export const PhoneNumber: FC = ({ cache, setDisabled }) => {
     const [visible, setVisible] = useState(false)
+    //const [phoneNumber, setPhoneNumber] = useState('(11) 11111-1111')
     const [phoneNumber, setPhoneNumber] = useState('')
     const [error, setError] = useState('')
 
     const onToggleSnackBar = () => setVisible(true)
 
-    const validPhoneNumber = () => {
-        cache.set('PhoneNumber', phoneNumber)
-        if (phoneNumber.length !== 15) {
-            setError(i18n.t('error.invalidPhoneNumber'))
-            onToggleSnackBar()
+    const validPhone = async () => {
+        await cache.set('PhoneNumber', phoneNumber)
+        if (!(await isValidPhoneNumber(phoneNumber, setDisabled))) {
+            await setError(i18n.t('error.invalidPhoneNumber'))
+            await onToggleSnackBar()
         }
     }
 
-    // useEffect(() => {
-    //     const getCache = async () => console.debug('Matheus', await cache.getAll())
-    //     getCache()
-    // }, [cache])
+    useEffect(() => {
+        isValidPhoneNumber(phoneNumber, setDisabled)
+    }, [])
 
     return (
         <>
@@ -38,10 +36,12 @@ export const PhoneNumber: FC = ({ cache }) => {
             <ContentContainer>
                 <InputText>{i18n.t('labels.cellphone')}</InputText>
                 <TextInput
-                    onBlur={() => {
-                        validPhoneNumber()
+                    onBlur={() => validPhone()}
+                    onChangeText={async value => {
+                        await setPhoneNumber(value)
+                        await savePhoneNumberInCache(value, cache)
+                        await isValidPhoneNumber(phoneNumber, setDisabled)
                     }}
-                    onChangeText={setPhoneNumber}
                     render={props => (
                         <TextInputMask
                             {...props}

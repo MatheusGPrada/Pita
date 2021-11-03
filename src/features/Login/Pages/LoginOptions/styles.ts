@@ -1,10 +1,10 @@
+import { theme } from '@theme'
 import styled from 'styled-components/native'
-import { theme } from '../../../../styles/theme'
 
 export const Image = styled.Image`
     flex: 1;
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
     align-self: center;
 `
 
