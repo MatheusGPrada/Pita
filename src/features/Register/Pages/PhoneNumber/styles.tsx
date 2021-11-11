@@ -3,7 +3,7 @@ import styled from 'styled-components/native'
 
 export const HeaderContent = styled.View`
     margin-bottom: ${theme.marginsPx.m60px};
-    padding-horizontal: ${theme.marginsPx.m8px};
+    padding-horizontal: ${theme.marginsPx.m32px};
 `
 
 export const Title = styled.Text`

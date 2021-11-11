@@ -8,7 +8,8 @@ import { ProgressSteps, ProgressStep } from 'react-native-progress-steps'
 import { i18n } from '@i18n'
 import { theme } from '@theme'
 import { Email } from '../Email/Email'
-import { saveUserInfoInCache } from '@features/Register/Utils/utils'
+import { registerUser, saveEmailInCache, savePhoneNumberInCache, saveUserInfoInCache } from '@features/Register/Utils/utils'
+import { Password } from '../Password/Password'
 
 export const SignUp: FC = () => {
     const [cache, setCache] = useState(null)
@@ -79,15 +80,31 @@ export const SignUp: FC = () => {
                     finishBtnText={i18n.t('buttonLabels.finish')}
                     label={i18n.t('steps.email')}
                     nextBtnStyle={buttonStyle}
+                    nextBtnText={i18n.t('buttonLabels.next')}
                     nextBtnTextStyle={buttonTextStyle}
                     onPrevious={async () => {
-                        await saveUserInfoInCache('', '', '', cache)
+                        await savePhoneNumberInCache('', cache)
                     }}
                     previousBtnStyle={buttonStyle}
                     previousBtnText={i18n.t('buttonLabels.back')}
                     previousBtnTextStyle={buttonTextStyle}
                 >
                     <Email cache={cache} setDisabled={setDisabled} />
+                </ProgressStep>
+                <ProgressStep
+                    finishBtnText={i18n.t('buttonLabels.finish')}
+                    label={i18n.t('steps.password')}
+                    nextBtnStyle={buttonStyle}
+                    nextBtnTextStyle={buttonTextStyle}
+                    onPrevious={async () => {
+                        await saveEmailInCache('', cache)
+                    }}
+                    onSubmit={async () => registerUser(cache)}
+                    previousBtnStyle={buttonStyle}
+                    previousBtnText={i18n.t('buttonLabels.back')}
+                    previousBtnTextStyle={buttonTextStyle}
+                >
+                    <Password cache={cache} setDisabled={setDisabled} />
                 </ProgressStep>
             </ProgressSteps>
         </DarkTemplate>

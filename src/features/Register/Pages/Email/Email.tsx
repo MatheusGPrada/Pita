@@ -1,32 +1,30 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { ContentContainer, HeaderContent, Subtitle, InputText, SnackBarContainer, Title } from './styles'
 import { TextInput } from 'react-native-paper'
 import { SnackBar } from '@components/atoms/SnackBar/SnackBar'
 import { i18n } from '@i18n'
 import { theme } from '@theme'
+import { isValidEmail, saveEmailInCache } from '@features/Register/Utils/utils'
 
 export const Email: FC = ({ cache, setDisabled }) => {
     const [visible, setVisible] = useState(false)
-    // const [email, setEmail] = useState('matheus@gmail.com')
-    const [email, setEmail] = useState('')
+    const [email, setEmail] = useState('matheus6@gmail.com')
+    //const [email, setEmail] = useState('')
     const [error, setError] = useState('')
-
-    const validEmailRegex = /\S+@\S+\.\S+/
 
     const onToggleSnackBar = () => setVisible(true)
 
     const validEmail = () => {
         cache.set('Email', email)
-        if (!validEmailRegex.test(email)) {
+        if (!isValidEmail(email, setDisabled)) {
             setError(i18n.t('error.invalidEmail'))
             onToggleSnackBar()
         }
     }
 
-    // useEffect(() => {
-    //     const getCache = async () => console.debug('Matheus', await cache.getAll())
-    //     getCache()
-    // }, [cache])
+    useEffect(() => {
+        isValidEmail(email, setDisabled)
+    }, [email, setDisabled])
 
     return (
         <>
@@ -41,7 +39,11 @@ export const Email: FC = ({ cache, setDisabled }) => {
                     onBlur={() => {
                         validEmail()
                     }}
-                    onChangeText={setEmail}
+                    onChangeText={async value => {
+                        await setEmail(value)
+                        await saveEmailInCache(value, cache)
+                        await isValidEmail(value, setDisabled)
+                    }}
                     style={{ backgroundColor: 'rgb(255, 255, 255)', height: 45 }}
                     theme={{ colors: { primary: 'black' } }}
                     value={email}

@@ -13,12 +13,12 @@ import { saveUserInfoInCache, isValidUserInfo } from '@features/Register/Utils/u
 export const UserInfo: FC = ({ cache, setDisabled }) => {
     const [visible, setVisible] = useState(false)
 
-    // const [name, setName] = useState('Matheus')
-    // const [cpf, setCpf] = useState('482.085.298-18')
-    // const [birthDate, setBirthDate] = useState('31/03/2000')
-    const [name, setName] = useState('')
-    const [cpf, setCpf] = useState('')
-    const [birthDate, setBirthDate] = useState('')
+    const [name, setName] = useState('Matheus')
+    const [cpf, setCpf] = useState('482.085.298-18')
+    const [birthDate, setBirthDate] = useState('31/03/2000')
+    // const [name, setName] = useState('')
+    // const [cpf, setCpf] = useState('')
+    // const [birthDate, setBirthDate] = useState('')
 
     const [error, setError] = useState('')
 

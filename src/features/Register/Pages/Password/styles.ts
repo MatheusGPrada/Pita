@@ -2,7 +2,7 @@ import { theme } from '../../../../../src/styles/theme'
 import styled from 'styled-components/native'
 
 export const HeaderContent = styled.View`
-    margin-bottom: ${theme.marginsPx.m60px};
+    margin-bottom: ${theme.marginsPx.m20px};
     padding-horizontal: ${theme.marginsPx.m32px};
 `
 
@@ -23,10 +23,22 @@ export const Subtitle = styled.Text`
     font-weight: 300;
 `
 
+export const DescriptionContainer = styled.View`
+    margin-top: ${theme.marginsPx.m8px};
+`
+
+export const Description = styled.Text`
+    color: ${theme.colors.white};
+    font-family: ${theme.fonts.montserratRegular};
+    font-size: ${theme.fontSize.medium};
+    font-style: normal;
+    font-weight: 300;
+`
+
 export const InputText = styled.Text`
     color: ${theme.colors.white};
     font-family: ${theme.fonts.montserratRegular};
-    font-size: ${theme.fontSize.large};
+    font-size: ${theme.fontSize.medium};
     font-style: normal;
     font-weight: 300;
     margin-bottom: ${theme.marginsPx.m8px};

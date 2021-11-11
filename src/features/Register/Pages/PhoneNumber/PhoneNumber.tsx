@@ -9,8 +9,8 @@ import { isValidPhoneNumber, savePhoneNumberInCache } from '@features/Register/U
 
 export const PhoneNumber: FC = ({ cache, setDisabled }) => {
     const [visible, setVisible] = useState(false)
-    //const [phoneNumber, setPhoneNumber] = useState('(11) 11111-1111')
-    const [phoneNumber, setPhoneNumber] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('(11) 11111-1111')
+    //const [phoneNumber, setPhoneNumber] = useState('')
     const [error, setError] = useState('')
 
     const onToggleSnackBar = () => setVisible(true)

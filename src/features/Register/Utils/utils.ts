@@ -1,6 +1,11 @@
 import { isValidCPF } from '@brazilian-utils/brazilian-utils'
 import { isEmpty } from '@utils/validations'
 import { isValid } from 'date-fns'
+import api from 'src/api/api'
+import { REGISTER_USER } from 'src/api/endpoints'
+
+const validEmailRegex = /\S+@\S+\.\S+/
+const validPasswordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
 
 export const isValidUserInfo = async (name: string, cpf: string, birthDate: string, setDisabled: Function) => {
     const elements = birthDate.split('/')
@@ -31,4 +36,71 @@ export const isValidPhoneNumber = async (phoneNumber: string, setDisabled: Funct
 
 export const savePhoneNumberInCache = async (phoneNumber: string, cache) => {
     await cache.set('PhoneNumber', phoneNumber)
+}
+
+export const isValidEmail = async (email: string, setDisabled: Function) => {
+    if (validEmailRegex.test(email)) {
+        await setDisabled(false)
+        return true
+    }
+    await setDisabled(true)
+    return false
+}
+
+export const saveEmailInCache = async (email: string, cache) => {
+    await cache.set('Email', email)
+}
+
+export const isValidPassword = async (password: string, setDisabled: Function) => {
+    if (validPasswordRegex.test(password)) {
+        await setDisabled(false)
+        return true
+    }
+    await setDisabled(true)
+    return false
+}
+
+export const savePasswordInCache = async (password: string, cache) => {
+    await cache.set('Password', password)
+}
+
+export const registerUser = async (cache: object) => {
+    let result
+
+    const {
+        BirthDate: { value: birthDateValue },
+        CPF: { value: cpfValue },
+        Name: { value: nameValue },
+        Email: { value: emailValue },
+        PhoneNumber: { value: phoneValue },
+        Password: { value: passwordValue },
+    } = await cache.getAll()
+
+    const userInfo = {
+        cpf: cpfValue.replaceAll('.', '').replaceAll('-', ''),
+        dataNascimento: birthDateValue,
+        nome: nameValue,
+        senha: passwordValue,
+        telefone: phoneValue,
+        userName: emailValue,
+    }
+
+    await api
+        .post(REGISTER_USER, userInfo, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            const { data } = response
+            result = data
+        })
+        .catch(error => {
+            result = error
+        })
+
+    console.debug('userInfo', userInfo)
+    console.debug('result', result)
+
+    return result
 }
