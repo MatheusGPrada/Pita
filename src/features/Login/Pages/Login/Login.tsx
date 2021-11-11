@@ -34,7 +34,7 @@ export const Login: FC = () => {
     }
 
     const doLogin = () => {
-        user === 'Matheus' && password === '12345' ? navigate('HomeStack', { screen: 'Home' }) : setLoginError()
+        user === 'Matheus' && password === '12345' ? navigate(HOME_STACK, { screen: 'Home' }) : setLoginError()
         reset({
             index: 0,
             routes: [{ name: HOME_STACK }],

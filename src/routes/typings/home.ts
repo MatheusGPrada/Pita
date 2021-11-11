@@ -1,3 +1,3 @@
 export type HomeStackParamList = {
-    Home: undefined
+    Home: { patientInfo?: object }
 }

@@ -8,8 +8,7 @@ import { isValidEmail, saveEmailInCache } from '@features/Register/Utils/utils'
 
 export const Email: FC = ({ cache, setDisabled }) => {
     const [visible, setVisible] = useState(false)
-    const [email, setEmail] = useState('matheus6@gmail.com')
-    //const [email, setEmail] = useState('')
+    const [email, setEmail] = useState('')
     const [error, setError] = useState('')
 
     const onToggleSnackBar = () => setVisible(true)

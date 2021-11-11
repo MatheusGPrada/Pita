@@ -99,8 +99,5 @@ export const registerUser = async (cache: object) => {
             result = error
         })
 
-    console.debug('userInfo', userInfo)
-    console.debug('result', result)
-
     return result
 }

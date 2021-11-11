@@ -17,8 +17,7 @@ import { isValidPassword, savePasswordInCache } from '@features/Register/Utils/u
 
 export const Password: FC = ({ cache, setDisabled }) => {
     const [visible, setVisible] = useState(false)
-    const [password, setPassword] = useState('M@th3us1')
-    //const [password, setPassword] = useState('')
+    const [password, setPassword] = useState('')
     const [error, setError] = useState('')
 
     const onToggleSnackBar = () => setVisible(true)

@@ -34,6 +34,7 @@ const messages = {
                 invalidPassword: 'A senha informada é inválida',
                 invalidPhoneNumber: 'Número de Celular inválido',
                 invalidUserOrPassword: 'Usuário ou senha inválidos',
+                userAlreadyExist: 'Já existe um usuário com o CPF ou E-mail informado',
             },
             labels: {
                 OK: 'OK',

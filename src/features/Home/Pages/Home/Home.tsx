@@ -4,10 +4,15 @@ import { BottomNavigation } from 'react-native-paper'
 import { SafeAreaView, StatusBar } from 'react-native'
 import { Account } from '../Account/Account'
 import { Schedule } from '../Schedule/Schedule'
+import { useRoute } from '@react-navigation/native'
 
 Icon.loadFont()
 
 export const Home: FC = () => {
+    const { params } = useRoute()
+
+    console.debug('params', params)
+
     const [index, setIndex] = React.useState(0)
     const [routes] = React.useState([
         { icon: props => <Icon color="white" name="bookmark-check" size={36} {...props} />, key: 'schedule' },

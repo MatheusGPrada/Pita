@@ -10,10 +10,19 @@ import { theme } from '@theme'
 import { Email } from '../Email/Email'
 import { registerUser, saveEmailInCache, savePhoneNumberInCache, saveUserInfoInCache } from '@features/Register/Utils/utils'
 import { Password } from '../Password/Password'
+import { useNavigation } from '@react-navigation/native'
+import { SnackBar } from '@components/atoms/SnackBar/SnackBar'
+import { SnackBarContainer } from './styles'
+import { HOME_STACK } from '@routes/Contants'
 
 export const SignUp: FC = () => {
     const [cache, setCache] = useState(null)
     const [disabled, setDisabled] = useState(false)
+    const [visible, setVisible] = useState(false)
+
+    const { navigate, reset } = useNavigation()
+
+    const onToggleSnackBar = () => setVisible(true)
 
     useEffect(() => {
         const createCache = async () => {
@@ -99,12 +108,32 @@ export const SignUp: FC = () => {
                     onPrevious={async () => {
                         await saveEmailInCache('', cache)
                     }}
-                    onSubmit={async () => registerUser(cache)}
+                    onSubmit={async () => {
+                        const result = await registerUser(cache)
+                        if (JSON.stringify(result).includes('"status":400')) {
+                            onToggleSnackBar()
+                        } else {
+                            reset({
+                                index: 0,
+                                routes: [{ name: HOME_STACK }],
+                            })
+                            navigate(HOME_STACK, { params: { patientInfo: result }, screen: 'Home' })
+                        }
+                    }}
                     previousBtnStyle={buttonStyle}
                     previousBtnText={i18n.t('buttonLabels.back')}
                     previousBtnTextStyle={buttonTextStyle}
                 >
                     <Password cache={cache} setDisabled={setDisabled} />
+                    <SnackBarContainer>
+                        {visible && (
+                            <SnackBar
+                                backgroundColor={theme.colors.danger50}
+                                message={i18n.t('error.userAlreadyExist')}
+                                setVisible={setVisible}
+                            />
+                        )}
+                    </SnackBarContainer>
                 </ProgressStep>
             </ProgressSteps>
         </DarkTemplate>

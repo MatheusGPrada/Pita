@@ -1,6 +1,6 @@
-import i18n from 'i18next';
+import i18n from 'i18next'
 
-import { messages } from './languages/';
+import { messages } from './languages/'
 
 i18n.init({
     debug: false,
@@ -11,6 +11,6 @@ i18n.init({
         wait: true,
     },
     resources: messages,
-});
+})
 
-export { i18n };
+export { i18n }
