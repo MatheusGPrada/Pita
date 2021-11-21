@@ -8,7 +8,13 @@ import { ProgressSteps, ProgressStep } from 'react-native-progress-steps'
 import { i18n } from '@i18n'
 import { theme } from '@theme'
 import { Email } from '../Email/Email'
-import { registerUser, saveEmailInCache, savePhoneNumberInCache, saveUserInfoInCache } from '@features/Register/Utils/utils'
+import {
+    isValidPassword,
+    registerUser,
+    saveEmailInCache,
+    savePhoneNumberInCache,
+    saveUserInfoInCache,
+} from '@features/Register/Utils/utils'
 import { Password } from '../Password/Password'
 import { useNavigation } from '@react-navigation/native'
 import { SnackBar } from '@components/atoms/SnackBar/SnackBar'
@@ -109,15 +115,17 @@ export const SignUp: FC = () => {
                         await saveEmailInCache('', cache)
                     }}
                     onSubmit={async () => {
-                        const result = await registerUser(cache)
-                        if (JSON.stringify(result).includes('"status":400')) {
-                            onToggleSnackBar()
-                        } else {
-                            reset({
-                                index: 0,
-                                routes: [{ name: HOME_STACK }],
-                            })
-                            navigate(HOME_STACK, { params: { patientInfo: result }, screen: 'Home' })
+                        if (await isValidPassword(await cache.peek('Password'), setDisabled)) {
+                            const result = await registerUser(cache)
+                            if (JSON.stringify(result).includes('"name":"Error"')) {
+                                onToggleSnackBar()
+                            } else {
+                                reset({
+                                    index: 0,
+                                    routes: [{ name: HOME_STACK }],
+                                })
+                                navigate(HOME_STACK, { params: { patientInfo: result }, screen: 'Home' })
+                            }
                         }
                     }}
                     previousBtnStyle={buttonStyle}

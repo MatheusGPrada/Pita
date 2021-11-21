@@ -19,3 +19,7 @@ export const ImageContainer = styled.View`
 export const ContentContainer = styled.View`
     margin-top: ${theme.marginsPx.m100px};
 `
+
+export const SnackBarContainer = styled.View`
+    margin-top: ${theme.marginsPx.m40px};
+`

@@ -5,7 +5,6 @@ import api from 'src/api/api'
 import { REGISTER_USER } from 'src/api/endpoints'
 
 const validEmailRegex = /\S+@\S+\.\S+/
-const validPasswordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
 
 export const isValidUserInfo = async (name: string, cpf: string, birthDate: string, setDisabled: Function) => {
     const elements = birthDate.split('/')
@@ -52,7 +51,7 @@ export const saveEmailInCache = async (email: string, cache) => {
 }
 
 export const isValidPassword = async (password: string, setDisabled: Function) => {
-    if (validPasswordRegex.test(password)) {
+    if (password.length > 0) {
         await setDisabled(false)
         return true
     }

@@ -1,7 +1,7 @@
 import React, { FC, useState, useRef } from 'react'
 import Icon from 'react-native-vector-icons/Feather'
-import { Snackbar, TextInput } from 'react-native-paper'
-import { Image, ImageContainer, ContentContainer } from './styles'
+import { TextInput } from 'react-native-paper'
+import { Image, ImageContainer, ContentContainer, SnackBarContainer } from './styles'
 import { useNavigation } from '@react-navigation/native'
 import { TextInput as TextInputType } from 'react-native'
 import { ButtonContainer, InputContainer } from '@components/styledComponents/InputContainer/InputContainer'
@@ -10,13 +10,17 @@ import { Button } from '@components/atoms/Button/Button'
 import { i18n } from '@i18n'
 import { HOME_STACK } from '@routes/Contants'
 import { DarkTemplate } from '@components/templates/DarkTemplate/DarkTemplate'
+import api from 'src/api/api'
+import { LOGIN } from 'src/api/endpoints'
+import { theme } from '@theme'
+import { SnackBar } from '@components/atoms/SnackBar/SnackBar'
 
 Icon.loadFont()
 
 export const Login: FC = () => {
-    const [user, setUser] = useState('Matheus')
+    const [user, setUser] = useState('')
+    const [password, setPassword] = useState('')
     const [error, setError] = useState('')
-    const [password, setPassword] = useState('12345')
     const [showPassword, setShowPassword] = useState(true)
     const [visible, setVisible] = React.useState(false)
 
@@ -25,20 +29,42 @@ export const Login: FC = () => {
 
     const onToggleSnackBar = () => setVisible(!visible)
 
-    const onDismissSnackBar = () => setVisible(false)
-
-    const { navigate, reset } = useNavigation()
+    const { reset } = useNavigation()
 
     const handleForgotPassword = () => {
         // TO DO - ADD RECOVERY PASSWORD
     }
 
-    const doLogin = () => {
-        user === 'Matheus' && password === '12345' ? navigate(HOME_STACK, { screen: 'Home' }) : setLoginError()
-        reset({
-            index: 0,
-            routes: [{ name: HOME_STACK }],
-        })
+    const authenticate = async () => {
+        let result
+
+        cleanError()
+        await api
+            .post(
+                LOGIN,
+                { senha: password, userName: user },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                },
+            )
+            .then(response => {
+                const { data } = response
+                result = data
+            })
+            .catch(requestError => {
+                result = requestError
+            })
+
+        if (result?.token) {
+            reset({
+                index: 0,
+                routes: [{ name: HOME_STACK, params: { patientInfo: result } }],
+            })
+        } else {
+            setLoginError()
+        }
     }
 
     const setLoginError = () => {
@@ -72,7 +98,7 @@ export const Login: FC = () => {
                     <TextInput
                         onChangeText={setPassword}
                         onFocus={() => cleanError()}
-                        onSubmitEditing={() => doLogin()}
+                        onSubmitEditing={() => authenticate()}
                         placeholder={i18n.t('labels.password')}
                         ref={passwordInputRef}
                         right={
@@ -99,20 +125,17 @@ export const Login: FC = () => {
                     <ForgotPassword onPress={handleForgotPassword}>{i18n.t('labels.forgotPassword')}</ForgotPassword>
                 </InputContainer>
             </ContentContainer>
+            <SnackBarContainer>
+                {visible && <SnackBar backgroundColor={theme.colors.danger50} message={error} setVisible={setVisible} />}
+            </SnackBarContainer>
             <ButtonContainer>
-                <Button label={i18n.t('buttonLabels.login')} labelSize="large" onPress={() => doLogin()} useButtonContainer={true} />
+                <Button
+                    label={i18n.t('buttonLabels.login')}
+                    labelSize="large"
+                    onPress={() => authenticate()}
+                    useButtonContainer={true}
+                />
             </ButtonContainer>
-
-            <Snackbar
-                action={{
-                    label: i18n.t('labels.OK'),
-                    onPress: () => null,
-                }}
-                onDismiss={onDismissSnackBar}
-                visible={visible}
-            >
-                {error}
-            </Snackbar>
         </DarkTemplate>
     )
 }

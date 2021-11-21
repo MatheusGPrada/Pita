@@ -2,7 +2,7 @@ import { theme } from '../../../../../src/styles/theme'
 import styled from 'styled-components/native'
 
 export const HeaderContent = styled.View`
-    margin-bottom: ${theme.marginsPx.m20px};
+    margin-bottom: ${theme.marginsPx.m100px};
     padding-horizontal: ${theme.marginsPx.m32px};
 `
 
@@ -21,10 +21,6 @@ export const Subtitle = styled.Text`
     font-size: ${theme.fontSize.xLarge};
     font-style: normal;
     font-weight: 300;
-`
-
-export const DescriptionContainer = styled.View`
-    margin-top: ${theme.marginsPx.m8px};
 `
 
 export const Description = styled.Text`

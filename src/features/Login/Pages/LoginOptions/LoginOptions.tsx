@@ -1,12 +1,8 @@
-import { Button } from '@components/atoms/Button/Button'
 import { DarkTemplate } from '@components/templates/DarkTemplate/DarkTemplate'
 import { i18n } from '@i18n'
 import { useNavigation } from '@react-navigation/native'
 import React, { FC } from 'react'
-import Icon from 'react-native-vector-icons/AntDesign'
 import { Image, StyledText, TextContainer, LineSeparator, LineSeparatorContainer, StyledLabel } from './styles'
-
-Icon.loadFont()
 
 export const LoginOptions: FC = () => {
     const { navigate } = useNavigation()
@@ -23,9 +19,6 @@ export const LoginOptions: FC = () => {
                 <StyledLabel>{i18n.t('labels.or')}</StyledLabel>
                 <LineSeparator />
             </LineSeparatorContainer>
-            <Button disabled={false} label={i18n.t('buttonLabels.loginWithFacebook')} useButtonContainer={true}>
-                <Icon color="white" name="facebook-square" size={36} />
-            </Button>
         </DarkTemplate>
     )
 }

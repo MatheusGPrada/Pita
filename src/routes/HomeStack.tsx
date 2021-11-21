@@ -3,11 +3,13 @@ import { createStackNavigator, TransitionPresets } from '@react-navigation/stack
 import { Platform } from 'react-native'
 import { HomeStackParamList } from './typings/home'
 import { Home } from '../features/Home/Pages/Home/Home'
+import { HOME } from './routeNames/HomeStack'
 
 const { Navigator, Screen } = createStackNavigator<HomeStackParamList>()
 
-export const HomeStack = () => (
+export const HomeStack = ({ route: { params } }) => (
     <Navigator
+        initialRouteName={HOME}
         screenOptions={{
             // headerBackImage: () => <HeaderBackIcon addScreenNameTestId isArrow />,
             headerBackTitleVisible: false,
@@ -21,6 +23,6 @@ export const HomeStack = () => (
             ...TransitionPresets.SlideFromRightIOS,
         }}
     >
-        <Screen component={Home} name="Home" options={{ headerShown: false }} />
+        <Screen component={Home} initialParams={params} name="Home" options={{ headerShown: false }} />
     </Navigator>
 )

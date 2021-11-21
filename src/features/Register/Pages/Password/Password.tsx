@@ -1,14 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
-import {
-    ContentContainer,
-    HeaderContent,
-    Subtitle,
-    InputText,
-    SnackBarContainer,
-    Title,
-    Description,
-    DescriptionContainer,
-} from './styles'
+import { ContentContainer, HeaderContent, Subtitle, InputText, SnackBarContainer, Title } from './styles'
 import { TextInput } from 'react-native-paper'
 import { SnackBar } from '@components/atoms/SnackBar/SnackBar'
 import { i18n } from '@i18n'
@@ -24,7 +15,7 @@ export const Password: FC = ({ cache, setDisabled }) => {
 
     const validPassword = async () => {
         cache.set('Password', password)
-        if (!(await isValidPassword(password, setDisabled))) {
+        if (password.length === 0) {
             setError(i18n.t('error.invalidPassword'))
             onToggleSnackBar()
         }
@@ -39,18 +30,6 @@ export const Password: FC = ({ cache, setDisabled }) => {
             <HeaderContent>
                 <Title>{i18n.t('title.password')}</Title>
                 <Subtitle>{i18n.t('subtitle.insertPassword')}</Subtitle>
-                <DescriptionContainer>
-                    <Description>{i18n.t('descriptions.specialCharacter')}</Description>
-                </DescriptionContainer>
-                <DescriptionContainer>
-                    <Description>{i18n.t('descriptions.number')}</Description>
-                </DescriptionContainer>
-                <DescriptionContainer>
-                    <Description>{i18n.t('descriptions.capitalLetter')}</Description>
-                </DescriptionContainer>
-                <DescriptionContainer>
-                    <Description>{i18n.t('descriptions.minimalLetters')}</Description>
-                </DescriptionContainer>
             </HeaderContent>
             <ContentContainer>
                 <InputText>{i18n.t('labels.password')}</InputText>
