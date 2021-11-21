@@ -1,5 +1,5 @@
-import React, { useState, FC, useEffect } from 'react'
-import { ScheduleContent, FullSizeBgColor, Footer, ContentContainer } from '../styles'
+import React, { FC } from 'react'
+import { ScheduleContent, Footer, ContentContainer } from '../styles'
 import {
     Attendance,
     AttendanceContainer,
@@ -16,61 +16,41 @@ import { Attendances } from './typings'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { i18n } from '@i18n'
 import { Button } from '@components/atoms/Button/Button'
+import { ImageBackground } from 'react-native'
 
 Icon.loadFont()
 
 export const Schedule: FC = () => {
-    const [attendances, setAttendances] = useState<Attendances>([''])
-    const [loading, setLoading] = useState(true)
-
-    const checkSchedule = () => {
-        // TO DO - CHECK THE SCHEDULE
-        const Scheduleds = [
-            {
-                day: '01/01',
-                scheduledAttendance: ['Corte masculino', 'Tintura masculino', 'Hidratação'],
-                time: '12:00/13:00',
-            },
-            {
-                day: '02/01',
-                scheduledAttendance: ['Corte masculino', 'Tintura masculino', 'Hidratação'],
-                time: '12:00/13:00',
-            },
-            {
-                day: '03/01',
-                scheduledAttendance: ['Corte masculino', 'Tintura masculino', 'Hidratação'],
-                time: '12:00/13:00',
-            },
-        ]
-        return Scheduleds?.slice(0, 2)
-    }
+    //const attendances = []
+    const attendances = [
+        {
+            day: '01/01',
+            scheduledAttendance: ['Corte masculino', 'Tintura masculino', 'Hidratação'],
+            time: '12:00/13:00',
+        },
+        {
+            day: '02/01',
+            scheduledAttendance: ['Corte masculino', 'Tintura masculino', 'Hidratação'],
+            time: '12:00/13:00',
+        },
+        {
+            day: '03/01',
+            scheduledAttendance: ['Corte masculino', 'Tintura masculino', 'Hidratação'],
+            time: '12:00/13:00',
+        },
+    ]
 
     const addSchedule = () => {
         // TO DO - ADD SCHEDULE FLOW
     }
 
-    const seeAllSchedule = () => {
-        // TO DO - SEE ALL SCHEDULE
-    }
-
-    useEffect(() => {
-        setAttendances(checkSchedule())
-        setLoading(false)
-    }, [setAttendances, setLoading])
-
     return (
-        <FullSizeBgColor>
-            {/* TO DO - ADD THE FULLSIZE LOADING {loading && } */}
-            {!loading && attendances && (
+        <ImageBackground resizeMode="cover" source={require('../../../../assets/images/brick_wall.jpg')} style={{ flex: 1 }}>
+            {attendances ? (
                 <ScheduleContent>
                     <ContentContainer>
                         <ContentHeader>
                             <Title>{i18n.t('title.scheduleds')}</Title>
-                            <Button
-                                label={i18n.t('buttonLabels.seeAllSchedule')}
-                                onPress={() => seeAllSchedule()}
-                                variant="secondary"
-                            />
                         </ContentHeader>
 
                         {attendances.map((attendance: Attendances) => (
@@ -91,10 +71,10 @@ export const Schedule: FC = () => {
                         </ButtonContainer>
                     </ContentContainer>
                 </ScheduleContent>
-            )}
-            {!loading && !attendances && (
+            ) : (
                 <ScheduleContent>
                     <Title>{i18n.t('title.schedule')}</Title>
+
                     <SubTitle>{i18n.t('subtitle.createSchedule')}</SubTitle>
                     <Center>
                         <Icon color="gray" name="calendar" size={250} />
@@ -109,6 +89,6 @@ export const Schedule: FC = () => {
                     </Footer>
                 </ScheduleContent>
             )}
-        </FullSizeBgColor>
+        </ImageBackground>
     )
 }

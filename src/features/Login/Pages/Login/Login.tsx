@@ -18,11 +18,14 @@ import { SnackBar } from '@components/atoms/SnackBar/SnackBar'
 Icon.loadFont()
 
 export const Login: FC = () => {
-    const [user, setUser] = useState('')
-    const [password, setPassword] = useState('')
+    const [user, setUser] = useState('matheus@gmail.com')
+    const [password, setPassword] = useState('M@th3us1')
+    // const [user, setUser] = useState('')
+    // const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const [showPassword, setShowPassword] = useState(true)
-    const [visible, setVisible] = React.useState(false)
+    const [visible, setVisible] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const userInputRef = useRef<TextInputType>(null)
     const passwordInputRef = useRef<TextInputType>(null)
@@ -37,7 +40,7 @@ export const Login: FC = () => {
 
     const authenticate = async () => {
         let result
-
+        setLoading(true)
         cleanError()
         await api
             .post(
@@ -52,10 +55,14 @@ export const Login: FC = () => {
             .then(response => {
                 const { data } = response
                 result = data
+                setLoading(false)
             })
             .catch(requestError => {
                 result = requestError
+                setLoading(false)
             })
+
+        console.debug('Login', result)
 
         if (result?.token) {
             reset({
@@ -132,6 +139,7 @@ export const Login: FC = () => {
                 <Button
                     label={i18n.t('buttonLabels.login')}
                     labelSize="large"
+                    loading={loading}
                     onPress={() => authenticate()}
                     useButtonContainer={true}
                 />

@@ -26,18 +26,15 @@ export const Home: FC = () => {
 
     return (
         <>
-            <SafeAreaView style={{ backgroundColor: 'white', flex: 0 }} />
-            <SafeAreaView style={{ backgroundColor: 'white', flex: 1 }}>
-                <StatusBar backgroundColor="white" barStyle="dark-content" />
-                <BottomNavigation
-                    barStyle={{ backgroundColor: 'white', height: 50 }}
-                    labeled={false}
-                    navigationState={{ index, routes }}
-                    onIndexChange={setIndex}
-                    renderScene={renderScene}
-                    shifting={true}
-                />
-            </SafeAreaView>
+            <StatusBar barStyle="light-content" />
+            <BottomNavigation
+                barStyle={{ backgroundColor: 'black', height: 70 }}
+                labeled={false}
+                navigationState={{ index, routes }}
+                onIndexChange={setIndex}
+                renderScene={renderScene}
+                shifting={true}
+            />
         </>
     )
 }

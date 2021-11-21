@@ -39,10 +39,10 @@ export const AttendanceContainer = styled.View`
 `
 
 export const Title = styled.Text`
-    color: ${theme.colors.black100};
+    color: ${theme.colors.white};
     font-family: ${theme.fonts.montserratSemiBold};
     font-size: ${theme.fontSize.xxxLarge};
-    margin-bottom: ${theme.marginsPx.m20px};
+    padding: ${theme.marginsPx.m8px};
 `
 
 export const SubTitle = styled.Text`

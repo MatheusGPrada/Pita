@@ -1,11 +1,6 @@
 import styled from 'styled-components/native'
 import { theme } from '../../../styles/theme'
 
-export const FullSizeBgColor = styled.View`
-    flex: 1;
-    background-color: white;
-`
-
 export const ScheduleContent = styled.View`
     margin: ${theme.marginsPx.m40px} ${theme.marginsPx.m16px} ${theme.marginsPx.m16px} ${theme.marginsPx.m16px};
     flex: 1;
