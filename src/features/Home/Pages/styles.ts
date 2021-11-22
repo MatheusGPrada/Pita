@@ -1,9 +1,15 @@
 import styled from 'styled-components/native'
 import { theme } from '../../../styles/theme'
 
+export const FullColor = styled.View`
+    flex: 1;
+    background-color: #000;
+`
+
 export const ScheduleContent = styled.View`
     margin: ${theme.marginsPx.m40px} ${theme.marginsPx.m16px} ${theme.marginsPx.m16px} ${theme.marginsPx.m16px};
     flex: 1;
+    justify-content: center;
 `
 
 export const ProfileHeader = styled.View`
@@ -32,11 +38,6 @@ export const ButtonContainer = styled.View`
     margin-top: ${theme.marginsPx.m32px};
 `
 
-export const Footer = styled.View`
-    justify-content: center;
-    margin-bottom: ${theme.marginsPx.m16px};
-`
-
 export const ContentTitle = styled.Text`
     color: black;
     font-family: ${theme.fonts.montserratSemiBold};
@@ -44,8 +45,4 @@ export const ContentTitle = styled.Text`
     letter-spacing: ${theme.letterSpacing.ls08};
     align-self: flex-start;
     left: ${theme.marginsPx.m20px};
-`
-
-export const ContentContainer = styled.View`
-    flex: 1;
 `

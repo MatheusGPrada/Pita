@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { BottomNavigation } from 'react-native-paper'
-import { SafeAreaView, StatusBar } from 'react-native'
+import { StatusBar } from 'react-native'
 import { Account } from '../Account/Account'
 import { Schedule } from '../Schedule/Schedule'
 import { useRoute } from '@react-navigation/native'

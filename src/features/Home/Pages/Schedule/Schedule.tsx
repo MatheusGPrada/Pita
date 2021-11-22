@@ -1,42 +1,78 @@
 import React, { FC } from 'react'
-import { ScheduleContent, Footer, ContentContainer } from '../styles'
+import { ScheduleContent, FullColor } from '../styles'
 import {
-    Attendance,
+    Service,
     AttendanceContainer,
     AttendanceHeader,
     Day,
-    Title,
     Time,
     Center,
-    SubTitle,
-    ContentHeader,
+    Title,
     ButtonContainer,
+    IconContainer,
+    CardContent,
+    SeeAllContainer,
+    ServicePrice,
+    ServiceContainer,
 } from './styles'
-import { Attendances } from './typings'
-import Icon from 'react-native-vector-icons/AntDesign'
+import AntDesign from 'react-native-vector-icons/AntDesign'
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import { i18n } from '@i18n'
 import { Button } from '@components/atoms/Button/Button'
-import { ImageBackground } from 'react-native'
 
-Icon.loadFont()
+AntDesign.loadFont()
+SimpleLineIcons.loadFont()
 
 export const Schedule: FC = () => {
-    //const attendances = []
+    // const attendances = []
     const attendances = [
         {
-            day: '01/01',
-            scheduledAttendance: ['Corte masculino', 'Tintura masculino', 'Hidratação'],
-            time: '12:00/13:00',
+            dataAgendamento: '01/01',
+            horario: '12:00/13:00',
+            idAgendamento: 0,
+            servico: [
+                {
+                    id: 1,
+                    nomeServico: 'Corte Masculino',
+                    precoServico: 50,
+                    tempoServico: '1:00',
+                },
+            ],
+            statusAgendamento: 'ativo',
         },
         {
-            day: '02/01',
-            scheduledAttendance: ['Corte masculino', 'Tintura masculino', 'Hidratação'],
-            time: '12:00/13:00',
+            dataAgendamento: '02/01',
+            horario: '12:00/13:00',
+            idAgendamento: 0,
+            servico: [
+                {
+                    id: 1,
+                    nomeServico: 'Corte Masculino',
+                    precoServico: 50,
+                    tempoServico: '1:00',
+                },
+            ],
+            statusAgendamento: 'antigo',
         },
         {
-            day: '03/01',
-            scheduledAttendance: ['Corte masculino', 'Tintura masculino', 'Hidratação'],
-            time: '12:00/13:00',
+            dataAgendamento: '03/01',
+            horario: '12:00/13:00',
+            idAgendamento: 0,
+            servico: [
+                {
+                    id: 1,
+                    nomeServico: 'Corte Masculino',
+                    precoServico: 50,
+                    tempoServico: '1:00',
+                },
+                {
+                    id: 2,
+                    nomeServico: 'Corte Feminino',
+                    precoServico: 50,
+                    tempoServico: '1:00',
+                },
+            ],
+            statusAgendamento: 'antigo',
         },
     ]
 
@@ -45,50 +81,58 @@ export const Schedule: FC = () => {
     }
 
     return (
-        <ImageBackground resizeMode="cover" source={require('../../../../assets/images/brick_wall.jpg')} style={{ flex: 1 }}>
-            {attendances ? (
-                <ScheduleContent>
-                    <ContentContainer>
-                        <ContentHeader>
-                            <Title>{i18n.t('title.scheduleds')}</Title>
-                        </ContentHeader>
+        <FullColor>
+            <ScheduleContent>
+                {attendances.length > 0 ? (
+                    <>
+                        <SeeAllContainer>
+                            <ButtonContainer>
+                                <Button label={i18n.t('buttonLabels.seeAllSchedule')} onPress={() => addSchedule()} />
+                            </ButtonContainer>
+                        </SeeAllContainer>
 
-                        {attendances.map((attendance: Attendances) => (
-                            <AttendanceContainer key={attendance.day}>
-                                <AttendanceHeader>
-                                    <Day>{attendance.day}</Day>
-                                    <Time>{attendance.time}</Time>
-                                </AttendanceHeader>
-                                {attendance.scheduledAttendance.map(service => (
-                                    <Attendance key={service}>{service}</Attendance>
-                                ))}
+                        {attendances.map(attendance => (
+                            <AttendanceContainer key={attendance.dataAgendamento} status={attendance.statusAgendamento}>
+                                <IconContainer>
+                                    <SimpleLineIcons color="black" name="mustache" size={50} />
+                                </IconContainer>
+                                <CardContent>
+                                    <AttendanceHeader>
+                                        <Day>{attendance.dataAgendamento}</Day>
+                                        <Time>{attendance.horario}</Time>
+                                    </AttendanceHeader>
+                                    {attendance.servico.map(({ nomeServico, precoServico, id }) => (
+                                        <ServiceContainer key={id}>
+                                            <ServicePrice>{`R$ ${precoServico}.00`}</ServicePrice>
+                                            <Service>{nomeServico}</Service>
+                                        </ServiceContainer>
+                                    ))}
+                                </CardContent>
                             </AttendanceContainer>
                         ))}
                         <ButtonContainer>
                             <Button label={i18n.t('buttonLabels.addSchedule')} onPress={() => addSchedule()}>
-                                <Icon color="white" name="plus" size={25} />
+                                <AntDesign color="white" name="plus" size={25} />
                             </Button>
                         </ButtonContainer>
-                    </ContentContainer>
-                </ScheduleContent>
-            ) : (
-                <ScheduleContent>
-                    <Title>{i18n.t('title.schedule')}</Title>
-
-                    <SubTitle>{i18n.t('subtitle.createSchedule')}</SubTitle>
-                    <Center>
-                        <Icon color="gray" name="calendar" size={250} />
-                    </Center>
-                    <Footer>
-                        <Button
-                            label={i18n.t('buttonLabels.doSchedule')}
-                            labelSize="large"
-                            onPress={() => addSchedule()}
-                            useButtonContainer={true}
-                        />
-                    </Footer>
-                </ScheduleContent>
-            )}
-        </ImageBackground>
+                    </>
+                ) : (
+                    <>
+                        <Title>{i18n.t('subtitle.createSchedule')}</Title>
+                        <Center>
+                            <AntDesign color="gray" name="calendar" size={250} />
+                        </Center>
+                        <ButtonContainer>
+                            <Button
+                                label={i18n.t('buttonLabels.addSchedule')}
+                                labelSize="large"
+                                onPress={() => addSchedule()}
+                                useButtonContainer={true}
+                            />
+                        </ButtonContainer>
+                    </>
+                )}
+            </ScheduleContent>
+        </FullColor>
     )
 }
