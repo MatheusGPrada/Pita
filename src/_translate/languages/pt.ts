@@ -6,9 +6,6 @@ const messages = {
             buttonLabels: {
                 addSchedule: 'Adicionar agendamento',
                 back: 'Voltar',
-                changeCellphone: 'Celular',
-                changeEmail: 'Email',
-                changeName: 'Nome',
                 changePassword: 'Senha',
                 doSchedule: 'Realizar agendamento',
                 email: 'Email',
@@ -60,6 +57,8 @@ const messages = {
             },
             title: {
                 cellphone: 'Celular',
+                changeEmail: 'Qual o seu email para contato?',
+                changeName: 'Como devo te chamar?',
                 changeProfileData: 'Alterar dados cadastrais',
                 email: 'E-mail',
                 password: 'Senha',

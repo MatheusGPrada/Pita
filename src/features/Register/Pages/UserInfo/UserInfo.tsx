@@ -48,7 +48,7 @@ export const UserInfo: FC = ({ cache, setDisabled }) => {
                         }}
                         onChangeText={setName}
                         ref={nameInputRef}
-                        style={{ backgroundColor: 'rgb(255, 255, 255)', height: 45, marginBottom: 20 }}
+                        style={{ backgroundColor: 'white', height: 45, marginBottom: 20 }}
                         theme={{ colors: { primary: 'black' } }}
                         value={name}
                     />
@@ -65,7 +65,7 @@ export const UserInfo: FC = ({ cache, setDisabled }) => {
                         }}
                         onChangeText={setCpf}
                         render={props => <TextInputMask {...props} keyboardType="numeric" type="cpf" />}
-                        style={{ backgroundColor: 'rgb(255, 255, 255)', height: 45, marginBottom: 20 }}
+                        style={{ backgroundColor: 'white', height: 45, marginBottom: 20 }}
                         theme={{ colors: { primary: 'black' } }}
                         value={cpf}
                     />
@@ -91,7 +91,7 @@ export const UserInfo: FC = ({ cache, setDisabled }) => {
                                 type={'datetime'}
                             />
                         )}
-                        style={{ backgroundColor: 'rgb(255, 255, 255)', height: 45, marginBottom: 20 }}
+                        style={{ backgroundColor: 'white', height: 45, marginBottom: 20 }}
                         theme={{ colors: { primary: 'black' } }}
                         value={birthDate}
                     />

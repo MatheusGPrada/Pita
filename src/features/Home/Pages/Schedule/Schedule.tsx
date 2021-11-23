@@ -19,62 +19,67 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import { i18n } from '@i18n'
 import { Button } from '@components/atoms/Button/Button'
+import { useRoute } from '@react-navigation/native'
 
 AntDesign.loadFont()
 SimpleLineIcons.loadFont()
 
 export const Schedule: FC = () => {
-    // const attendances = []
-    const attendances = [
-        {
-            dataAgendamento: '01/01',
-            horario: '12:00/13:00',
-            idAgendamento: 0,
-            servico: [
-                {
-                    id: 1,
-                    nomeServico: 'Corte Masculino',
-                    precoServico: 50,
-                    tempoServico: '1:00',
-                },
-            ],
-            statusAgendamento: 'ativo',
-        },
-        {
-            dataAgendamento: '02/01',
-            horario: '12:00/13:00',
-            idAgendamento: 0,
-            servico: [
-                {
-                    id: 1,
-                    nomeServico: 'Corte Masculino',
-                    precoServico: 50,
-                    tempoServico: '1:00',
-                },
-            ],
-            statusAgendamento: 'antigo',
-        },
-        {
-            dataAgendamento: '03/01',
-            horario: '12:00/13:00',
-            idAgendamento: 0,
-            servico: [
-                {
-                    id: 1,
-                    nomeServico: 'Corte Masculino',
-                    precoServico: 50,
-                    tempoServico: '1:00',
-                },
-                {
-                    id: 2,
-                    nomeServico: 'Corte Feminino',
-                    precoServico: 50,
-                    tempoServico: '1:00',
-                },
-            ],
-            statusAgendamento: 'antigo',
-        },
-    ]
+    const { params } = useRoute()
+
+    // console.debug('paramss1', params)
+
+    const attendances = []
+    // const attendances = [
+    //     {
+    //         dataAgendamento: '01/01',
+    //         horario: '12:00/13:00',
+    //         idAgendamento: 0,
+    //         servico: [
+    //             {
+    //                 id: 1,
+    //                 nomeServico: 'Corte Masculino',
+    //                 precoServico: 50,
+    //                 tempoServico: '1:00',
+    //             },
+    //         ],
+    //         statusAgendamento: 'ativo',
+    //     },
+    //     {
+    //         dataAgendamento: '02/01',
+    //         horario: '12:00/13:00',
+    //         idAgendamento: 0,
+    //         servico: [
+    //             {
+    //                 id: 1,
+    //                 nomeServico: 'Corte Masculino',
+    //                 precoServico: 50,
+    //                 tempoServico: '1:00',
+    //             },
+    //         ],
+    //         statusAgendamento: 'antigo',
+    //     },
+    //     {
+    //         dataAgendamento: '03/01',
+    //         horario: '12:00/13:00',
+    //         idAgendamento: 0,
+    //         servico: [
+    //             {
+    //                 id: 1,
+    //                 nomeServico: 'Corte Masculino',
+    //                 precoServico: 50,
+    //                 tempoServico: '1:00',
+    //             },
+    //             {
+    //                 id: 2,
+    //                 nomeServico: 'Corte Feminino',
+    //                 precoServico: 50,
+    //                 tempoServico: '1:00',
+    //             },
+    //         ],
+    //         statusAgendamento: 'antigo',
+    //     },
+    // ]
 
     const addSchedule = () => {
         // TO DO - ADD SCHEDULE FLOW

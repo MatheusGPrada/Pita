@@ -2,6 +2,8 @@ import { isValid } from 'date-fns'
 
 export const isEmpty = (str?: string) => !str || 0 === str.length
 
+export const isFilled = (str: string) => str && str.length > 0
+
 export const validDate = (date: string) => {
     if (date.length === 10) {
         const elements = date.split('/')

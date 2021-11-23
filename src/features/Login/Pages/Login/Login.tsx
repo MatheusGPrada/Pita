@@ -62,8 +62,6 @@ export const Login: FC = () => {
                 setLoading(false)
             })
 
-        console.debug('Login', result)
-
         if (result?.token) {
             reset({
                 index: 0,
@@ -96,7 +94,7 @@ export const Login: FC = () => {
                         onSubmitEditing={() => passwordInputRef.current.focus()}
                         placeholder={i18n.t('labels.user')}
                         ref={userInputRef}
-                        style={{ backgroundColor: 'rgb(255, 255, 255)', height: 45 }}
+                        style={{ backgroundColor: 'white', height: 45 }}
                         theme={{ colors: { primary: 'black' } }}
                         value={user}
                     />
@@ -125,7 +123,7 @@ export const Login: FC = () => {
                             )
                         }
                         secureTextEntry={showPassword}
-                        style={{ backgroundColor: 'rgb(255, 255, 255)', height: 45 }}
+                        style={{ backgroundColor: 'white', height: 45 }}
                         theme={{ colors: { primary: 'black' } }}
                         value={password}
                     />

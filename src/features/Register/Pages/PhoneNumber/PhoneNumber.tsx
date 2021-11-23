@@ -53,7 +53,7 @@ export const PhoneNumber: FC = ({ cache, setDisabled }) => {
                             type={'cel-phone'}
                         />
                     )}
-                    style={{ backgroundColor: 'rgb(255, 255, 255)', height: 45 }}
+                    style={{ backgroundColor: 'white', height: 45 }}
                     theme={{ colors: { primary: 'black' } }}
                     value={phoneNumber}
                 />

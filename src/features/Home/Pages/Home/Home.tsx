@@ -11,7 +11,7 @@ Icon.loadFont()
 export const Home: FC = () => {
     const { params } = useRoute()
 
-    console.debug('params', params)
+    // console.debug('params', params)
 
     const [index, setIndex] = React.useState(0)
     const [routes] = React.useState([

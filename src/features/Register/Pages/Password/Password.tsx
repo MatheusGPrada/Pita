@@ -42,7 +42,7 @@ export const Password: FC = ({ cache, setDisabled }) => {
                         await savePasswordInCache(value, cache)
                         await isValidPassword(value, setDisabled)
                     }}
-                    style={{ backgroundColor: 'rgb(255, 255, 255)', height: 45 }}
+                    style={{ backgroundColor: 'white', height: 45 }}
                     theme={{ colors: { primary: 'black' } }}
                     value={password}
                 />

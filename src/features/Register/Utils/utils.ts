@@ -4,7 +4,7 @@ import { isValid } from 'date-fns'
 import api from 'src/api/api'
 import { REGISTER_USER } from 'src/api/endpoints'
 
-const validEmailRegex = /\S+@\S+\.\S+/
+export const validEmailRegex = /\S+@\S+\.\S+/
 
 export const isValidUserInfo = async (name: string, cpf: string, birthDate: string, setDisabled: Function) => {
     const elements = birthDate.split('/')

@@ -84,8 +84,9 @@ export const Center = styled.View`
 `
 
 export const ButtonContainer = styled.View`
-    margin-top: ${theme.marginsPx.m40px};
     border-radius: 30px;
+    margin-bottom: ${theme.marginsPx.m40px};
+    margin-top: ${theme.marginsPx.m40px};
 `
 export const CardContent = styled.View`
     flex: 1;

@@ -43,7 +43,7 @@ export const Email: FC = ({ cache, setDisabled }) => {
                         await saveEmailInCache(value, cache)
                         await isValidEmail(value, setDisabled)
                     }}
-                    style={{ backgroundColor: 'rgb(255, 255, 255)', height: 45 }}
+                    style={{ backgroundColor: 'white', height: 45 }}
                     theme={{ colors: { primary: 'black' } }}
                     value={email}
                 />
