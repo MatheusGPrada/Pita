@@ -16,6 +16,7 @@ export const EditingInfoModal: FC = ({
     setVisible = (any: boolean) => null,
     validFunction = (any: string) => null,
     errorMessage = '',
+    children = <></>,
 }) => {
     const [showSnackBar, setShowSnackBar] = useState(false)
 
@@ -37,6 +38,7 @@ export const EditingInfoModal: FC = ({
                 </ModalHeader>
                 <ModalContent>
                     <ChangeName>{Title}</ChangeName>
+                    {children}
                     <TextInput
                         onBlur={setValue}
                         onChangeText={setValue}

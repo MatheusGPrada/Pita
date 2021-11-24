@@ -29,57 +29,57 @@ export const Schedule: FC = () => {
 
     // console.debug('paramss1', params)
 
-    const attendances = []
-    // const attendances = [
-    //     {
-    //         dataAgendamento: '01/01',
-    //         horario: '12:00/13:00',
-    //         idAgendamento: 0,
-    //         servico: [
-    //             {
-    //                 id: 1,
-    //                 nomeServico: 'Corte Masculino',
-    //                 precoServico: 50,
-    //                 tempoServico: '1:00',
-    //             },
-    //         ],
-    //         statusAgendamento: 'ativo',
-    //     },
-    //     {
-    //         dataAgendamento: '02/01',
-    //         horario: '12:00/13:00',
-    //         idAgendamento: 0,
-    //         servico: [
-    //             {
-    //                 id: 1,
-    //                 nomeServico: 'Corte Masculino',
-    //                 precoServico: 50,
-    //                 tempoServico: '1:00',
-    //             },
-    //         ],
-    //         statusAgendamento: 'antigo',
-    //     },
-    //     {
-    //         dataAgendamento: '03/01',
-    //         horario: '12:00/13:00',
-    //         idAgendamento: 0,
-    //         servico: [
-    //             {
-    //                 id: 1,
-    //                 nomeServico: 'Corte Masculino',
-    //                 precoServico: 50,
-    //                 tempoServico: '1:00',
-    //             },
-    //             {
-    //                 id: 2,
-    //                 nomeServico: 'Corte Feminino',
-    //                 precoServico: 50,
-    //                 tempoServico: '1:00',
-    //             },
-    //         ],
-    //         statusAgendamento: 'antigo',
-    //     },
-    // ]
+    // const attendances = []
+    const attendances = [
+        {
+            dataAgendamento: '01/01',
+            horario: '12:00/13:00',
+            idAgendamento: 0,
+            servico: [
+                {
+                    id: 1,
+                    nomeServico: 'Corte Masculino',
+                    precoServico: 50,
+                    tempoServico: '1:00',
+                },
+            ],
+            statusAgendamento: 'ativo',
+        },
+        {
+            dataAgendamento: '02/01',
+            horario: '12:00/13:00',
+            idAgendamento: 0,
+            servico: [
+                {
+                    id: 1,
+                    nomeServico: 'Corte Masculino',
+                    precoServico: 50,
+                    tempoServico: '1:00',
+                },
+            ],
+            statusAgendamento: 'antigo',
+        },
+        {
+            dataAgendamento: '03/01',
+            horario: '12:00/13:00',
+            idAgendamento: 0,
+            servico: [
+                {
+                    id: 1,
+                    nomeServico: 'Corte Masculino',
+                    precoServico: 50,
+                    tempoServico: '1:00',
+                },
+                {
+                    id: 2,
+                    nomeServico: 'Corte Feminino',
+                    precoServico: 50,
+                    tempoServico: '1:00',
+                },
+            ],
+            statusAgendamento: 'antigo',
+        },
+    ]
 
     const addSchedule = () => {
         // TO DO - ADD SCHEDULE FLOW

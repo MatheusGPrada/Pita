@@ -56,3 +56,8 @@ export const UserLetter = styled.Text`
     padding: ${theme.marginsPx.m16px} ${theme.marginsPx.m20px};
     font-size: ${theme.fontSize.xxLarge};
 `
+export const PasswordTitle = styled.Text`
+    color: ${theme.colors.white};
+    padding: ${theme.marginsPx.m40px} 0;
+    font-size: ${theme.fontSize.xxLarge};
+`
