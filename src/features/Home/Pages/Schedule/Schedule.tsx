@@ -18,22 +18,25 @@ import {
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { i18n } from '@i18n'
 import { Button } from '@components/atoms/Button/Button'
-import { useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { Modal, Portal, Provider } from 'react-native-paper'
 import { theme } from '@theme'
+import { isBefore } from 'date-fns'
 
 AntDesign.loadFont()
 
 export const Schedule: FC = () => {
-    const [showSeeAll, setShowSeeAll] = useState(false)
     const { params } = useRoute()
-
-    // console.debug('paramss1', params)
+    const {
+        patientInfo: { token },
+    } = params
+    const { navigate } = useNavigation()
+    const [showSeeAll, setShowSeeAll] = useState(false)
 
     // const attendances = []
     const attendances = [
         {
-            dataAgendamento: '01/01',
+            dataAgendamento: '10/12/2021',
             horario: '12:00/13:00',
             idAgendamento: 0,
             servico: [
@@ -47,7 +50,7 @@ export const Schedule: FC = () => {
             statusAgendamento: 'ativo',
         },
         {
-            dataAgendamento: '02/01',
+            dataAgendamento: '02/01/2021',
             horario: '12:00/13:00',
             idAgendamento: 0,
             servico: [
@@ -61,7 +64,7 @@ export const Schedule: FC = () => {
             statusAgendamento: 'antigo',
         },
         {
-            dataAgendamento: '03/01',
+            dataAgendamento: '03/01/2021',
             horario: '12:00/13:00',
             idAgendamento: 0,
             servico: [
@@ -82,10 +85,6 @@ export const Schedule: FC = () => {
         },
     ]
 
-    const addSchedule = () => {
-        // TO DO - ADD SCHEDULE FLOW
-    }
-
     return (
         <FullColor>
             <Provider>
@@ -98,31 +97,41 @@ export const Schedule: FC = () => {
                                 </ButtonContainer>
                             </SeeAllContainer>
 
-                            {attendances.map(({ dataAgendamento, horario, servico, statusAgendamento }) => (
-                                <AttendanceContainer key={dataAgendamento} status={statusAgendamento}>
-                                    <IconContainer>
-                                        {statusAgendamento === 'ativo' ? (
-                                            <AntDesign color="black" name="calendar" size={50} />
-                                        ) : (
-                                            <AntDesign color="black" name="check" size={50} />
-                                        )}
-                                    </IconContainer>
-                                    <CardContent>
-                                        <AttendanceHeader>
-                                            <Day>{dataAgendamento}</Day>
-                                            <Time>{horario}</Time>
-                                        </AttendanceHeader>
-                                        {servico.map(({ nomeServico, precoServico, id }) => (
-                                            <ServiceContainer key={id}>
-                                                <ServicePrice>{`R$ ${precoServico}.00`}</ServicePrice>
-                                                <Service>{nomeServico}</Service>
-                                            </ServiceContainer>
-                                        ))}
-                                    </CardContent>
-                                </AttendanceContainer>
-                            ))}
+                            {attendances.map(({ dataAgendamento, horario, servico }) => {
+                                const month = new Date(dataAgendamento).getDate().toString()
+                                const day = (new Date(dataAgendamento).getMonth() + 1).toString()
+                                const year = new Date(dataAgendamento).getFullYear().toString()
+                                const statusAgendamento = isBefore(new Date(month.concat('/', day, '/', year)), new Date())
+
+                                return (
+                                    <AttendanceContainer key={dataAgendamento} status={statusAgendamento}>
+                                        <IconContainer>
+                                            {statusAgendamento ? (
+                                                <AntDesign color="black" name="check" size={50} />
+                                            ) : (
+                                                <AntDesign color="black" name="calendar" size={50} />
+                                            )}
+                                        </IconContainer>
+                                        <CardContent>
+                                            <AttendanceHeader>
+                                                <Day>{dataAgendamento}</Day>
+                                                <Time>{horario}</Time>
+                                            </AttendanceHeader>
+                                            {servico.map(({ nomeServico, precoServico, id }) => (
+                                                <ServiceContainer key={id}>
+                                                    <ServicePrice>{`R$ ${precoServico}.00`}</ServicePrice>
+                                                    <Service>{nomeServico}</Service>
+                                                </ServiceContainer>
+                                            ))}
+                                        </CardContent>
+                                    </AttendanceContainer>
+                                )
+                            })}
                             <ButtonContainer>
-                                <Button label={i18n.t('buttonLabels.addSchedule')} onPress={() => addSchedule()}>
+                                <Button
+                                    label={i18n.t('buttonLabels.addSchedule')}
+                                    onPress={() => navigate('SelectService', { token: token })}
+                                >
                                     <AntDesign color="white" name="plus" size={25} />
                                 </Button>
                             </ButtonContainer>
@@ -137,7 +146,7 @@ export const Schedule: FC = () => {
                                 <Button
                                     label={i18n.t('buttonLabels.addSchedule')}
                                     labelSize="large"
-                                    onPress={() => addSchedule()}
+                                    onPress={() => navigate('SelectService')}
                                     useButtonContainer={true}
                                 />
                             </ButtonContainer>

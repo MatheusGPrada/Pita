@@ -1,3 +1,3 @@
 export interface AttendanceProps {
-    status: string
+    status: boolean
 }

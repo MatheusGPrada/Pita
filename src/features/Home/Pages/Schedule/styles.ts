@@ -49,7 +49,7 @@ export const IconContainer = styled.View`
 `
 
 export const AttendanceContainer = styled.View<AttendanceProps>`
-    background-color: ${({ status }) => (status === 'ativo' ? `#758bfd` : `#e3d0d8`)};
+    background-color: ${({ status }) => (status ? `#e3d0d8` : `#758bfd`)};
     border-radius: 30px;
     margin-horizontal: ${theme.marginsPx.m16px};
     flex-direction: row;
