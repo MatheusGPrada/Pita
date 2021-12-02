@@ -12,7 +12,6 @@ const { Navigator, Screen } = createStackNavigator<RegisterStackParamList>()
 export const RegisterStack = () => (
     <Navigator
         screenOptions={{
-            // headerBackImage: () => <HeaderBackIcon addScreenNameTestId isArrow />,
             headerBackTitleVisible: false,
             headerStyle: {
                 backgroundColor: 'black',

@@ -159,7 +159,6 @@ module.exports = {
         'prefer-spread': 'error',
         'prefer-template': 'error',
         'prettier/prettier': 'error',
-        'quote-props': ['error', 'as-needed'],
         quotes: [
             'error',
             'single',

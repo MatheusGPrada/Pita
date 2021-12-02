@@ -67,6 +67,7 @@ const messages = {
                 password: 'Senha',
                 schedule: 'Nenhum agendamento',
                 scheduleds: 'Agendados',
+                selectServices: 'Selecione o(s) serviço(s)',
                 welcome: 'Bem vindo',
             },
             validation: {

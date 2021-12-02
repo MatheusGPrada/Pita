@@ -121,7 +121,7 @@ export const SignUp: FC = () => {
                             if (JSON.stringify(result).includes('"name":"Error"')) {
                                 onToggleSnackBar()
                             } else {
-                                navigate(LOGIN_STACK, { screen: 'Login' })
+                                navigate('Login')
                             }
                         }
                     }}
