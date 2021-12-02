@@ -19,14 +19,15 @@ import { Password } from '../Password/Password'
 import { useNavigation } from '@react-navigation/native'
 import { SnackBar } from '@components/atoms/SnackBar/SnackBar'
 import { SnackBarContainer } from './styles'
-import { HOME_STACK } from '@routes/Contants'
+import { LoginStack } from '@routes/LoginStack'
+import { LOGIN_STACK } from '@routes/Contants'
 
 export const SignUp: FC = () => {
     const [cache, setCache] = useState(null)
     const [disabled, setDisabled] = useState(false)
     const [visible, setVisible] = useState(false)
 
-    const { navigate, reset } = useNavigation()
+    const { navigate } = useNavigation()
 
     const onToggleSnackBar = () => setVisible(true)
 
@@ -120,11 +121,7 @@ export const SignUp: FC = () => {
                             if (JSON.stringify(result).includes('"name":"Error"')) {
                                 onToggleSnackBar()
                             } else {
-                                reset({
-                                    index: 0,
-                                    routes: [{ name: HOME_STACK }],
-                                })
-                                navigate(HOME_STACK, { params: { patientInfo: result }, screen: 'Home' })
+                                navigate(LOGIN_STACK, { screen: 'Login' })
                             }
                         }
                     }}

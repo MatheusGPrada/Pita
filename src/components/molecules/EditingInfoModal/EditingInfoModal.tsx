@@ -44,6 +44,7 @@ export const EditingInfoModal: FC = ({
                         onChangeText={setValue}
                         onSubmitEditing={() => {
                             if (validFunction(value)) {
+                                setValue(value)
                                 onSubmiting(value)
                             } else {
                                 setShowSnackBar(true)
