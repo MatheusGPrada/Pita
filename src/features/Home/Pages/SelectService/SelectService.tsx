@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback, useEffect } from 'react'
+import React, { FC, useState, useCallback } from 'react'
 import { useFocusEffect, useRoute } from '@react-navigation/native'
 import { DarkTemplate } from '@components/templates/DarkTemplate/DarkTemplate'
 import { Card, CardInfo, IconContainer, Content, LoadingContainer, ServiceInfo, ServiceTitle, Title, CardService } from './styles'

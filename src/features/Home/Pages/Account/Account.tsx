@@ -9,9 +9,8 @@ import { i18n } from '@i18n'
 import { Provider } from 'react-native-paper'
 import { EditingInfoModal } from '@components/molecules/EditingInfoModal/EditingInfoModal'
 import { isFilled } from '@utils/validations'
-import { validEmailRegex } from '@features/Register/Utils/utils'
 import api from 'src/api/api'
-import { ALL_SERVICES } from 'src/api/endpoints'
+import { UPDATE_USER } from 'src/api/endpoints'
 
 MaterialCommunityIcons.loadFont()
 AntDesign.loadFont()
@@ -20,25 +19,19 @@ export const Account = () => {
     const { navigate, reset } = useNavigation()
     const {
         params: {
-            patientInfo: { nome, userName, telefone },
+            patientInfo: { nome, telefone },
         },
     } = useRoute()
 
     const [showChangeName, setShowChangeName] = useState(false)
     const [changeName, setChangeName] = useState('')
 
-    const [showChangeEmail, setShowChangeEmail] = useState(false)
-    const [changeEmail, setChangeEmail] = useState('')
-
     const [showChangePhone, setShowChangePhone] = useState(false)
     const [changePhone, setChangePhone] = useState('')
 
-    const [showChangePassword, setShowChangePassword] = useState(false)
-    const [changePassword, setChangePassword] = useState('')
-
     const callUpdateUser = async userInfo => {
         await api
-            .get(ALL_SERVICES, {
+            .get(UPDATE_USER, {
                 headers: {
                     Authorization: token,
                     'Content-Type': 'application/json',
@@ -87,17 +80,6 @@ export const Account = () => {
                         value={changeName}
                     />
                 )}
-                {showChangeEmail && (
-                    <EditingInfoModal
-                        Title={i18n.t('title.changeEmail')}
-                        errorMessage={i18n.t('error.invalidEmail')}
-                        onSubmiting={() => console.debug('Adicionar chamada do enpoint')}
-                        setValue={setChangeEmail}
-                        setVisible={setShowChangeEmail}
-                        validFunction={(value: string) => validEmailRegex.test(value)}
-                        value={changeEmail}
-                    />
-                )}
                 {showChangePhone && (
                     <EditingInfoModal
                         Title={i18n.t('title.changePhone')}
@@ -107,17 +89,6 @@ export const Account = () => {
                         setVisible={setShowChangePhone}
                         validFunction={(value: string) => value.length === 15}
                         value={changePhone}
-                    />
-                )}
-                {showChangePassword && (
-                    <EditingInfoModal
-                        Title={i18n.t('title.changePassword')}
-                        errorMessage={i18n.t('error.invalidPassword')}
-                        onSubmiting={() => console.debug(changePassword)}
-                        setValue={setChangePassword}
-                        setVisible={setShowChangePassword}
-                        validFunction={(value: string) => value.length > 0}
-                        value={changePassword}
                     />
                 )}
 
@@ -130,32 +101,12 @@ export const Account = () => {
                     </ButtonContainer>
                     <ButtonContainer>
                         <Button
-                            label={userName}
-                            onPress={() => setShowChangeEmail(true)}
-                            useButtonContainer={true}
-                            variant={'tertiary'}
-                        >
-                            <MaterialCommunityIcons color="black" name="email" size={36} />
-                        </Button>
-                    </ButtonContainer>
-                    <ButtonContainer>
-                        <Button
                             label={telefone}
                             onPress={() => setShowChangePhone(true)}
                             useButtonContainer={true}
                             variant={'tertiary'}
                         >
                             <MaterialCommunityIcons color="black" name="cellphone-basic" size={36} />
-                        </Button>
-                    </ButtonContainer>
-                    <ButtonContainer>
-                        <Button
-                            label={i18n.t('buttonLabels.changePassword')}
-                            onPress={() => setShowChangePassword(true)}
-                            useButtonContainer={true}
-                            variant={'tertiary'}
-                        >
-                            <MaterialCommunityIcons color="black" name="lock" size={36} />
                         </Button>
                     </ButtonContainer>
                 </ProfileContent>

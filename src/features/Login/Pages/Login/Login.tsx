@@ -34,10 +34,6 @@ export const Login: FC = () => {
 
     const { reset } = useNavigation()
 
-    const handleForgotPassword = () => {
-        // TO DO - ADD RECOVERY PASSWORD
-    }
-
     const authenticate = async () => {
         let result
         setLoading(true)
@@ -127,7 +123,6 @@ export const Login: FC = () => {
                         theme={{ colors: { primary: 'black' } }}
                         value={password}
                     />
-                    <ForgotPassword onPress={handleForgotPassword}>{i18n.t('labels.forgotPassword')}</ForgotPassword>
                 </InputContainer>
             </ContentContainer>
             <SnackBarContainer>

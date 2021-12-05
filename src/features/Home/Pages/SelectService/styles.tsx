@@ -45,7 +45,7 @@ export const CardInfo = styled.View`
 `
 
 export const ServiceTitle = styled.Text`
-    color: ${theme.colors.white};
+    color: ${theme.colors.black100};
     font-family: ${theme.fonts.montserratSemiBold};
     font-size: ${theme.fontSize.large};
     text-align: center;
@@ -53,7 +53,7 @@ export const ServiceTitle = styled.Text`
 
 export const ServiceInfo = styled.Text`
     margin-top: ${theme.marginsPx.m12px};
-    color: ${theme.colors.white};
+    color: ${theme.colors.black100};
     font-family: ${theme.fonts.montserratSemiBold};
     font-size: ${theme.fontSize.medium};
     text-align: center;
