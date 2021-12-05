@@ -10,6 +10,8 @@ import { Provider } from 'react-native-paper'
 import { EditingInfoModal } from '@components/molecules/EditingInfoModal/EditingInfoModal'
 import { isFilled } from '@utils/validations'
 import { validEmailRegex } from '@features/Register/Utils/utils'
+import api from 'src/api/api'
+import { ALL_SERVICES } from 'src/api/endpoints'
 
 MaterialCommunityIcons.loadFont()
 AntDesign.loadFont()
@@ -33,6 +35,29 @@ export const Account = () => {
 
     const [showChangePassword, setShowChangePassword] = useState(false)
     const [changePassword, setChangePassword] = useState('')
+
+    const callUpdateUser = async userInfo => {
+        await api
+            .get(ALL_SERVICES, {
+                headers: {
+                    Authorization: token,
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => {
+                const { data } = response
+                setLoading(false)
+                setServices(data)
+            })
+            .catch(requestError => {
+                setLoading(false)
+                setServices(requestError)
+            })
+    }
+
+    const postChangePassword = (password: string) => {
+        return {}
+    }
 
     const doLogOut = () => {
         navigate(LOGIN_STACK, { screen: 'LoginOptions' })

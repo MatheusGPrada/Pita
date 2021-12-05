@@ -36,10 +36,12 @@ const messages = {
                 forgotPassword: 'Esqueceu a senha',
                 login: 'Entrar',
                 name: 'Nome',
+                no: 'não',
                 or: 'Ou',
                 password: 'Senha',
                 register: 'Cadastrar',
                 user: 'Usuário',
+                yes: 'sim',
             },
             steps: {
                 email: 'E-mail',
@@ -54,8 +56,10 @@ const messages = {
                 insertPhoneNumber: 'Informe o seu número de celular para contato',
                 signUp: 'Informe seus dados pessoais abaixo',
                 validPhoneNumber: 'Será enviado um código para o seu celular',
+                youWishToCancelTheAttendance: 'Deseja mesmo cancelar o agendamento?',
             },
             title: {
+                cancelAttendance: 'Cancelar agendamento',
                 cellphone: 'Celular',
                 changeEmail: 'Qual o seu email para contato?',
                 changeName: 'Como devo te chamar?',

@@ -14,7 +14,7 @@ export const ServiceContainer = styled.View`
     padding-left: ${theme.marginsPx.m16px};
 `
 
-export const Service = styled.Text`
+export const ServiceName = styled.Text`
     color: ${theme.colors.black100};
     font-family: ${theme.fonts.montserratRegular};
     font-size: ${theme.fontSize.large};
@@ -32,14 +32,14 @@ export const ServicePrice = styled.Text`
 export const Day = styled.Text`
     color: #000000;
     font-family: ${theme.fonts.montserratRegular};
-    font-size: ${theme.fontSize.xLarge};
+    font-size: ${theme.fontSize.large};
     padding-left: ${theme.marginsPx.m16px};
 `
 
 export const Time = styled.Text`
     color: #000000;
     font-family: ${theme.fonts.montserratRegular};
-    font-size: ${theme.fontSize.xLarge};
+    font-size: ${theme.fontSize.large};
     padding-right: ${theme.marginsPx.m16px};
 `
 
@@ -57,7 +57,7 @@ export const AttendanceContainer = styled.View<AttendanceProps>`
     padding: ${theme.marginsPx.m20px};
 `
 
-export const SeeAllContainer = styled.View`
+export const SeeAllButtonContainer = styled.View`
     align-items: flex-end;
     margin-bottom: ${theme.marginsPx.m20px};
 `
@@ -88,6 +88,13 @@ export const ButtonContainer = styled.View`
     margin-bottom: ${theme.marginsPx.m40px};
     margin-top: ${theme.marginsPx.m40px};
 `
+
 export const CardContent = styled.View`
     flex: 1;
+`
+
+export const LoadingContainer = styled.View`
+    align-items: center;
+    flex: 1;
+    justify-content: center;
 `

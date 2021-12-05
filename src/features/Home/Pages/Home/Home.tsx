@@ -11,8 +11,6 @@ Icon.loadFont()
 export const Home: FC = () => {
     const { params } = useRoute()
 
-    // console.debug('params', params)
-
     const [index, setIndex] = React.useState(0)
     const [routes] = React.useState([
         { icon: props => <Icon color="white" name="bookmark-check" size={36} {...props} />, key: 'schedule' },

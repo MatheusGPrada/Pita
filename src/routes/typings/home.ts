@@ -3,4 +3,5 @@ export type HomeStackParamList = {
     Account: { patientInfo?: object }
     Schedule: { patientInfo?: object }
     SelectService: { token: string }
+    SeeAll: { token: string; userId: string }
 }
