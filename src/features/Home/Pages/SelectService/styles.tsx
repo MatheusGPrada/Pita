@@ -30,6 +30,10 @@ export const IconContainer = styled.View`
     flex: 1;
 `
 
+export const ButtonContainer = styled.View`
+    margin-top: ${theme.marginsPx.m20px};
+`
+
 export const Card = styled.View`
     flex-direction: row;
     background-color: ${({ status }) => (status ? `#e3d0d8` : `#758bfd`)};

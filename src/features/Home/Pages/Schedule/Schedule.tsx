@@ -35,7 +35,7 @@ AntDesign.loadFont()
 export const Schedule: FC = () => {
     const { params } = useRoute()
     const {
-        patientInfo: { token, id: userId },
+        patientInfo: { token, id: userId, userName },
     } = params
     const { navigate } = useNavigation()
     const [loading, setLoading] = useState(true)
@@ -155,7 +155,7 @@ export const Schedule: FC = () => {
                             <ButtonContainer>
                                 <Button
                                     label={i18n.t('buttonLabels.addSchedule')}
-                                    onPress={() => navigate('SelectService', { token: token })}
+                                    onPress={() => navigate('SelectService', { token: token, userName: userName })}
                                 >
                                     <AntDesign color="white" name="plus" size={25} />
                                 </Button>
@@ -171,7 +171,7 @@ export const Schedule: FC = () => {
                                 <Button
                                     label={i18n.t('buttonLabels.addSchedule')}
                                     labelSize="large"
-                                    onPress={() => navigate('SelectService', { token: token })}
+                                    onPress={() => navigate('SelectService', { token: token, userName: userName })}
                                     useButtonContainer={true}
                                 />
                             </ButtonContainer>

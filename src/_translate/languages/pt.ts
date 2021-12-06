@@ -15,6 +15,7 @@ const messages = {
                 logout: 'Sair da conta',
                 next: 'Próximo',
                 seeAllSchedule: 'Ver todos',
+                selectTime: 'Selecionar horário',
             },
             error: {
                 emptyName: 'O nome deve ser preenchido',
@@ -72,6 +73,7 @@ const messages = {
                 schedule: 'Nenhum agendamento',
                 scheduleds: 'Agendados',
                 selectServices: 'Selecione o(s) serviço(s)',
+                selectTheAttendanceDate: 'Selecione o dia para agendar o agendamento',
                 welcome: 'Bem vindo',
             },
             validation: {

@@ -13,4 +13,5 @@ export interface Service {
     nomeServico: string
     precoServico: string
     id: string
+    time: string
 }

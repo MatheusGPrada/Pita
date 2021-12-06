@@ -1,7 +1,18 @@
 import React, { FC, useState, useCallback } from 'react'
-import { useFocusEffect, useRoute } from '@react-navigation/native'
+import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
 import { DarkTemplate } from '@components/templates/DarkTemplate/DarkTemplate'
-import { Card, CardInfo, IconContainer, Content, LoadingContainer, ServiceInfo, ServiceTitle, Title, CardService } from './styles'
+import {
+    Card,
+    CardInfo,
+    IconContainer,
+    Content,
+    LoadingContainer,
+    ServiceInfo,
+    ServiceTitle,
+    Title,
+    CardService,
+    ButtonContainer,
+} from './styles'
 import { i18n } from '@i18n'
 import api from 'src/api/api'
 import { Loading } from '@components/atoms/Loading/Loading'
@@ -9,17 +20,19 @@ import { ALL_SERVICES } from 'src/api/endpoints'
 import { ScrollView } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import { Button } from '@components/atoms/Button/Button'
 
 AntDesign.loadFont()
 
 export const SelectService: FC = () => {
     const [loading, setLoading] = useState(true)
     const [services, setServices] = useState([])
-    const [update, setUpdate] = useState('')
+    const [update, setUpdate] = useState(0)
     const [selectedServices, setSelectedServices] = useState([])
     const {
-        params: { token },
+        params: { token, userName },
     } = useRoute()
+    const { navigate } = useNavigation()
 
     useFocusEffect(
         useCallback(() => {
@@ -50,11 +63,11 @@ export const SelectService: FC = () => {
         update,
     ])
 
-    const selectService = (id: string, title: string) => {
+    const selectService = (id: string, title: string, time: string) => {
         const alreadySelected = selectedServices
         if (alreadySelected.filter(service => service.id === id).length === 0) {
             setUpdate(Math.random())
-            alreadySelected.push({ id: id, title: title })
+            alreadySelected.push({ id: id, time: time, title: title })
             setSelectedServices(alreadySelected)
             return
         }
@@ -77,7 +90,7 @@ export const SelectService: FC = () => {
                 {services.length > 0 && (
                     <ScrollView>
                         {services.map(({ id, nomeServico, precoServico, tempoServico }) => (
-                            <TouchableOpacity key={id} onPress={() => selectService(id, nomeServico)}>
+                            <TouchableOpacity key={id} onPress={() => selectService(id, nomeServico, tempoServico)}>
                                 <Card>
                                     <CardService>
                                         <ServiceTitle>{nomeServico}</ServiceTitle>
@@ -94,6 +107,16 @@ export const SelectService: FC = () => {
                         ))}
                     </ScrollView>
                 )}
+                <ButtonContainer>
+                    <Button
+                        label={i18n.t('buttonLabels.selectTime')}
+                        onPress={() =>
+                            navigate('ScheduleAttendance', { services: selectedServices, token: token, userName: userName })
+                        }
+                        useButtonContainer={true}
+                        variant={'primary'}
+                    />
+                </ButtonContainer>
             </Content>
         </DarkTemplate>
     )
