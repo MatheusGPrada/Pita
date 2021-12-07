@@ -1,8 +1,10 @@
 import styled from 'styled-components/native'
 import { theme } from '../../../../styles/theme'
+import { TimeContainerProps } from './typings'
 
 export const ContentContainer = styled.View`
     padding: ${theme.marginsPx.m16px};
+    flex: 1;
 `
 
 export const Title = styled.Text`
@@ -12,9 +14,9 @@ export const Title = styled.Text`
     margin-bottom: ${theme.marginsPx.m40px};
 `
 
-export const TimeContainer = styled.View`
+export const TimeContainer = styled.View<TimeContainerProps>`
     margin: ${theme.marginsPx.m8px} ${theme.marginsPx.m40px};
-    background-color: ${theme.colors.primary50};
+    background-color: ${({ enable }) => (enable ? theme.colors.primary50 : theme.colors.grayscale80)};
     border-radius: 20px;
 `
 

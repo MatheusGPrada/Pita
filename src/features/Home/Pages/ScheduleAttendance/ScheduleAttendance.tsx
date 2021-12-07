@@ -1,3 +1,4 @@
+/* eslint-disable max-depth */
 /* eslint-disable react/jsx-indent */
 /* eslint-disable indent */
 import React, { FC, useCallback, useState } from 'react'
@@ -28,6 +29,7 @@ export const ScheduleAttendance: FC = () => {
     const [selectedServicesTime, setSelectedServicesTime] = useState('')
     const [selectedServiceMinutes, setSelectedServiceMinutes] = useState(0)
     const [timeCards, setTimeCards] = useState([])
+    const [cardToRender, setCardToRender] = useState([])
     const ONE_HOUR = 60
 
     const mountTimeCards = useCallback(() => {
@@ -35,11 +37,7 @@ export const ScheduleAttendance: FC = () => {
             let startTime = '10:00'
             const cards = []
 
-            while (
-                parseInt(startTime.substr(0, 2).concat(startTime.substr(3, 2)), 10) +
-                    parseInt(selectedServicesTime.substr(0, 2).concat(selectedServicesTime.substr(2, 2)).replace(':', ''), 10) <=
-                1800
-            ) {
+            while (parseInt(startTime.replace(':', ''), 10) + parseInt(selectedServicesTime.replace(':', ''), 10) <= 1800) {
                 const endTime = SumHour(startTime, selectedServiceMinutes)
                 cards.push(`${startTime}/${endTime}`)
                 startTime = endTime
@@ -54,25 +52,84 @@ export const ScheduleAttendance: FC = () => {
         return today.setMonth(today.getMonth() + 1)
     }
 
-    const getAttendancesFromDate = (selectedDate: Date) => {
-        setFilteredAttendances(
-            attedanceAlreadyScheduled
-                .filter(
-                    ({ dataAgendamento }: Attendance) =>
-                        dataAgendamento ===
-                        selectedDate
-                            .getDate()
-                            .toString()
-                            .concat('/', (selectedDate.getMonth() + 1).toString(), '/', selectedDate.getFullYear().toString()),
-                )
-                .sort(
-                    (a: Attendance, b: Attendance) =>
-                        parseInt(a.horario.substr(0, 2).concat(a.horario.substr(3, 2)), 10) -
-                        parseInt(b.horario.substr(0, 2).concat(b.horario.substr(3, 2)), 10),
-                ),
-        )
+    const mountCardToRender = (filteredData: Array<Attendance>) => {
+        setCardToRender([])
+        const availableCards = []
+        const isTheLastAttendance = (index: number) => filteredData.length === index + 1
+        let previosEnd = ''
+        filteredData.map(({ horario, idAgendamento }: Attendance, index: number) => {
+            if (index === 0) {
+                let start = '10:00'
 
-        const teste = attedanceAlreadyScheduled
+                if (
+                    parseInt(horario.replace(':', ''), 10) - parseInt(start.replace(':', ''), 10) >=
+                    parseInt(selectedServicesTime.replace(':', ''), 10)
+                ) {
+                    while (parseInt(start.replace(':', ''), 10) < parseInt(horario.substr(0, 5).replace(':', ''), 10)) {
+                        const availableTime = SumHour(start, selectedServiceMinutes)
+                        availableCards.push({
+                            enable: true,
+                            key: start,
+                            time: `${start}/${availableTime}`,
+                        })
+                        start = availableTime
+                    }
+                }
+                previosEnd = horario.substr(6, 5)
+                availableCards.push({
+                    enable: false,
+                    key: idAgendamento,
+                    time: horario,
+                })
+            } else {
+                let availableTime = SumHour(previosEnd, selectedServiceMinutes)
+                if (
+                    parseInt(horario.replace(':', ''), 10) - parseInt(previosEnd.replace(':', ''), 10) >
+                    parseInt(selectedServicesTime.replace(':', ''), 10)
+                ) {
+                    while (parseInt(availableTime.replace(':', ''), 10) < parseInt(horario.substr(0, 5).replace(':', ''), 10)) {
+                        availableCards.push({
+                            enable: true,
+                            key: previosEnd,
+                            time: `${previosEnd}/${availableTime}`,
+                        })
+                        previosEnd = availableTime
+                        availableTime = SumHour(previosEnd, selectedServiceMinutes)
+                    }
+                }
+
+                previosEnd = horario.substr(6, 5)
+                availableCards.push({
+                    enable: false,
+                    key: idAgendamento,
+                    time: horario,
+                })
+
+                if (isTheLastAttendance(index)) {
+                    availableTime = SumHour(previosEnd, selectedServiceMinutes)
+                    if (
+                        parseInt(horario.replace(':', ''), 10) - parseInt(previosEnd.replace(':', ''), 10) >
+                        parseInt(selectedServicesTime.replace(':', ''), 10)
+                    ) {
+                        while (parseInt(availableTime.replace(':', ''), 10) < parseInt(horario.substr(0, 5).replace(':', ''), 10)) {
+                            availableCards.push({
+                                enable: true,
+                                key: previosEnd,
+                                time: `${previosEnd}/${availableTime}`,
+                            })
+                            previosEnd = availableTime
+                            availableTime = SumHour(previosEnd, selectedServiceMinutes)
+                        }
+                    }
+                }
+            }
+            setCardToRender(availableCards)
+            return null
+        })
+    }
+
+    const getAttendancesFromDate = (selectedDate: Date) => {
+        const filteredData = attedanceAlreadyScheduled
             .filter(
                 ({ dataAgendamento }: Attendance) =>
                     dataAgendamento ===
@@ -86,7 +143,8 @@ export const ScheduleAttendance: FC = () => {
                     parseInt(a.horario.substr(0, 2).concat(a.horario.substr(3, 2)), 10) -
                     parseInt(b.horario.substr(0, 2).concat(b.horario.substr(3, 2)), 10),
             )
-        teste.map(({ horario }) => console.debug('horario', horario))
+        setFilteredAttendances(filteredData)
+        mountCardToRender(filteredData)
         setLoading(false)
     }
 
@@ -198,23 +256,16 @@ export const ScheduleAttendance: FC = () => {
             ) : (
                 <ContentContainer>
                     <ScrollView>
-                        {!loading &&
-                            filteredAttendances.length > 0 &&
-                            filteredAttendances.map(({ horario, idAgendamento }: Attendance) => {
-                                const startAt = horario.substr(0, 5)
-                                const endAt = horario.substr(6, 5)
-
-                                return (
-                                    <TimeContainer key={idAgendamento}>
-                                        <Time>{horario}</Time>
-                                    </TimeContainer>
-                                )
-                            })}
-                        {!loading &&
-                            filteredAttendances.length === 0 &&
+                        {cardToRender.length > 0 &&
+                            cardToRender.map(({ enable, key, time }, index: number) => (
+                                <TimeContainer enable={enable} key={key}>
+                                    <Time>{time}</Time>
+                                </TimeContainer>
+                            ))}
+                        {filteredAttendances.length === 0 &&
                             timeCards.length > 0 &&
                             timeCards.map((time, index) => (
-                                <TimeContainer key={index}>
+                                <TimeContainer enable={true} key={index}>
                                     <Time>{time}</Time>
                                 </TimeContainer>
                             ))}
