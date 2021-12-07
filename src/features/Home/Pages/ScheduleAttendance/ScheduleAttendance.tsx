@@ -38,7 +38,7 @@ export const ScheduleAttendance: FC = () => {
     const [showModal, setShowModal] = useState(false)
     const [selectedTime, setSelectedTime] = useState('')
     const ONE_HOUR = 60
-    const LAST_HOUR = 1800 // 18:00
+    const LAST_HOUR = 1800
 
     const mountTimeCards = useCallback(() => {
         if (selectedServiceMinutes > 0) {

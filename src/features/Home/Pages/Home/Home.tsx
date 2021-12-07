@@ -4,6 +4,7 @@ import { BottomNavigation } from 'react-native-paper'
 import { StatusBar } from 'react-native'
 import { Account } from '../Account/Account'
 import { Schedule } from '../Schedule/Schedule'
+import { useRoute } from '@react-navigation/native'
 
 Icon.loadFont()
 

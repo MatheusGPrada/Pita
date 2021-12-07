@@ -21,7 +21,7 @@ import { i18n } from '@i18n'
 import { Button } from '@components/atoms/Button/Button'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { isBefore } from 'date-fns'
-import { USER_ATTENDANCE } from 'src/api/endpoints'
+import { ALL_ATTENDANCES, USER_ATTENDANCE } from 'src/api/endpoints'
 import api from 'src/api/api'
 import { Loading } from '@components/atoms/Loading/Loading'
 import { formatedDateToSchedule } from '@features/Home/Utils/utils'
@@ -63,22 +63,41 @@ export const Schedule: FC = () => {
     useEffect(
         useCallback(() => {
             const getAttendance = async () => {
-                await api
-                    .get(`${USER_ATTENDANCE}${userId}`, {
-                        headers: {
-                            Authorization: token,
-                            'Content-Type': 'application/json',
-                        },
-                    })
-                    .then(response => {
-                        const { data } = response
-                        setLoading(false)
-                        setAttendances(data)
-                    })
-                    .catch(requestError => {
-                        setLoading(false)
-                        setAttendances(requestError)
-                    })
+                if (userId !== 2) {
+                    await api
+                        .get(`${USER_ATTENDANCE}${userId}`, {
+                            headers: {
+                                Authorization: token,
+                                'Content-Type': 'application/json',
+                            },
+                        })
+                        .then(response => {
+                            const { data } = response
+                            setLoading(false)
+                            setAttendances(data)
+                        })
+                        .catch(requestError => {
+                            setLoading(false)
+                            setAttendances(requestError)
+                        })
+                } else {
+                    await api
+                        .get(ALL_ATTENDANCES, {
+                            headers: {
+                                Authorization: token,
+                                'Content-Type': 'application/json',
+                            },
+                        })
+                        .then(response => {
+                            const { data } = response
+                            setLoading(false)
+                            setAttendances(data)
+                        })
+                        .catch(requestError => {
+                            setLoading(false)
+                            setAttendances(requestError)
+                        })
+                }
             }
             getAttendance()
         }, [userId, token]),
@@ -152,14 +171,16 @@ export const Schedule: FC = () => {
                                         </AttendanceContainer>
                                     )
                                 })}
-                            <ButtonContainer>
-                                <Button
-                                    label={i18n.t('buttonLabels.addSchedule')}
-                                    onPress={() => navigate('SelectService', { token: token, userName: userName })}
-                                >
-                                    <AntDesign color="white" name="plus" size={25} />
-                                </Button>
-                            </ButtonContainer>
+                            {userId !== 2 && (
+                                <ButtonContainer>
+                                    <Button
+                                        label={i18n.t('buttonLabels.addSchedule')}
+                                        onPress={() => navigate('SelectService', { token: token, userName: userName })}
+                                    >
+                                        <AntDesign color="white" name="plus" size={25} />
+                                    </Button>
+                                </ButtonContainer>
+                            )}
                         </>
                     ) : (
                         <>

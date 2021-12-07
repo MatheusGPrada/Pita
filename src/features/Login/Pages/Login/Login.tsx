@@ -18,10 +18,8 @@ import { SnackBar } from '@components/atoms/SnackBar/SnackBar'
 Icon.loadFont()
 
 export const Login: FC = () => {
-    const [user, setUser] = useState('matheus@gmail.com')
-    const [password, setPassword] = useState('M@th3us1')
-    // const [user, setUser] = useState('')
-    // const [password, setPassword] = useState('')
+    const [user, setUser] = useState('')
+    const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const [showPassword, setShowPassword] = useState(true)
     const [visible, setVisible] = useState(false)
