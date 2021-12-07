@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { ProfileHeader, ProfileContent, UserName, FullColor, ButtonContainer, ContentTitle, UserAvatar, UserLetter } from '../styles'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
@@ -19,38 +19,32 @@ export const Account = () => {
     const { navigate, reset } = useNavigation()
     const {
         params: {
-            patientInfo: { nome, telefone },
+            patientInfo: { nome, telefone, token, id },
         },
     } = useRoute()
 
     const [showChangeName, setShowChangeName] = useState(false)
-    const [changeName, setChangeName] = useState('')
+    const [changeName, setChangeName] = useState(nome)
 
     const [showChangePhone, setShowChangePhone] = useState(false)
-    const [changePhone, setChangePhone] = useState('')
+    const [changePhone, setChangePhone] = useState(telefone)
 
-    const callUpdateUser = async userInfo => {
-        await api
-            .get(UPDATE_USER, {
-                headers: {
-                    Authorization: token,
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then(response => {
-                const { data } = response
-                setLoading(false)
-                setServices(data)
-            })
-            .catch(requestError => {
-                setLoading(false)
-                setServices(requestError)
-            })
-    }
+    const callUpdateUser = useCallback(
+        async (changeValue: string) => {
+            const valueToChange = changeValue === 'name' ? { id: id, nome: changeName } : { id: id, telefone: changePhone }
 
-    const postChangePassword = (password: string) => {
-        return {}
-    }
+            await api
+                .put(UPDATE_USER, valueToChange, {
+                    headers: {
+                        Authorization: token,
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => {})
+                .catch(requestError => {})
+        },
+        [changeName, changePhone, id, token],
+    )
 
     const doLogOut = () => {
         navigate(LOGIN_STACK, { screen: 'LoginOptions' })
@@ -65,15 +59,18 @@ export const Account = () => {
             <Provider>
                 <ProfileHeader>
                     <UserAvatar>
-                        <UserLetter>{nome.substr(0, 1).toUpperCase()}</UserLetter>
+                        <UserLetter>{changeName.substr(0, 1).toUpperCase()}</UserLetter>
                     </UserAvatar>
-                    <UserName>{nome}</UserName>
+                    <UserName>{changeName}</UserName>
                 </ProfileHeader>
                 {showChangeName && (
                     <EditingInfoModal
                         Title={i18n.t('title.changeName')}
                         errorMessage={i18n.t('error.emptyName')}
-                        onSubmiting={() => console.debug('Adicionar chamada do enpoint')}
+                        onSubmiting={() => {
+                            callUpdateUser('name')
+                            setShowChangeName(false)
+                        }}
                         setValue={setChangeName}
                         setVisible={setShowChangeName}
                         validFunction={isFilled}
@@ -84,9 +81,13 @@ export const Account = () => {
                     <EditingInfoModal
                         Title={i18n.t('title.changePhone')}
                         errorMessage={i18n.t('error.invalidPhoneNumber')}
-                        onSubmiting={() => console.debug('Adicionar chamada do enpoint')}
+                        onSubmiting={() => {
+                            setShowChangePhone(false)
+                            callUpdateUser('phone')
+                        }}
                         setValue={setChangePhone}
                         setVisible={setShowChangePhone}
+                        showPhoneMask={true}
                         validFunction={(value: string) => value.length === 15}
                         value={changePhone}
                     />
@@ -95,13 +96,18 @@ export const Account = () => {
                 <ProfileContent>
                     <ContentTitle>{i18n.t('title.changeProfileData')}</ContentTitle>
                     <ButtonContainer>
-                        <Button label={nome} onPress={() => setShowChangeName(true)} useButtonContainer={true} variant={'tertiary'}>
+                        <Button
+                            label={changeName}
+                            onPress={() => setShowChangeName(true)}
+                            useButtonContainer={true}
+                            variant={'tertiary'}
+                        >
                             <MaterialCommunityIcons color="black" name="account" size={36} />
                         </Button>
                     </ButtonContainer>
                     <ButtonContainer>
                         <Button
-                            label={telefone}
+                            label={changePhone}
                             onPress={() => setShowChangePhone(true)}
                             useButtonContainer={true}
                             variant={'tertiary'}

@@ -58,6 +58,7 @@ const messages = {
                 signUp: 'Informe seus dados pessoais abaixo',
                 validPhoneNumber: 'Será enviado um código para o seu celular',
                 youWishToCancelTheAttendance: 'Deseja mesmo cancelar o agendamento?',
+                youWishToCreateTheAttendance: 'Deseja criar o agendamento?',
             },
             title: {
                 cancelAttendance: 'Cancelar agendamento',
@@ -67,6 +68,7 @@ const messages = {
                 changePassword: 'Informe a nova senha',
                 changePhone: 'Qual o seu celular para contato?',
                 changeProfileData: 'Alterar dados cadastrais',
+                createAttendance: 'Criar agendamento',
                 email: 'E-mail',
                 oldPassword: 'Informe a senha atual',
                 password: 'Senha',

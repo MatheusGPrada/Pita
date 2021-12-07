@@ -5,6 +5,7 @@ import { theme } from '@theme'
 import { ChangeName, ModalContent, ModalHeader, SnackBarContainer } from './styles'
 import { SnackBar } from '@components/atoms/SnackBar/SnackBar'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import { TextInputMask } from 'react-native-masked-text'
 
 AntDesign.loadFont()
 
@@ -17,6 +18,7 @@ export const EditingInfoModal: FC = ({
     validFunction = (any: string) => null,
     errorMessage = '',
     children = <></>,
+    showPhoneMask = false,
 }) => {
     const [showSnackBar, setShowSnackBar] = useState(false)
 
@@ -39,33 +41,76 @@ export const EditingInfoModal: FC = ({
                 <ModalContent>
                     <ChangeName>{Title}</ChangeName>
                     {children}
-                    <TextInput
-                        onBlur={setValue}
-                        onChangeText={setValue}
-                        onSubmitEditing={() => {
-                            if (validFunction(value)) {
-                                setValue(value)
-                                onSubmiting(value)
-                            } else {
-                                setShowSnackBar(true)
+                    {!showPhoneMask && (
+                        <TextInput
+                            onBlur={setValue}
+                            onChangeText={setValue}
+                            onSubmitEditing={() => {
+                                if (validFunction(value)) {
+                                    setValue(value)
+                                    onSubmiting(value)
+                                } else {
+                                    setShowSnackBar(true)
+                                }
+                            }}
+                            right={
+                                <TextInput.Icon
+                                    name={() => <AntDesign color={theme.colors.primary50} name="arrowright" size={36} />}
+                                    onPress={() => {
+                                        if (validFunction(value)) {
+                                            onSubmiting(value)
+                                        } else {
+                                            setShowSnackBar(true)
+                                        }
+                                    }}
+                                />
                             }
-                        }}
-                        right={
-                            <TextInput.Icon
-                                name={() => <AntDesign color={theme.colors.primary50} name="arrowright" size={36} />}
-                                onPress={() => {
-                                    if (validFunction(value)) {
-                                        onSubmiting(value)
-                                    } else {
-                                        setShowSnackBar(true)
-                                    }
-                                }}
-                            />
-                        }
-                        style={{ backgroundColor: 'white', height: 55, marginBottom: 20 }}
-                        theme={{ colors: { primary: 'black' } }}
-                        value={value}
-                    />
+                            style={{ backgroundColor: 'white', height: 55, marginBottom: 20 }}
+                            theme={{ colors: { primary: 'black' } }}
+                            value={value}
+                        />
+                    )}
+                    {showPhoneMask && (
+                        <TextInput
+                            onBlur={setValue}
+                            onChangeText={setValue}
+                            onSubmitEditing={() => {
+                                if (validFunction(value)) {
+                                    setValue(value)
+                                    onSubmiting(value)
+                                } else {
+                                    setShowSnackBar(true)
+                                }
+                            }}
+                            render={props => (
+                                <TextInputMask
+                                    {...props}
+                                    keyboardType="numeric"
+                                    options={{
+                                        dddMask: '(99) ',
+                                        maskType: 'BRL',
+                                        withDDD: true,
+                                    }}
+                                    type={'cel-phone'}
+                                />
+                            )}
+                            right={
+                                <TextInput.Icon
+                                    name={() => <AntDesign color={theme.colors.primary50} name="arrowright" size={36} />}
+                                    onPress={() => {
+                                        if (validFunction(value)) {
+                                            onSubmiting(value)
+                                        } else {
+                                            setShowSnackBar(true)
+                                        }
+                                    }}
+                                />
+                            }
+                            style={{ backgroundColor: 'white', height: 55, marginBottom: 20 }}
+                            theme={{ colors: { primary: 'black' } }}
+                            value={value}
+                        />
+                    )}
                     <SnackBarContainer>
                         {showSnackBar && (
                             <SnackBar backgroundColor={theme.colors.danger50} message={errorMessage} setVisible={setShowSnackBar} />
