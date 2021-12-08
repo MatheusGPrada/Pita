@@ -3,7 +3,7 @@ import { ScheduleContent, FullColor } from '../styles'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { useRoute } from '@react-navigation/native'
 import { isBefore } from 'date-fns'
-import { formatedDateToSchedule } from '@features/Home/Utils/utils'
+import { formatedDateToSchedule, getActualDate } from '@features/Home/Utils/utils'
 import { Attendance, Service } from '../Schedule/typings'
 import { ScrollView } from 'react-native-gesture-handler'
 import {
@@ -117,9 +117,17 @@ export const SeeAll: FC = () => {
                                 .map(({ dataAgendamento, horario, servico, idAgendamento }: Attendance, index: number) => {
                                     const formatedDate = formatedDateToSchedule(dataAgendamento)
                                     const day = new Date(formatedDate).getDate().toString()
-                                    const month = (new Date(formatedDate).getMonth() + 1).toString()
+                                    const month = new Date(formatedDate).getMonth().toString()
                                     const year = new Date(formatedDate).getFullYear().toString()
-                                    const statusAgendamento = isBefore(new Date(month.concat('/', day, '/', year)), new Date())
+                                    const endTime = horario.substr(6, 5)
+                                    const endHour = parseInt(endTime.substr(0, 2), 10)
+                                    const endMinute = parseInt(endTime.substr(3, 2), 10)
+                                    const statusAgendamento = isBefore(
+                                        new Date(
+                                            Date.UTC(parseInt(year, 10), parseInt(month, 10), parseInt(day, 10), endHour, endMinute),
+                                        ),
+                                        getActualDate(),
+                                    )
 
                                     return (
                                         <AttendanceContainer key={index} status={statusAgendamento}>

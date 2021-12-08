@@ -9,3 +9,16 @@ export const SumHour = (startHour: string, valueToSum: number) => {
 
     return `${startDate.getUTCHours()}:${startDate.getMinutes().toString() === '0' ? '00' : startDate.getMinutes().toString()}`
 }
+
+export const getActualDate = () => {
+    const actualDate = new Date()
+    return new Date(
+        Date.UTC(
+            actualDate.getUTCFullYear(),
+            actualDate.getUTCMonth(),
+            actualDate.getUTCDate(),
+            actualDate.getHours(),
+            actualDate.getUTCMinutes(),
+        ),
+    )
+}
